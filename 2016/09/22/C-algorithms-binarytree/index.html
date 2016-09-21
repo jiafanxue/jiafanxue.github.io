@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C/C++,Algorithms," />
 
 
 
@@ -84,15 +84,40 @@
 
 
 
-<meta name="description" content="Do what you want, do what you wish">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xefvan's blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="树的简单介绍树和二叉树的术语
+节点的度：一个节点含有的子树的个数称为该节点的度； 
+树的度：一棵树中，最大的节点的度称为树的度；
+叶节点或终端节点：度为零的节点；
+非终端节点或分支节点：度不为零的节点；
+父亲节点或父节点：若一个节点含有子节点，则这个节点称为其子节点的父节点；
+孩子节点或子节点：一个节点含有的子树的根节点称为该节点的子节点；
+兄弟节点：具有相同父节点的节点互称为兄弟节点；
+节点的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构之二叉树(一)">
+<meta property="og:url" content="http://yoursite.com/2016/09/22/C-algorithms-binarytree/index.html">
 <meta property="og:site_name" content="Xefvan's blog">
-<meta property="og:description" content="Do what you want, do what you wish">
+<meta property="og:description" content="树的简单介绍树和二叉树的术语
+节点的度：一个节点含有的子树的个数称为该节点的度； 
+树的度：一棵树中，最大的节点的度称为树的度；
+叶节点或终端节点：度为零的节点；
+非终端节点或分支节点：度不为零的节点；
+父亲节点或父节点：若一个节点含有子节点，则这个节点称为其子节点的父节点；
+孩子节点或子节点：一个节点含有的子树的根节点称为该节点的子节点；
+兄弟节点：具有相同父节点的节点互称为兄弟节点；
+节点的">
+<meta property="og:updated_time" content="2016-09-21T17:39:03.994Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xefvan's blog">
-<meta name="twitter:description" content="Do what you want, do what you wish">
+<meta name="twitter:title" content="数据结构之二叉树(一)">
+<meta name="twitter:description" content="树的简单介绍树和二叉树的术语
+节点的度：一个节点含有的子树的个数称为该节点的度； 
+树的度：一棵树中，最大的节点的度称为树的度；
+叶节点或终端节点：度为零的节点；
+非终端节点或分支节点：度不为零的节点；
+父亲节点或父节点：若一个节点含有子节点，则这个节点称为其子节点的父节点；
+孩子节点或子节点：一个节点含有的子树的根节点称为该节点的子节点；
+兄弟节点：具有相同父节点的节点互称为兄弟节点；
+节点的">
 
 
 
@@ -113,9 +138,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/22/C-algorithms-binarytree/"/>
 
-  <title> Xefvan's blog </title>
+  <title> 数据结构之二叉树(一) | Xefvan's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -136,9 +161,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -235,9 +258,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -257,10 +280,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/09/22/C-algorithms-binarytree/" itemprop="url">
-                  数据结构之二叉树(一)
-                </a>
+                数据结构之二叉树(一)
               
             
           </h1>
@@ -272,7 +292,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-22T01:25:59Z" content="2016-09-22">
+            <time itemprop="dateCreated" datetime="2016-09-22T09:25:59+08:00" content="2016-09-22">
               2016-09-22
             </time>
           </span>
@@ -326,9 +346,7 @@
       
 
       
-        
-          
-            <hr>
+        <hr>
 <h2 id="树的简单介绍"><a href="#树的简单介绍" class="headerlink" title="树的简单介绍"></a>树的简单介绍</h2><h3 id="树和二叉树的术语"><a href="#树和二叉树的术语" class="headerlink" title="树和二叉树的术语"></a>树和二叉树的术语</h3><ol>
 <li>节点的度：一个节点含有的子树的个数称为该节点的度； </li>
 <li>树的度：一棵树中，最大的节点的度称为树的度；</li>
@@ -396,167 +414,61 @@
 </blockquote>
 <p>附上： <a href="https://github.com/jiafanxue/Cprogram/blob/master/Data%20Structures%20in%20C/5-1.c" title="C实现二叉树遍历" target="_blank" rel="external">c语言实现二叉树遍历</a></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/31/C-class-constructor-一/" itemprop="url">
-                  C++类的初体验封装之构造函数（一）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-31T10:01:17Z" content="2016-08-31">
-              2016-08-31
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/ccode/" rel="tag">#C/C++</a>
           
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/31/C-class-constructor-一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/31/C-class-constructor-一/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/Algorithms/" rel="tag">#Algorithms</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h4 id="在讲构造函数之前，我们先介绍什么是类，类的作用和类的定义"><a href="#在讲构造函数之前，我们先介绍什么是类，类的作用和类的定义" class="headerlink" title="在讲构造函数之前，我们先介绍什么是类，类的作用和类的定义"></a>在讲构造函数之前，我们先介绍什么是类，类的作用和类的定义</h4><h2 id="什么是类"><a href="#什么是类" class="headerlink" title="什么是类"></a>什么是类</h2><h4 id="类是一种复杂的数据结构，它是将各种不同的数据类型和数据的相关操作封装在一起的集合体。类的基本思想是数据抽象和封装。而类包含数据成员和成员函数"><a href="#类是一种复杂的数据结构，它是将各种不同的数据类型和数据的相关操作封装在一起的集合体。类的基本思想是数据抽象和封装。而类包含数据成员和成员函数" class="headerlink" title="类是一种复杂的数据结构，它是将各种不同的数据类型和数据的相关操作封装在一起的集合体。类的基本思想是数据抽象和封装。而类包含数据成员和成员函数"></a>类是一种复杂的数据结构，它是将各种不同的数据类型和数据的相关操作封装在一起的集合体。类的基本思想是数据抽象和封装。而类包含数据成员和成员函数</h4><p>例如：当你定义一个人的类，一个人有他的名字（name），性别（sex），年龄（age），身高（height）等等，而这些名字，性别，年龄，身高就是类的数据成员，当然一个人还应该会吃饭（eat），会走路（move），会玩游戏（play）等等，这些就可以看成类的成员函数。这个类接下来会给出定义</p>
-<hr>
-<h2 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h2><h4 id="在C-中类由class关键字定义"><a href="#在C-中类由class关键字定义" class="headerlink" title="在C++中类由class关键字定义"></a>在C++中类由<code>class</code>关键字定义</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> 类名</div><div class="line">&#123;</div><div class="line">	<span class="comment">// 相关数据成员和成员函数</span></div><div class="line">&#125;;   <span class="comment">// 记住分号不要漏了</span></div></pre></td></tr></table></figure>
-<p>例如刚刚人的类<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Person</div><div class="line">&#123;</div><div class="line">	<span class="comment">// 数据成员</span></div><div class="line">	<span class="built_in">string</span> name;</div><div class="line">	<span class="built_in">string</span> sex;</div><div class="line">	<span class="keyword">int</span> age;</div><div class="line">	<span class="keyword">double</span> height;</div><div class="line">	<span class="comment">// 成员函数</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">move</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>;</div><div class="line">	<span class="comment">// .......</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>写到这里有些人可能会想，每个人都是有隐私的，像女生，她们一般不会透露自己的年龄，个人信息就会变得很重要，这时就希望某些数据成员不被外界直接访问得到，年龄这个数据成员就被加了限制，所以我们要用到封装</p>
-<hr>
-<h2 id="类的访问限制和封装"><a href="#类的访问限制和封装" class="headerlink" title="类的访问限制和封装"></a>类的访问限制和封装</h2><p>在C++中，我们使用访问限制符来加强类的封装性。访问限定符包含三个：<code>public</code>, <code>private</code>, <code>protected</code></p>
-<h4 id="public-公有的"><a href="#public-公有的" class="headerlink" title="public: 公有的"></a>public: 公有的</h4><h4 id="private-私有的"><a href="#private-私有的" class="headerlink" title="private: 私有的"></a>private: 私有的</h4><h4 id="protected-受保护的"><a href="#protected-受保护的" class="headerlink" title="protected: 受保护的"></a>protected: 受保护的</h4><p>当人的类加了访问限定符后<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Person</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:			<span class="comment">//显示出来的</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">move</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>;</div><div class="line"><span class="keyword">private</span>: 		<span class="comment">// 隐藏起来的</span></div><div class="line">	<span class="built_in">string</span> name;</div><div class="line">	<span class="built_in">string</span> sex;</div><div class="line">	<span class="keyword">int</span> age;</div><div class="line">	<span class="keyword">double</span> height;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="内联函数"><a href="#内联函数" class="headerlink" title="内联函数"></a>内联函数</h2><h4 id="普通函数和内敛函数的区别"><a href="#普通函数和内敛函数的区别" class="headerlink" title="普通函数和内敛函数的区别"></a>普通函数和内敛函数的区别</h4><p>普通函数<br><a href="https://www.processon.com/chart_image/57c6365de4b0e8a504d8eac1.png" title="普通函数" target="_blank" rel="external"><img src="https://www.processon.com/chart_image/57c6365de4b0e8a504d8eac1.png" alt="普通函数" title="普通函数"></a><br>内联函数<br><a href="https://www.processon.com/chart_image/57c63975e4b0e8a504d931cf.png" title="内联函数" target="_blank" rel="external"><img src="https://www.processon.com/chart_image/57c63975e4b0e8a504d931cf.png" alt="内联函数" title="内联函数"></a><br>内联函数：避免了函数调用的额外开销<br>例如声明print为内联函数<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">inline</span> <span class="built_in">string</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;s1, <span class="keyword">const</span> <span class="built_in">string</span> &amp;s2)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> (s1.size() &lt; s2.,size() ? s1 : s2)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">当执行</div><div class="line"><span class="built_in">cout</span> &lt;&lt; print(s1, s2) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">在编译的过程中会展开成</div><div class="line"><span class="built_in">cout</span> &lt;&lt; (s1.size() &lt; s2.size() ? s1 : s2) &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
-<p>当然内联函数一般来说是比较容易的函数，如果函数有60多行代码，那么直接展开会变的很麻烦</p>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/31/C-class-constructor-一/" rel="next" title="C++类的初体验封装之构造函数（一）">
+                <i class="fa fa-chevron-left"></i> C++类的初体验封装之构造函数（一）
+              </a>
+            
+          </div>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -564,6 +476,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/22/C-algorithms-binarytree/"
+           data-title="数据结构之二叉树(一)" data-url="http://yoursite.com/2016/09/22/C-algorithms-binarytree/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -583,8 +503,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -663,6 +592,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#树的简单介绍"><span class="nav-number">1.</span> <span class="nav-text">树的简单介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#树和二叉树的术语"><span class="nav-number">1.1.</span> <span class="nav-text">树和二叉树的术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的特点"><span class="nav-number">1.2.</span> <span class="nav-text">树的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的种类"><span class="nav-number">1.3.</span> <span class="nav-text">树的种类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树"><span class="nav-number">2.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树和树的根本区别："><span class="nav-number">2.1.</span> <span class="nav-text">二叉树和树的根本区别：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的简单创建"><span class="nav-number">2.2.</span> <span class="nav-text">二叉树的简单创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的遍历："><span class="nav-number">2.3.</span> <span class="nav-text">二叉树的遍历：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前序遍历"><span class="nav-number">2.3.1.</span> <span class="nav-text">前序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中序遍历"><span class="nav-number">2.3.2.</span> <span class="nav-text">中序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后序遍历"><span class="nav-number">2.3.3.</span> <span class="nav-text">后序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#层序遍历"><span class="nav-number">2.3.4.</span> <span class="nav-text">层序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#printvalue的实现"><span class="nav-number">2.3.5.</span> <span class="nav-text">printvalue的实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象二叉树的实现"><span class="nav-number">2.4.</span> <span class="nav-text">抽象二叉树的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树节点的结构"><span class="nav-number">2.4.1.</span> <span class="nav-text">二叉树节点的结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树抽象类的构建"><span class="nav-number">2.4.2.</span> <span class="nav-text">二叉树抽象类的构建</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -766,6 +706,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
