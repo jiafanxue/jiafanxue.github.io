@@ -258,6 +258,122 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/23/C-structure-binarytree/" itemprop="url">
+                  数据结构之二叉树(二)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-23T01:42:59Z" content="2016-09-23">
+              2016-09-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/23/C-structure-binarytree/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/23/C-structure-binarytree/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="数据结构之二叉树-二"><a href="#数据结构之二叉树-二" class="headerlink" title="数据结构之二叉树(二)"></a>数据结构之二叉树(二)</h2><hr>
+<h4 id="二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有"><a href="#二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有" class="headerlink" title="二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有"></a>二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有</h4><ol>
+<li>确定树高</li>
+<li>确定元素数目</li>
+<li>复制</li>
+<li>显示或打印二叉树</li>
+<li>确定两颗二叉树是否一样</li>
+<li>删除整颗树</li>
+</ol>
+<h4 id="这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）"><a href="#这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）" class="headerlink" title="这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）"></a>这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：<a href="http://ixjfun.top/2016/09/22/C-algorithms-binarytree/" title="数据结构之二叉树（一）" target="_blank" rel="external">数据结构之二叉树（一）</a></h4><h2 id="二叉树的完整构建（续）"><a href="#二叉树的完整构建（续）" class="headerlink" title="二叉树的完整构建（续）"></a>二叉树的完整构建（续）</h2><p>在构建二叉树，我们先要知道二叉树的数据成员和成员函数应该是什么。首先数据成员要有记录树节点的变量，以便我们返回树的节点个数，一个指向根节点的指针（可用于遍历操作等）。成员函数中，我们应该有上述提到的所有部分或全部操作（每个人的需求不一样，看自己的数据结构需要什么，自由组合等等）。因此代码实现为：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">template &lt;typename T&gt;</div><div class="line">class linkedBinaryTree : public binaryTree&lt;binaryTreeNode&lt;T&gt;&gt;</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	linkedBinaryTree();</div><div class="line">	~linkedBinaryTree(erase(););</div><div class="line">	bool emtpy() const &#123;return m_iTreeSize == 0; &#125;</div><div class="line">	void preOrder(void (*theVisit)(binaryTreeNode&lt;T&gt;*))</div><div class="line">	&#123;</div><div class="line">		visit = theVist;</div><div class="line">		preOrder(m_pRoot);</div><div class="line">	&#125;</div><div class="line">	void inOrder(void (*theVisit)(binaryTreeNode&lt;T&gt;*))</div><div class="line">	&#123;</div><div class="line">		visit = theVist;</div><div class="line">		inOrder(m_pRoot);</div><div class="line">	&#125;</div><div class="line">	void postOrder(void (*theVisit)(binaryTreeNode&lt;T&gt;*))</div><div class="line">	&#123;</div><div class="line">		visit = theVist;</div><div class="line">		postOrder(m_pRoot);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	void int size() const &#123;return m_iTreeSize; &#125;</div><div class="line">	void levelOrder(void (*)(binaryTreeNode&lt;T&gt;*));</div><div class="line">	void erase()</div><div class="line">	&#123;</div><div class="line">		postOrder(dispose);</div><div class="line">		m_pRoot = NULL;</div><div class="line">		treeSize = 0;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">private:</div><div class="line">	int m_iTreeSize;</div><div class="line">	binaryTreeNode&lt;T&gt; *m_pRoot;		// 指向根节点</div><div class="line">	static void (*visit))(binaryTreeNode&lt;T&gt; *);		// 访问函数</div><div class="line">	static void preOrder(binaryTreeNode&lt;T&gt; *);  		// 前序遍历</div><div class="line">	static void inOrder(binaryTreeNode&lt;T&gt; *);			  // 中序遍历</div><div class="line">	static void dispose(binaryTreeNode&lt;T&gt; *t) &#123;delete t;&#125;			// 后序遍历</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意事项：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> (*)(binaryTreeNode&lt;T&gt;*)</div><div class="line"></div><div class="line">是一种函数类型，这种函数的返回值为<span class="keyword">void</span>, 它的参数类型为binaryTreeNode&lt;T&gt; *， 即是一个指针</div></pre></td></tr></table></figure></p>
+<h5 id="如何获取树的高度"><a href="#如何获取树的高度" class="headerlink" title="如何获取树的高度"></a>如何获取树的高度</h5><p>思路：首先取它左子树的高度，然后取它右子树的高度，最后把左右子树高度的最大值加1，取得树的高度</p>
+<h5 id="删除整颗树"><a href="#删除整颗树" class="headerlink" title="删除整颗树"></a>删除整颗树</h5><p>思路：前序或中序或后序遍历，每次遍历删除节点即可</p>
+<h5 id="比较两颗树是否相等"><a href="#比较两颗树是否相等" class="headerlink" title="比较两颗树是否相等"></a>比较两颗树是否相等</h5><p>思路：如果两颗树的节点数不一样，则直接输出不相等，前序，中序或后序遍历每个节点的节点元素，两颗树进行数值比较</p>
+<h3 id="类的部分实现"><a href="#类的部分实现" class="headerlink" title="类的部分实现"></a>类的部分实现</h3><h4 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> linkedBinaryTree&lt;T&gt;::preOrder(binaryTreeNode&lt;T&gt; *t)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(t != <span class="literal">NULL</span>)</div><div class="line">	&#123;</div><div class="line">		linkedBinaryTree&lt;T&gt;::printvalue(t);</div><div class="line">		preOrder(t-&gt;leftChild);</div><div class="line">		preOrder(t-&gt;rightChild);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="树的高度"><a href="#树的高度" class="headerlink" title="树的高度"></a>树的高度</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">int</span> linkedBinaryTree&lt;T&gt;::height(binaryTreeNode&lt;T&gt; *t)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(t == <span class="literal">NULL</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> hl = height(t-&gt;leftChild);</div><div class="line">	<span class="keyword">int</span> hr = height(t-&gt;rightChild);</div><div class="line">	<span class="keyword">if</span> (hl &gt; hr)</div><div class="line">		<span class="keyword">return</span> ++hl;</div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="keyword">return</span> ++hr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/22/C-algorithms-binarytree/" itemprop="url">
                   数据结构之二叉树(一)
                 </a>
@@ -595,7 +711,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

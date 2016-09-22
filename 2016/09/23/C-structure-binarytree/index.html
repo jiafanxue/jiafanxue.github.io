@@ -1,0 +1,694 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C/C++,数据结构," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="数据结构之二叉树(二)
+二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有
+确定树高
+确定元素数目
+复制
+显示或打印二叉树
+确定两颗二叉树是否一样
+删除整颗树
+
+这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）二叉树的完整构建（续）在构建二叉树，我们先要知道二叉树的数据成员和成员函数应该是什么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构之二叉树(二)">
+<meta property="og:url" content="http://yoursite.com/2016/09/23/C-structure-binarytree/index.html">
+<meta property="og:site_name" content="Xefvan's blog">
+<meta property="og:description" content="数据结构之二叉树(二)
+二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有
+确定树高
+确定元素数目
+复制
+显示或打印二叉树
+确定两颗二叉树是否一样
+删除整颗树
+
+这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）二叉树的完整构建（续）在构建二叉树，我们先要知道二叉树的数据成员和成员函数应该是什么">
+<meta property="og:updated_time" content="2016-09-22T17:44:07.397Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构之二叉树(二)">
+<meta name="twitter:description" content="数据结构之二叉树(二)
+二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有
+确定树高
+确定元素数目
+复制
+显示或打印二叉树
+确定两颗二叉树是否一样
+删除整颗树
+
+这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）二叉树的完整构建（续）在构建二叉树，我们先要知道二叉树的数据成员和成员函数应该是什么">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Tutuxs'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/23/C-structure-binarytree/"/>
+
+  <title> 数据结构之二叉树(二) | Xefvan's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Xefvan's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构之二叉树(二)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-23T09:42:59+08:00" content="2016-09-23">
+              2016-09-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/23/C-structure-binarytree/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/23/C-structure-binarytree/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="数据结构之二叉树-二"><a href="#数据结构之二叉树-二" class="headerlink" title="数据结构之二叉树(二)"></a>数据结构之二叉树(二)</h2><hr>
+<h4 id="二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有"><a href="#二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有" class="headerlink" title="二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有"></a>二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有</h4><ol>
+<li>确定树高</li>
+<li>确定元素数目</li>
+<li>复制</li>
+<li>显示或打印二叉树</li>
+<li>确定两颗二叉树是否一样</li>
+<li>删除整颗树</li>
+</ol>
+<h4 id="这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）"><a href="#这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）" class="headerlink" title="这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）"></a>这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：<a href="http://ixjfun.top/2016/09/22/C-algorithms-binarytree/" title="数据结构之二叉树（一）" target="_blank" rel="external">数据结构之二叉树（一）</a></h4><h2 id="二叉树的完整构建（续）"><a href="#二叉树的完整构建（续）" class="headerlink" title="二叉树的完整构建（续）"></a>二叉树的完整构建（续）</h2><p>在构建二叉树，我们先要知道二叉树的数据成员和成员函数应该是什么。首先数据成员要有记录树节点的变量，以便我们返回树的节点个数，一个指向根节点的指针（可用于遍历操作等）。成员函数中，我们应该有上述提到的所有部分或全部操作（每个人的需求不一样，看自己的数据结构需要什么，自由组合等等）。因此代码实现为：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">template &lt;typename T&gt;</div><div class="line">class linkedBinaryTree : public binaryTree&lt;binaryTreeNode&lt;T&gt;&gt;</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	linkedBinaryTree();</div><div class="line">	~linkedBinaryTree(erase(););</div><div class="line">	bool emtpy() const &#123;return m_iTreeSize == 0; &#125;</div><div class="line">	void preOrder(void (*theVisit)(binaryTreeNode&lt;T&gt;*))</div><div class="line">	&#123;</div><div class="line">		visit = theVist;</div><div class="line">		preOrder(m_pRoot);</div><div class="line">	&#125;</div><div class="line">	void inOrder(void (*theVisit)(binaryTreeNode&lt;T&gt;*))</div><div class="line">	&#123;</div><div class="line">		visit = theVist;</div><div class="line">		inOrder(m_pRoot);</div><div class="line">	&#125;</div><div class="line">	void postOrder(void (*theVisit)(binaryTreeNode&lt;T&gt;*))</div><div class="line">	&#123;</div><div class="line">		visit = theVist;</div><div class="line">		postOrder(m_pRoot);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	void int size() const &#123;return m_iTreeSize; &#125;</div><div class="line">	void levelOrder(void (*)(binaryTreeNode&lt;T&gt;*));</div><div class="line">	void erase()</div><div class="line">	&#123;</div><div class="line">		postOrder(dispose);</div><div class="line">		m_pRoot = NULL;</div><div class="line">		treeSize = 0;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">private:</div><div class="line">	int m_iTreeSize;</div><div class="line">	binaryTreeNode&lt;T&gt; *m_pRoot;		// 指向根节点</div><div class="line">	static void (*visit))(binaryTreeNode&lt;T&gt; *);		// 访问函数</div><div class="line">	static void preOrder(binaryTreeNode&lt;T&gt; *);  		// 前序遍历</div><div class="line">	static void inOrder(binaryTreeNode&lt;T&gt; *);			  // 中序遍历</div><div class="line">	static void dispose(binaryTreeNode&lt;T&gt; *t) &#123;delete t;&#125;			// 后序遍历</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意事项：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> (*)(binaryTreeNode&lt;T&gt;*)</div><div class="line"></div><div class="line">是一种函数类型，这种函数的返回值为<span class="keyword">void</span>, 它的参数类型为binaryTreeNode&lt;T&gt; *， 即是一个指针</div></pre></td></tr></table></figure></p>
+<h5 id="如何获取树的高度"><a href="#如何获取树的高度" class="headerlink" title="如何获取树的高度"></a>如何获取树的高度</h5><p>思路：首先取它左子树的高度，然后取它右子树的高度，最后把左右子树高度的最大值加1，取得树的高度</p>
+<h5 id="删除整颗树"><a href="#删除整颗树" class="headerlink" title="删除整颗树"></a>删除整颗树</h5><p>思路：前序或中序或后序遍历，每次遍历删除节点即可</p>
+<h5 id="比较两颗树是否相等"><a href="#比较两颗树是否相等" class="headerlink" title="比较两颗树是否相等"></a>比较两颗树是否相等</h5><p>思路：如果两颗树的节点数不一样，则直接输出不相等，前序，中序或后序遍历每个节点的节点元素，两颗树进行数值比较</p>
+<h3 id="类的部分实现"><a href="#类的部分实现" class="headerlink" title="类的部分实现"></a>类的部分实现</h3><h4 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> linkedBinaryTree&lt;T&gt;::preOrder(binaryTreeNode&lt;T&gt; *t)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(t != <span class="literal">NULL</span>)</div><div class="line">	&#123;</div><div class="line">		linkedBinaryTree&lt;T&gt;::printvalue(t);</div><div class="line">		preOrder(t-&gt;leftChild);</div><div class="line">		preOrder(t-&gt;rightChild);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="树的高度"><a href="#树的高度" class="headerlink" title="树的高度"></a>树的高度</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">int</span> linkedBinaryTree&lt;T&gt;::height(binaryTreeNode&lt;T&gt; *t)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(t == <span class="literal">NULL</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> hl = height(t-&gt;leftChild);</div><div class="line">	<span class="keyword">int</span> hr = height(t-&gt;rightChild);</div><div class="line">	<span class="keyword">if</span> (hl &gt; hr)</div><div class="line">		<span class="keyword">return</span> ++hl;</div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="keyword">return</span> ++hr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ccode/" rel="tag">#C/C++</a>
+          
+            <a href="/tags/数据结构/" rel="tag">#数据结构</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/22/C-algorithms-binarytree/" rel="next" title="数据结构之二叉树(一)">
+                <i class="fa fa-chevron-left"></i> 数据结构之二叉树(一)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/23/C-structure-binarytree/"
+           data-title="数据结构之二叉树(二)" data-url="http://yoursite.com/2016/09/23/C-structure-binarytree/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Xefvan" />
+          <p class="site-author-name" itemprop="name">Xefvan</p>
+          <p class="site-description motion-element" itemprop="description">Do what you want, do what you wish</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jiafanxue" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5675853550" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/tutuxs" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构之二叉树-二"><span class="nav-number">1.</span> <span class="nav-text">数据结构之二叉树(二)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有"><span class="nav-number">1.0.1.</span> <span class="nav-text">二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）"><span class="nav-number">1.0.2.</span> <span class="nav-text">这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树的完整构建（续）"><span class="nav-number">2.</span> <span class="nav-text">二叉树的完整构建（续）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#如何获取树的高度"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">如何获取树的高度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除整颗树"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">删除整颗树</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#比较两颗树是否相等"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">比较两颗树是否相等</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的部分实现"><span class="nav-number">2.1.</span> <span class="nav-text">类的部分实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历"><span class="nav-number">2.1.1.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#树的高度"><span class="nav-number">2.1.2.</span> <span class="nav-text">树的高度</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xefvan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"Tutuxs"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
