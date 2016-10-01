@@ -1,0 +1,704 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C/C++,数据结构," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="数据结构之线性表 – 链式描述
+概述与数组描述不同，在链式描述中，线性表的元素在内存中的存储位置是随机的。每个元素都有一个明确的指针（链）指向线性表的下一个元素的位置（地址）
+链表的种类一般分为单链表，双链表和循环链表（单向或双向）。
+单链表单链表结构是每个节点只有一个链，例如
+双链表链表中每个节点有两个链，一个指向上一个节点，一个指向下一个节点
+循环链表循环链表是单链表的一种变种，单链表是将尾节">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构之线性表 -- 链式描述">
+<meta property="og:url" content="http://yoursite.com/2016/10/02/C-structure-linear-chain/index.html">
+<meta property="og:site_name" content="Xefvan's blog">
+<meta property="og:description" content="数据结构之线性表 – 链式描述
+概述与数组描述不同，在链式描述中，线性表的元素在内存中的存储位置是随机的。每个元素都有一个明确的指针（链）指向线性表的下一个元素的位置（地址）
+链表的种类一般分为单链表，双链表和循环链表（单向或双向）。
+单链表单链表结构是每个节点只有一个链，例如
+双链表链表中每个节点有两个链，一个指向上一个节点，一个指向下一个节点
+循环链表循环链表是单链表的一种变种，单链表是将尾节">
+<meta property="og:image" content="https://www.processon.com/chart_image/57efc539e4b009c4af2684ca.png">
+<meta property="og:image" content="https://www.processon.com/chart_image/57efcddbe4b0300f4fd45fd5.png">
+<meta property="og:updated_time" content="2016-10-01T15:18:51.147Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构之线性表 -- 链式描述">
+<meta name="twitter:description" content="数据结构之线性表 – 链式描述
+概述与数组描述不同，在链式描述中，线性表的元素在内存中的存储位置是随机的。每个元素都有一个明确的指针（链）指向线性表的下一个元素的位置（地址）
+链表的种类一般分为单链表，双链表和循环链表（单向或双向）。
+单链表单链表结构是每个节点只有一个链，例如
+双链表链表中每个节点有两个链，一个指向上一个节点，一个指向下一个节点
+循环链表循环链表是单链表的一种变种，单链表是将尾节">
+<meta name="twitter:image" content="https://www.processon.com/chart_image/57efc539e4b009c4af2684ca.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Tutuxs'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/02/C-structure-linear-chain/"/>
+
+  <title> 数据结构之线性表 -- 链式描述 | Xefvan's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Xefvan's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构之线性表 -- 链式描述
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-02T07:16:37+08:00" content="2016-10-01">
+              2016-10-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/02/C-structure-linear-chain/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/02/C-structure-linear-chain/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="数据结构之线性表-–-链式描述"><a href="#数据结构之线性表-–-链式描述" class="headerlink" title="数据结构之线性表 – 链式描述"></a>数据结构之线性表 – 链式描述</h2><hr>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>与数组描述不同，在链式描述中，线性表的元素在内存中的存储位置是随机的。每个元素都有一个明确的指针（链）指向线性表的下一个元素的位置（地址）</p>
+<h2 id="链表的种类"><a href="#链表的种类" class="headerlink" title="链表的种类"></a>链表的种类</h2><p>一般分为单链表，双链表和循环链表（单向或双向）。</p>
+<h3 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h3><p>单链表结构是每个节点只有一个链，例如<br><a href="https://www.processon.com/chart_image/57efc539e4b009c4af2684ca.png" title="单链表" target="_blank" rel="external"><img src="https://www.processon.com/chart_image/57efc539e4b009c4af2684ca.png" alt="单链表" title="单链表"></a></p>
+<h3 id="双链表"><a href="#双链表" class="headerlink" title="双链表"></a>双链表</h3><p>链表中每个节点有两个链，一个指向上一个节点，一个指向下一个节点</p>
+<h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><p>循环链表是单链表的一种变种，单链表是将尾节点置为NULL，而循环链表是将尾节点指向头结点。</p>
+<h2 id="链表的节点结构"><a href="#链表的节点结构" class="headerlink" title="链表的节点结构"></a>链表的节点结构</h2><p>这里我们以单链表为例，构建它的结构，如上图所示一个单链表需要有<strong>数据域</strong>（用来存放元素），链域（用来指向下一个节点），所以代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义节点的结构</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">struct</span> chainNode</div><div class="line">&#123;</div><div class="line">	T element;</div><div class="line">	chainNode&lt;T&gt; *next;</div><div class="line"></div><div class="line">	chainNode() &#123;&#125;</div><div class="line">	chainNode(<span class="keyword">const</span> T&amp; element)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">this</span>-&gt;element = element;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	chainNode(<span class="keyword">const</span> T&amp; element, chainNode&lt;T&gt;* next)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">this</span>-&gt;element = element;</div><div class="line">		<span class="keyword">this</span>-&gt;next = next;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="链表的类（class-chain）"><a href="#链表的类（class-chain）" class="headerlink" title="链表的类（class chain）"></a>链表的类（class chain）</h2><p>当我们定义一个单链表的时候，我们考虑到要如何创建，如何添加，如何删除等等操作，因此编写代码如下。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 链表的操作</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> chain</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	chain();</div><div class="line">	chain(<span class="keyword">const</span> chain&lt;T&gt;&amp;);</div><div class="line">	~chain();</div><div class="line">	<span class="comment">//ADT实现</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> element)</span></span>;		<span class="comment">// 向尾端添加元素</span></div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> listSize == <span class="number">0</span>; &#125;	<span class="comment">// 判断是否为空</span></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> listSize; &#125;			<span class="comment">// 返回链表长度</span></div><div class="line">	<span class="function">T&amp; <span class="title">get</span><span class="params">(<span class="keyword">int</span> theIndex)</span> <span class="keyword">const</span></span>;						<span class="comment">// 根据下标获取链表元素</span></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">indexof</span><span class="params">(<span class="keyword">const</span> T&amp; theElement)</span> <span class="keyword">const</span></span>;			<span class="comment">// 根据元素获取下标</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">erase</span><span class="params">(<span class="keyword">int</span> theIndex)</span></span>;						<span class="comment">// 根据下标删除元素</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> theIndex, <span class="keyword">const</span> T&amp; theElement)</span></span>;	<span class="comment">// 插入操作</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">()</span> <span class="keyword">const</span></span>;							<span class="comment">// 输出链表</span></div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">checkIndex</span><span class="params">(<span class="keyword">int</span> theIndex)</span>   <span class="comment">// 检查下标</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(theIndex &lt; <span class="number">0</span> || theIndex &gt; listSize)</div><div class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	chainNode&lt;T&gt;* firstNode;</div><div class="line">	<span class="keyword">int</span> listSize;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="链表类的实现"><a href="#链表类的实现" class="headerlink" title="链表类的实现"></a>链表类的实现</h2><h4 id="构造函数和析构函数"><a href="#构造函数和析构函数" class="headerlink" title="构造函数和析构函数"></a>构造函数和析构函数</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">chain&lt;T&gt;::chain()</div><div class="line">&#123;</div><div class="line">	firstNode = <span class="literal">NULL</span>;</div><div class="line">	listSize = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">chain&lt;T&gt;::chain(<span class="keyword">const</span> chain&lt;T&gt;&amp; theList)</div><div class="line">&#123;</div><div class="line">	listSize = theList.listSize;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(listSize == <span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		firstNode = <span class="literal">NULL</span>;</div><div class="line">		listSize = <span class="number">0</span>;</div><div class="line">		<span class="comment">//return;</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 进行拷贝</span></div><div class="line">	<span class="comment">// 中间变量</span></div><div class="line">	chainNode&lt;T&gt;* sourceNode = theList.firstNode;</div><div class="line">	firstNode = <span class="keyword">new</span> chainNode&lt;T&gt;(sourceNode-&gt;element);</div><div class="line">	<span class="comment">// 因为要保证firstNode始终指向头指正，并且能够正常赋值，</span></div><div class="line">	<span class="comment">// 采取另一个指针来拷贝</span></div><div class="line">	chainNode&lt;T&gt;* temp = firstNode;</div><div class="line"></div><div class="line">	sourceNode = sourceNode-&gt;next;</div><div class="line">	<span class="keyword">while</span>(sourceNode != <span class="literal">NULL</span>)</div><div class="line">	&#123;</div><div class="line">		temp-&gt;next = <span class="keyword">new</span> chainNode&lt;T&gt;(sourceNode-&gt;element);</div><div class="line">		temp = temp-&gt;next;</div><div class="line">		sourceNode = sourceNode-&gt;next;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	temp-&gt;next = <span class="literal">NULL</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">chain&lt;T&gt;::~chain()</div><div class="line">&#123;</div><div class="line">	<span class="keyword">while</span>(firstNode != <span class="literal">NULL</span>)</div><div class="line">	&#123;</div><div class="line">		chainNode&lt;T&gt;* nextNode = firstNode-&gt;next;</div><div class="line">		<span class="keyword">delete</span> firstNode;</div><div class="line">		firstNode = nextNode;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="add-和-insert-操作"><a href="#add-和-insert-操作" class="headerlink" title="add() 和 insert() 操作"></a>add() 和 insert() 操作</h4><p>思路都是把上一个节点的指针指向插入的元素，插入元素的指针指向节点的下一个节点<br><a href="https://www.processon.com/chart_image/57efcddbe4b0300f4fd45fd5.png" title="插入操作" target="_blank" rel="external"><img src="https://www.processon.com/chart_image/57efcddbe4b0300f4fd45fd5.png" alt="插入操作" title="插入操作"></a></p>
+<p>代码实现<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> chain&lt;T&gt;::add(<span class="keyword">int</span> theElement)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(firstNode == <span class="literal">NULL</span>)</div><div class="line">	&#123;</div><div class="line">		firstNode = <span class="keyword">new</span> chainNode&lt;T&gt;(theElement, firstNode);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		chainNode&lt;T&gt;* p = firstNode;</div><div class="line">		<span class="keyword">while</span>(p-&gt;next != <span class="literal">NULL</span>)</div><div class="line">		&#123;</div><div class="line">			p = p-&gt;next;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		p-&gt;next = <span class="keyword">new</span> chainNode&lt;T&gt;;</div><div class="line">		p-&gt;next-&gt;element = theElement;</div><div class="line">		p-&gt;next-&gt;next = <span class="literal">NULL</span>;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	listSize++;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> chain&lt;T&gt;::insert(<span class="keyword">int</span> theIndex, <span class="keyword">const</span> T&amp; theElement)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(theIndex &lt; <span class="number">0</span> || theIndex &gt; listSize)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(theIndex == <span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		firstNode = <span class="keyword">new</span> chainNode&lt;T&gt;(theElement, firstNode);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		chainNode&lt;T&gt;* p = firstNode;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; theIndex - <span class="number">1</span>; i++)</div><div class="line">		&#123;</div><div class="line">			p = p-&gt;next;</div><div class="line">		&#125;</div><div class="line">		p = <span class="keyword">new</span> chainNode&lt;T&gt;(theElement, p-&gt;next);</div><div class="line">	&#125;</div><div class="line">	listSize++;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="erase-操作"><a href="#erase-操作" class="headerlink" title="erase() 操作"></a>erase() 操作</h4><p>例如，有N个节点的链表，要删除第三个节点，即是遍历到第二个节点，将第二个节点的链域从原来指向第三个节点的指针，改为指向第四个节点，然后释放第三个节点即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> chain&lt;T&gt;::erase(<span class="keyword">int</span> theIndex)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(!checkIndex(theIndex))</div><div class="line">		<span class="keyword">return</span>;</div><div class="line"></div><div class="line">	chainNode&lt;T&gt;* deleteNode = firstNode;</div><div class="line">	<span class="keyword">if</span>(deleteNode == <span class="literal">NULL</span>)</div><div class="line">	&#123;</div><div class="line">		deleteNode = firstNode;</div><div class="line">		firstNode = firstNode-&gt;next;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		chainNode&lt;T&gt;* p = firstNode;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; theIndex - <span class="number">1</span>; i++)</div><div class="line">		&#123;</div><div class="line">			p = p-&gt;next;</div><div class="line">		&#125;</div><div class="line">		deleteNode = p-&gt;next;</div><div class="line">		p-&gt;next = p-&gt;next-&gt;next;</div><div class="line">	&#125;</div><div class="line">	listSize--;</div><div class="line">	<span class="keyword">delete</span> deleteNode;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="get-和-indexof-操作"><a href="#get-和-indexof-操作" class="headerlink" title="get() 和 indexof() 操作"></a>get() 和 indexof() 操作</h4><p>在线性表中要查找一个元素的位置，必须从第一个节点出发，依次遍历每一个节点，直到你需要的节点的位置停止。因此每次遍历的时候我们都需要一个临时指针（指向firstNode节点）来替代头结点，进行遍历，以防止头结点的指向错误，导致下一次遍历失败（或者说，下一次遍历的时候不是从头结点出发，而是从你上次遍历的时候停止的地方）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T&amp; chain&lt;T&gt;::get(<span class="keyword">int</span> theIndex) <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">	chainNode&lt;T&gt;* currentNode = firstNode;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; theIndex; i++)</div><div class="line">	&#123;</div><div class="line">		currentNode = currentNode-&gt;next;</div><div class="line">	&#125;	</div><div class="line"></div><div class="line">	<span class="keyword">return</span> currentNode-&gt;element;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">int</span> chain&lt;T&gt;::indexof(<span class="keyword">const</span> T&amp; theElement) <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">	chainNode&lt;T&gt;* currentNode = firstNode;</div><div class="line">	<span class="keyword">int</span> index;</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; listSize; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(currentNode-&gt;element == theElement)</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		currentNode = currentNode-&gt;next;</div><div class="line">		index++;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(currentNode == <span class="literal">NULL</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="keyword">return</span> index;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>相对于单链表，双向链表和循环链表有许多不同，例如：我们如何计算它的链表长度？<br>这些留给下一次写吧，谢谢你的观看，如果有什么意见请提出来。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ccode/" rel="tag">#C/C++</a>
+          
+            <a href="/tags/数据结构/" rel="tag">#数据结构</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/01/C-structure-linear-array/" rel="next" title="数据结构之线性表---数组描述">
+                <i class="fa fa-chevron-left"></i> 数据结构之线性表---数组描述
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/02/C-structure-linear-chain/"
+           data-title="数据结构之线性表 -- 链式描述" data-url="http://yoursite.com/2016/10/02/C-structure-linear-chain/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Xefvan" />
+          <p class="site-author-name" itemprop="name">Xefvan</p>
+          <p class="site-description motion-element" itemprop="description">Do what you want, do what you wish</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jiafanxue" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5675853550" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/tutuxs" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构之线性表-–-链式描述"><span class="nav-number">1.</span> <span class="nav-text">数据结构之线性表 – 链式描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表的种类"><span class="nav-number">3.</span> <span class="nav-text">链表的种类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单链表"><span class="nav-number">3.1.</span> <span class="nav-text">单链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双链表"><span class="nav-number">3.2.</span> <span class="nav-text">双链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环链表"><span class="nav-number">3.3.</span> <span class="nav-text">循环链表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表的节点结构"><span class="nav-number">4.</span> <span class="nav-text">链表的节点结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表的类（class-chain）"><span class="nav-number">5.</span> <span class="nav-text">链表的类（class chain）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表类的实现"><span class="nav-number">6.</span> <span class="nav-text">链表类的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数和析构函数"><span class="nav-number">6.0.1.</span> <span class="nav-text">构造函数和析构函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#add-和-insert-操作"><span class="nav-number">6.0.2.</span> <span class="nav-text">add() 和 insert() 操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#erase-操作"><span class="nav-number">6.0.3.</span> <span class="nav-text">erase() 操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-和-indexof-操作"><span class="nav-number">6.0.4.</span> <span class="nav-text">get() 和 indexof() 操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">7.</span> <span class="nav-text">其他</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xefvan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"Tutuxs"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
