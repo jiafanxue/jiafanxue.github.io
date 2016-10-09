@@ -267,6 +267,135 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/10/c-structure-stack-array-chain/" itemprop="url">
+                  数据结构之栈
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-09T17:42:23Z" content="2016-10-09">
+              2016-10-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/10/c-structure-stack-array-chain/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/10/c-structure-stack-array-chain/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p>栈是一种特殊的线性表，其插入（又称入栈或压栈）和删除（又称出栈或弹栈）操作都在表的一端进行。表的两头称为栈顶和栈底</p>
+<p><em>例如：栈的删除操作中，删除D元素</em></p>
+<p><img src="http://img.blog.csdn.net/20161009163230725" alt="栈的删除"></p>
+<h2 id="递归工作栈"><a href="#递归工作栈" class="headerlink" title="递归工作栈"></a>递归工作栈</h2><p>我们常常会用到递归函数，而计算机执行递归就是使用递归工作栈。<br>当一个函数被调用时，一个返回地址和被调函数的局部变量和形参的值都要存储在递归工作栈中。因此随着递归的不断调用，最先被执行的操作存储在栈的最底部，最后的操作存储在栈的顶部。当执行到递归结束点（递归出口）的时候，开始从顶部自上往下返回存储的数据。</p>
+<font color="#ff0000"><br>注：递归次数过多容易造成栈溢出，所以一般不提倡用递归算法设计程序<br></font>
+
+<h2 id="栈的简单操作"><a href="#栈的简单操作" class="headerlink" title="栈的简单操作"></a>栈的简单操作</h2><p>因为栈是一种特殊的线性表，所以它同线性表一样具有数组描述形式和链表描述形式</p>
+<h4 id="数组描述"><a href="#数组描述" class="headerlink" title="数组描述"></a>数组描述</h4><p>创建arrayStack类<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ARRAYSTACK_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ARRAYSTACK_H</span></div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">stack</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">virtual</span> ~<span class="built_in">stack</span>() &#123;&#125;;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</div><div class="line">		<span class="comment">// 返回true, 当且仅当栈为空</span></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</div><div class="line">		<span class="comment">// 返回栈中的元素</span></div><div class="line">	<span class="function"><span class="keyword">virtual</span> T&amp; <span class="title">top</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">		<span class="comment">// 返回栈顶元素的索引</span></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">		<span class="comment">// 删除栈顶元素</span></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">const</span> T&amp; theElement)</span> </span>= <span class="number">0</span>;</div><div class="line">		<span class="comment">// 将元素theElement压入栈</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> arrayStack : <span class="keyword">public</span> <span class="built_in">stack</span>&lt;T&gt;</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	arrayStack(<span class="keyword">int</span> InitialCapacity = <span class="number">10</span>);</div><div class="line">	~arrayStack() &#123; <span class="keyword">delete</span> [] <span class="built_in">stack</span>; &#125;</div><div class="line"></div><div class="line">	<span class="comment">// 实现stack</span></div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> stackTop == <span class="number">-1</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> stackTop + <span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function">T&amp; <span class="title">top</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(stackTop == <span class="number">-1</span>)</div><div class="line">			<span class="keyword">throw</span> <span class="string">"The stack is empty"</span>;</div><div class="line"></div><div class="line">		<span class="keyword">return</span> <span class="built_in">stack</span>[stackTop];</div><div class="line">	&#125; </div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(stackTop == <span class="number">-1</span>)</div><div class="line">			<span class="keyword">throw</span> <span class="string">"The stack is emtpy"</span>;</div><div class="line"></div><div class="line">		<span class="built_in">stack</span>[stackTop--].~T();	<span class="comment">// T的析构函数</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">const</span> T&amp; theElement)</span></span>; </div><div class="line">	<span class="comment">// 改变容器大小（翻倍）</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">changeLengthlD</span><span class="params">(T* &amp;a, <span class="keyword">int</span> oldLength, <span class="keyword">int</span> newLength)</span></span>;</div><div class="line">	<span class="comment">// 输出全部元素</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> stackTop;			<span class="comment">// 当前栈顶</span></div><div class="line">	<span class="keyword">int</span> arrayLength;		<span class="comment">// 数组长度（栈容量）</span></div><div class="line">	T* <span class="built_in">stack</span>;			 <span class="comment">// 元素数组</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">arrayStack&lt;T&gt;::arrayStack(<span class="keyword">int</span> InitialCapacity)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(InitialCapacity &lt; <span class="number">1</span>)</div><div class="line">		InitialCapacity = <span class="number">10</span>;</div><div class="line"></div><div class="line">	arrayLength = InitialCapacity;</div><div class="line">	<span class="built_in">stack</span> = <span class="keyword">new</span> T[InitialCapacity];</div><div class="line">	stackTop = <span class="number">-1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> arrayStack&lt;T&gt;::push(<span class="keyword">const</span> T&amp; theElement)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(stackTop == arrayLength <span class="number">-1</span>)</div><div class="line">	&#123;</div><div class="line">		changeLengthlD(<span class="built_in">stack</span>, arrayLength, <span class="number">2</span> * arrayLength);</div><div class="line">		arrayLength *= <span class="number">2</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="built_in">stack</span>[++stackTop] = theElement;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> arrayStack&lt;T&gt;::changeLengthlD(T* &amp;a, <span class="keyword">int</span> oldLength, <span class="keyword">int</span> newLength)</div><div class="line">&#123;</div><div class="line">	T* temp = <span class="keyword">new</span> T[oldLength];</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; oldLength; i++)</div><div class="line">		temp[i] = a[i];</div><div class="line"></div><div class="line">	<span class="keyword">delete</span>[] a;</div><div class="line">	a = <span class="keyword">new</span> T[newLength];</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; oldLength; i++)</div><div class="line">		a[i] = temp[i];</div><div class="line"></div><div class="line">	<span class="keyword">delete</span>[] temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> arrayStack&lt;T&gt;::output()</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(stackTop == <span class="number">-1</span>)</div><div class="line">		<span class="keyword">throw</span> <span class="string">"The array is emtpy"</span>;</div><div class="line"></div><div class="line">	<span class="keyword">int</span> a = stackTop;</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(;a &gt;= <span class="number">0</span>; a--)</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">stack</span>[a] &lt;&lt; <span class="string">" "</span>;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !ARRAYSTACK_H</span></span></div></pre></td></tr></table></figure></p>
+<h4 id="链表描述"><a href="#链表描述" class="headerlink" title="链表描述"></a>链表描述</h4><p>用节点存储元素可能会有点麻烦，如果你直接存储的是一个链表的头结点（栈底），那么你要得到链表的尾节点（栈顶），都要循环遍历一次。如果你存储的是一个链表的尾节点，那么会方便许多。当然也有人会问当删除操作的时候，怎么将指针指向前一个呢？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> LINKEDSTACK_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LINKEDSTACK_H</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">// 节点结构</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">struct</span> chainNode</div><div class="line">&#123;</div><div class="line">	T element;</div><div class="line">	chainNode&lt;T&gt; *next;</div><div class="line"></div><div class="line">	chainNode() &#123;&#125;</div><div class="line">	chainNode(<span class="keyword">const</span> T&amp; element)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">this</span>-&gt;element = element;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	chainNode(<span class="keyword">const</span> T&amp; element, chainNode&lt;T&gt;* next)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">this</span>-&gt;element = element;</div><div class="line">		<span class="keyword">this</span>-&gt;next = next;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">stack</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">virtual</span> ~<span class="built_in">stack</span>() &#123;&#125;;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</div><div class="line">		<span class="comment">// 返回true, 当且仅当栈为空</span></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</div><div class="line">		<span class="comment">// 返回栈中的元素</span></div><div class="line">	<span class="function"><span class="keyword">virtual</span> T&amp; <span class="title">top</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">		<span class="comment">// 返回栈顶元素的索引</span></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">		<span class="comment">// 删除栈顶元素</span></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">const</span> T&amp; theElement)</span> </span>= <span class="number">0</span>;</div><div class="line">		<span class="comment">// 将元素theElement压入栈</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> linkedStack : <span class="keyword">public</span> <span class="built_in">stack</span>&lt;T&gt;</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	linkedStack(<span class="keyword">int</span> InitialCapacity = <span class="number">10</span>)</div><div class="line">	&#123;</div><div class="line">		stackSize = <span class="number">0</span>;</div><div class="line">		stackTop = <span class="literal">NULL</span>;</div><div class="line">	&#125;</div><div class="line">	~linkedStack();</div><div class="line"></div><div class="line">	<span class="comment">// 实现操作</span></div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> stackSize == <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> stackSize;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function">T&amp; <span class="title">top</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(stackSize == <span class="number">0</span>)</div><div class="line">			<span class="keyword">throw</span> <span class="string">"The stack is empty"</span>;</div><div class="line">		<span class="keyword">return</span> stackTop-&gt;element;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">const</span> T&amp; theElement)</span></span></div><div class="line">	&#123;</div><div class="line">		stackTop = <span class="keyword">new</span> chainNode&lt;T&gt;(theElement, stackTop);</div><div class="line">		stackSize++;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	chainNode&lt;T&gt;* stackTop;</div><div class="line">	<span class="keyword">int</span> stackSize;		 <span class="comment">// 栈中的元素</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">linkedStack&lt;T&gt;::~linkedStack()</div><div class="line">&#123;</div><div class="line">	<span class="keyword">while</span>(stackTop != <span class="literal">NULL</span>)</div><div class="line">	&#123;</div><div class="line">		chainNode&lt;T&gt;* nextNode = stackTop-&gt;next;</div><div class="line">		<span class="keyword">delete</span> stackTop;</div><div class="line">		stackTop = nextNode;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> linkedStack&lt;T&gt;::pop()</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(stackSize == <span class="number">0</span>)</div><div class="line">		<span class="keyword">throw</span> <span class="string">"the stack is empty"</span>;</div><div class="line"></div><div class="line">	chainNode&lt;T&gt;* nextNode = stackTop-&gt;next;</div><div class="line">	<span class="keyword">delete</span> stackTop;</div><div class="line">	stackTop = nextNode;</div><div class="line">	stackSize--;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !LINKEDSTACK_H</span></span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/02/C-structure-linear-chain/" itemprop="url">
                   数据结构之线性表 -- 链式描述
                 </a>
@@ -1020,7 +1149,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
