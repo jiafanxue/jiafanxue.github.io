@@ -1,0 +1,709 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C/C++," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="C++ typedef和typename关键字
+前序在《STL源码解析》一书中看到了这样一段代码12345template &amp;lt;class ForwardIterator, class Size, class T, class T1&amp;gt;inline ForwardIterator __uninitialized_fill_n(ForwardIterator first, Size n, c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ typedef和typename关键字">
+<meta property="og:url" content="http://yoursite.com/2016/10/12/C-typedef-and-typename/index.html">
+<meta property="og:site_name" content="Xefvan's blog">
+<meta property="og:description" content="C++ typedef和typename关键字
+前序在《STL源码解析》一书中看到了这样一段代码12345template &amp;lt;class ForwardIterator, class Size, class T, class T1&amp;gt;inline ForwardIterator __uninitialized_fill_n(ForwardIterator first, Size n, c">
+<meta property="og:updated_time" content="2016-10-12T05:12:42.795Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++ typedef和typename关键字">
+<meta name="twitter:description" content="C++ typedef和typename关键字
+前序在《STL源码解析》一书中看到了这样一段代码12345template &amp;lt;class ForwardIterator, class Size, class T, class T1&amp;gt;inline ForwardIterator __uninitialized_fill_n(ForwardIterator first, Size n, c">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Tutuxs'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/12/C-typedef-and-typename/"/>
+
+  <title> C++ typedef和typename关键字 | Xefvan's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-[UA-85210305-1]-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Xefvan's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C++ typedef和typename关键字
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-12T20:41:52+08:00" content="2016-10-12">
+              2016-10-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/12/C-typedef-and-typename/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/12/C-typedef-and-typename/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="C-typedef和typename关键字"><a href="#C-typedef和typename关键字" class="headerlink" title="C++ typedef和typename关键字"></a>C++ typedef和typename关键字</h1><hr>
+<h2 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h2><p>在《STL源码解析》一书中看到了这样一段代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ForwardIterator, <span class="keyword">class</span> Size, <span class="keyword">class</span> T, <span class="keyword">class</span> T1&gt;</div><div class="line"><span class="keyword">inline</span> ForwardIterator <span class="number">__u</span>ninitialized_fill_n(ForwardIterator first, Size n, <span class="keyword">const</span> T&amp; x, T1*)&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="number">__</span>type_traits&lt;T1&gt;::is_POD_type is_POD;</div><div class="line">	<span class="keyword">return</span> <span class="number">__u</span>ninitialized_fill_n_aux(first, n, x, is_POD());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在代码的第三行中出现的</p>
+<pre><code>typedef typename __type_traits&lt;T1&gt;::is_POD_type is_POD;
+</code></pre><p>可能会让初学者感到无法理解，难以接受。这里的typedef 还好理解，但是typename又是啥鬼?:tw-1f62c:<br>在《C++Primer 5th》P593页和《Effective C++》第42条都讲解了这部分内容，我也总结了下给大家，方便大家解惑。</p>
+<h2 id="类型别名typedef"><a href="#类型别名typedef" class="headerlink" title="类型别名typedef"></a>类型别名typedef</h2><p>类型说明的格式为:</p>
+<font color="#FF0000">typedef  类型 定义名;</font>
+
+<p>它用来对一个数据类型取一个新名字。其中定义名表示这个类型的新名字。</p>
+<p>例如:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> type_int;	</div><div class="line"><span class="comment">// 这里的type_int就是整形int的另一个名字，接下来可以用type_int代替int</span></div></pre></td></tr></table></figure></p>
+<h2 id="类型解释typename"><a href="#类型解释typename" class="headerlink" title="类型解释typename"></a>类型解释typename</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>在维基百科中这样解释：<br>当用于泛型编程时是另一术语”class”的同义词。这个关键字用于指出模板声明（或定义）中的非独立名称（dependent names）是类型名，而非变量名。</p>
+<p>例如声明一个人的模板类<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> Person</div><div class="line">&#123;</div><div class="line">	<span class="comment">// .... </span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 或者</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> Person</div><div class="line">&#123;</div><div class="line">	</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="使用类的类型成员"><a href="#使用类的类型成员" class="headerlink" title="使用类的类型成员"></a>使用类的类型成员</h3><p>通常我们使用作用域运算符(::)来访问static成员和类型成员。在普通（非模板）代码中，编译器掌握类的定义。因此，他知道通过作用域运算符访问的名字是类型还是static成员。例如：string::size_type,编译器有string的定义，从而知道size_type是一个类型。</p>
+<p>但是如果是模板类就变得很困难了。</p>
+<p>例如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print2nd</span><span class="params">(<span class="keyword">const</span> C&amp; contrainer)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// ...</span></div><div class="line">	C::const_iterator* x;			<span class="comment">// 申明x为一个指针，指向C::const_iterator</span></div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>这段代码看起来好像是对，但是它确实是错的，回到之前我们之所以认为它对，是因为我们“知道”C::const_iterator是一个类型，但是如果C::const_iterator不是一个类型呢，如果它是一个static成员变量呢？又或者是一个全局变量呢？那么上述的用法就变为相乘了。</p>
+<p>因此有必要说明C::const_iterator是一个类型。只要在紧邻它之前放置关键字typename即可<br>例如<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print2nd</span><span class="params">(<span class="keyword">const</span> C&amp; contrainer)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// ...</span></div><div class="line">	<span class="keyword">typename</span> C::const_iterator* x;			<span class="comment">// 申明x为一个指针，指向C::const_iterator</span></div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<font color="#ff0000"> 这个规则很简单：在任何时候当你想在template中涉及一个嵌套从属类型名称，就必须在紧临它的前一个位置放置上关键字typename（也有例外）</font>
+
+
+<hr>
+<p><font color="#0099ff" size="4">“typename作为嵌套从属类型名称的前缀词”的例外</font><br>template 不可以出现在base classes list内的嵌套从属类型名称之前，也不可以出现在memeber initialization list(成员初始列表)中作为base class 修饰词, 例如：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">template &lt;typename T&gt;</div><div class="line">class Derived : public Base&lt;T&gt;::Nested	//  Base classes list，不允许出现"typename"</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	explicit Derived(int x) : </div><div class="line">	Base&lt;T&gt;::Nested(x)				// 成员初始化列表，不允许出现"typename"</div><div class="line">	&#123;		</div><div class="line">		typename Base&lt;T&gt;::Nested temp;				// 嵌套从属类型名称</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="typedef和typename共用"><a href="#typedef和typename共用" class="headerlink" title="typedef和typename共用"></a>typedef和typename共用</h2><p>回到最初的问题，这里我们用另外一个例子代替</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> IterT&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">workWithIterator</span><span class="params">(IterT iter)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">typename</span> <span class="built_in">std</span>::iterator_traits&lt;IterT&gt;::<span class="function">value_type <span class="title">temp</span><span class="params">(*iter)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>看起来任然可能有点蒙, 所以先讲下traits</p>
+<h3 id="traits（特性萃取机）"><a href="#traits（特性萃取机）" class="headerlink" title="traits（特性萃取机）"></a>traits（特性萃取机）</h3><p>在我们日常中，常用到的迭代器相应型别有5中：value_type, difference_type, pointer, reference, iterator catagoly。而“特性萃取机”traits会忠实的原汁原味的榨取出来:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> I&gt;</div><div class="line"><span class="keyword">struct</span> iterator_traits&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::iterator_category 	  iterator_category;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::value_type 				value_type;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::difference_type 		difference_type;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::pointer 					 pointer;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::reference 				  reference;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>而<code>std::iterator_traits&lt;IterT&gt;::value_type</code>说的就是”类型为IterT之对象所指之物的类型”<br>如果你的IterT为<code>vector&lt;int&gt;::iterator</code>，temp的类型就是int，<br>如果你的IterT为<code>list&lt;sting&gt;::iterator</code>，temp的类型就是string</p>
+<p>说完上面哪行代码就解释的通了<br><code>std::iterator_traits&lt;IterT&gt;::value_type</code>是一个嵌套从属类型名（value_type被嵌套与<code>iterator_traits&lt;IterT&gt;</code>之内而IterT是一个template参数），所以必须在它之前放置typename</p>
+<p>而为了简化书写，加上typedef，完美:tw-1f604:<br>最终代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> IterT&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">workWithIterator</span><span class="params">(IterT iter)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="built_in">std</span>::iterator_traits&lt;IterT&gt;::value_type;</div><div class="line">	<span class="function">value_type <span class="title">temp</span><span class="params">(*iter)</span></span>;</div><div class="line">	<span class="comment">// .....</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ccode/" rel="tag">#C/C++</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/10/c-structure-stack-array-chain/" rel="next" title="数据结构之栈">
+                <i class="fa fa-chevron-left"></i> 数据结构之栈
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/12/C-typedef-and-typename/"
+           data-title="C++ typedef和typename关键字" data-url="http://yoursite.com/2016/10/12/C-typedef-and-typename/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Xefvan" />
+          <p class="site-author-name" itemprop="name">Xefvan</p>
+          <p class="site-description motion-element" itemprop="description">Do what you want, do what you wish</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jiafanxue" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5675853550" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/tutuxs" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-typedef和typename关键字"><span class="nav-number">1.</span> <span class="nav-text">C++ typedef和typename关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前序"><span class="nav-number">1.1.</span> <span class="nav-text">前序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型别名typedef"><span class="nav-number">1.2.</span> <span class="nav-text">类型别名typedef</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型解释typename"><span class="nav-number">1.3.</span> <span class="nav-text">类型解释typename</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用类的类型成员"><span class="nav-number">1.3.2.</span> <span class="nav-text">使用类的类型成员</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typedef和typename共用"><span class="nav-number">1.4.</span> <span class="nav-text">typedef和typename共用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#traits（特性萃取机）"><span class="nav-number">1.4.1.</span> <span class="nav-text">traits（特性萃取机）</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xefvan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"Tutuxs"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
