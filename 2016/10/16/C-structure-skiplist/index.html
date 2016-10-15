@@ -1,0 +1,740 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C/C++,数据结构," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="数据结构之跳表
+字典字典有一些形如的数对组成的集合，其中k是关键字，v是与关键字k对应的值
+常见的字典操作有
+
+确定字典是否为空
+字典的数对个数
+根据关键字查找数对
+插入数对
+删除指定关键字的数对
+
+生活中常用到字典这种结构，例如：我们读书的时候买的字典，里面每一个词都有相应的解释，而你查找的子相当于k，解释相当于v。当然字典有一对一的关系，也有一对多的关系。
+字典类字典的节点1234567891">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构之跳表">
+<meta property="og:url" content="http://yoursite.com/2016/10/16/C-structure-skiplist/index.html">
+<meta property="og:site_name" content="Xefvan's blog">
+<meta property="og:description" content="数据结构之跳表
+字典字典有一些形如的数对组成的集合，其中k是关键字，v是与关键字k对应的值
+常见的字典操作有
+
+确定字典是否为空
+字典的数对个数
+根据关键字查找数对
+插入数对
+删除指定关键字的数对
+
+生活中常用到字典这种结构，例如：我们读书的时候买的字典，里面每一个词都有相应的解释，而你查找的子相当于k，解释相当于v。当然字典有一对一的关系，也有一对多的关系。
+字典类字典的节点1234567891">
+<meta property="og:image" content="http://img.blog.csdn.net/20161016162603694">
+<meta property="og:image" content="http://img.blog.csdn.net/20161016180055800">
+<meta property="og:updated_time" content="2016-10-15T14:22:53.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构之跳表">
+<meta name="twitter:description" content="数据结构之跳表
+字典字典有一些形如的数对组成的集合，其中k是关键字，v是与关键字k对应的值
+常见的字典操作有
+
+确定字典是否为空
+字典的数对个数
+根据关键字查找数对
+插入数对
+删除指定关键字的数对
+
+生活中常用到字典这种结构，例如：我们读书的时候买的字典，里面每一个词都有相应的解释，而你查找的子相当于k，解释相当于v。当然字典有一对一的关系，也有一对多的关系。
+字典类字典的节点1234567891">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161016162603694">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Tutuxs'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/16/C-structure-skiplist/"/>
+
+  <title> 数据结构之跳表 | Xefvan's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-[UA-85210305-1]-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Xefvan's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构之跳表
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-15T22:22:26Z" content="2016-10-15">
+              2016-10-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/16/C-structure-skiplist/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/16/C-structure-skiplist/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="数据结构之跳表"><a href="#数据结构之跳表" class="headerlink" title="数据结构之跳表"></a>数据结构之跳表</h1><hr>
+<h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><p>字典有一些形如<k, v="">的数对组成的集合，其中k是关键字，v是与关键字k对应的值</k,></p>
+<p>常见的字典操作有</p>
+<ul>
+<li>确定字典是否为空</li>
+<li>字典的数对个数</li>
+<li>根据关键字查找数对</li>
+<li>插入数对</li>
+<li>删除指定关键字的数对</li>
+</ul>
+<p>生活中常用到字典这种结构，例如：我们读书的时候买的字典，里面每一个词都有相应的解释，而你查找的子相当于k，解释相当于v。当然字典有一对一的关系，也有一对多的关系。</p>
+<h3 id="字典类"><a href="#字典类" class="headerlink" title="字典类"></a>字典类</h3><h4 id="字典的节点"><a href="#字典的节点" class="headerlink" title="字典的节点"></a>字典的节点</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 链表节点定义</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line"><span class="keyword">struct</span> pairNode</div><div class="line">&#123;</div><div class="line">	pair&lt;<span class="keyword">const</span> K, E&gt; element;</div><div class="line">	pairNode&lt;K, E&gt;* next;</div><div class="line"></div><div class="line">	pairNode() &#123;&#125;</div><div class="line">	pairNode(<span class="keyword">const</span> pair&lt;<span class="keyword">const</span> K, E&gt;&amp; element) : element(element)</div><div class="line">	&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	pairNode(<span class="keyword">const</span> pair&lt;<span class="keyword">const</span> K, E&gt;&amp; element, pairNode&lt;K, E&gt;* next)</div><div class="line">		: element(element)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">this</span>-&gt;next = next;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h4 id="字典类-1"><a href="#字典类-1" class="headerlink" title="字典类"></a>字典类</h4><p>这里主要实现上述的操作<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line"><span class="keyword">class</span> sortedChain</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	sortedChain();</div><div class="line">	~sortedChain();</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">emtpy</span><span class="params">()</span> <span class="keyword">const</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> dSize == <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> dSize;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	pair&lt;<span class="keyword">const</span> K, E&gt;* find(<span class="keyword">const</span> K&amp;) <span class="keyword">const</span>;		<span class="comment">// 查找操作, 如果找到返回指针，否则返回NULL</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">erase</span><span class="params">(<span class="keyword">const</span> K&amp;)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">const</span> pair&lt;<span class="keyword">const</span> K, E&gt;&amp;)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">(ostream&amp; out)</span> <span class="keyword">const</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	pairNode&lt;K, E&gt;* firstNode; </div><div class="line">	<span class="keyword">int</span> dSize;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h4 id="字典类的实现"><a href="#字典类的实现" class="headerlink" title="字典类的实现"></a>字典类的实现</h4><h5 id="find"><a href="#find" class="headerlink" title="find()"></a>find()</h5><p>只需要一次遍历，判断<code>currentNode-&gt;element.first</code> 和 <code>theKey</code> 是否相等</p>
+<h5 id="insert"><a href="#insert" class="headerlink" title="insert()"></a>insert()</h5><p>插入的时候首先通过查找操作来确定字典中是否存在相同关键字的数对，如果有，则更新（因为是一对一的字典）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line"><span class="keyword">void</span> sortedChain&lt;K, E&gt;::insert(<span class="keyword">const</span> pair&lt;<span class="keyword">const</span> K, E&gt;&amp; thePair)</div><div class="line">&#123;</div><div class="line">	pairNode&lt;K, E&gt;* p = firstNode, *tmp = <span class="literal">NULL</span>;</div><div class="line">	<span class="comment">// 遍历链表</span></div><div class="line">	<span class="keyword">while</span>(p != <span class="literal">NULL</span> &amp;&amp; p-&gt;element.first &lt; thePair.first)</div><div class="line">	&#123;</div><div class="line">		tmp = p;</div><div class="line">		p = p-&gt;next;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 如果存在相同的key值，更新</span></div><div class="line">	<span class="keyword">if</span>(p != <span class="literal">NULL</span> &amp;&amp; p-&gt;element.first == thePair.first)</div><div class="line">	&#123;</div><div class="line">		p-&gt;element.second = thePair.second;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 插入</span></div><div class="line">	pairNode&lt;K, E&gt;* newNode = <span class="keyword">new</span> pairNode&lt;K,E&gt;(thePair, p);</div><div class="line">	<span class="keyword">if</span>(tmp == <span class="literal">NULL</span>)</div><div class="line">		firstNode = newNode;</div><div class="line">	<span class="keyword">else</span></div><div class="line">		tmp-&gt;next = newNode;</div><div class="line">	dSize++;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="erase"><a href="#erase" class="headerlink" title="erase()"></a>erase()</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line"><span class="keyword">void</span> sortedChain&lt;K, E&gt;::erase(<span class="keyword">const</span> K&amp; theKey)</div><div class="line">&#123;</div><div class="line">	pairNode&lt;K, E&gt;* p = firstNode, *tmp = <span class="literal">NULL</span>;</div><div class="line"></div><div class="line">	<span class="keyword">while</span>(p != <span class="literal">NULL</span> &amp;&amp; p-&gt;element.first &lt; theKey)</div><div class="line">	&#123;</div><div class="line">		tmp = p;</div><div class="line">		p = p-&gt;next;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(p != <span class="literal">NULL</span> &amp;&amp; p-&gt;element.first == theKey)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(tmp == <span class="literal">NULL</span>)		<span class="comment">// 这种情况的出现是因为while循环没有执行，之所以不执行是因为, 要没删除的theKey是第一个</span></div><div class="line">			firstNode = p-&gt;next;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			tmp-&gt;next = p-&gt;next;</div><div class="line">		<span class="comment">// 删除p（thekey所在位置）</span></div><div class="line">		<span class="keyword">delete</span> p;</div><div class="line">		--dSize;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="跳表"><a href="#跳表" class="headerlink" title="跳表"></a>跳表</h2><h3 id="构建思路"><a href="#构建思路" class="headerlink" title="构建思路"></a>构建思路</h3><p>当我们在进行链表查找，删除，添加的时候，要进行n次的比较，如果链表的中间有一个指针，那么我们的这些操作次数可以减少一半。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>增加额外的向前指针的链表叫做跳表，因此它会比普通的链表复杂一点。跳表结构的头结点需要足够的指针域，以满足最大链表级数的构建需要，而尾节点不需要指针域。</p>
+<p>如下图的结构我们叫做跳表，在该结构中有一组等级链表，0级链表包括所有数对，1级链表每2个节点取一个，2级链表每4个取一个</p>
+<p><img src="http://img.blog.csdn.net/20161016162603694" alt="跳表"></p>
+<h3 id="跳表类"><a href="#跳表类" class="headerlink" title="跳表类"></a>跳表类</h3><h5 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h5><p>与字典节点结构有点不同，next指针变为指针数组，即指针域<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line"><span class="keyword">struct</span> skipNode</div><div class="line">&#123;</div><div class="line">	<span class="keyword">typedef</span> pair&lt;<span class="keyword">const</span> K, E&gt; pairType;</div><div class="line"></div><div class="line">	pairType element;</div><div class="line">	skipNode&lt;K, E&gt;** next;		<span class="comment">// 指针数组</span></div><div class="line"></div><div class="line">	skipNode(<span class="keyword">const</span> pairType&amp; thePair, <span class="keyword">int</span> size) : element(thePair)</div><div class="line">	&#123;</div><div class="line">		next = <span class="keyword">new</span> skipNode&lt;K, E&gt;*[size];</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>跳表类<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line"><span class="keyword">class</span> SkipList</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	SkipList(K largeKey, <span class="keyword">int</span> maxPairs, <span class="keyword">float</span> prob);</div><div class="line">	~SkipList();</div><div class="line"></div><div class="line">	<span class="comment">// find, 如果找到返回指针，没有返回NULL</span></div><div class="line">	pair&lt;<span class="keyword">const</span> K, E&gt;* find(<span class="keyword">const</span> K&amp; theKey) <span class="keyword">const</span>;</div><div class="line">	<span class="comment">// level，级的分配</span></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">level</span><span class="params">()</span> <span class="keyword">const</span></span>;</div><div class="line">	<span class="comment">// search，搜索</span></div><div class="line">	skipNode&lt;K,E&gt;* search(<span class="keyword">const</span> K&amp; theKey) <span class="keyword">const</span>;</div><div class="line">	<span class="comment">// insert， 插入操作</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">const</span> pair&lt;<span class="keyword">const</span> K, E&gt;&amp; thePair)</span></span>;</div><div class="line">	<span class="comment">// erase，删除操作</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">erase</span><span class="params">(<span class="keyword">const</span> K&amp; theKey)</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">float</span> cutOff;				<span class="comment">// 用来确定层数</span></div><div class="line">	<span class="keyword">int</span> levels;					<span class="comment">// 当前最大的非空链对</span></div><div class="line">	<span class="keyword">int</span> dSize;					<span class="comment">// 字典的数对个数</span></div><div class="line">	<span class="keyword">int</span> maxLevel;				<span class="comment">// 允许的最大链表层数</span></div><div class="line">	K tailKey;					<span class="comment">// 最大关键字</span></div><div class="line">	skipNode&lt;K, E&gt;* headerNode;	<span class="comment">// 头结点指针</span></div><div class="line">	skipNode&lt;K, E&gt;* tailNode;	<span class="comment">// 尾节点指针</span></div><div class="line">	skipNode&lt;K, E&gt;** last;		<span class="comment">// last[i] 表示i层的最后节点</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><p>例如，如果我们要查找关键字为30的节点，find从最高级链表开始查找，知道0级链表。在每一级链表中采用逼近的方法，直到0级链表，图解如下：<br><img src="http://img.blog.csdn.net/20161016180055800" alt="跳表查找"></p>
+<p>部分代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line">pair&lt;<span class="keyword">const</span> K, E&gt;* SkipList&lt;K,E&gt;::find(<span class="keyword">const</span> K&amp; theKey) <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// 返回匹配的数对的指针</span></div><div class="line">	<span class="comment">// 如果关键字大于最大关键字，返回NULL</span></div><div class="line">	<span class="keyword">if</span>(theKey &gt;= tailKey)</div><div class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line"></div><div class="line">	<span class="comment">// 位置beforeNode是关键字为theKey的节点之最右边的位置</span></div><div class="line">	skipNode&lt;K,E&gt;* beforeNode = headerNode;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = levels; i &gt;= <span class="number">0</span>; i--)</div><div class="line">		<span class="keyword">while</span>(beforeNode-&gt;next[i]-&gt;element.first &lt; theKey)</div><div class="line">			beforeNode = beforeNode-&gt;next[i];</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(beforeNode-&gt;next[<span class="number">0</span>]-&gt;element.first == theKey)</div><div class="line">		<span class="keyword">return</span> &amp;beforeNode-&gt;next[<span class="number">0</span>]-&gt;element;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 跳表实现 */</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _SKIPLIST_H_</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> _SKIPLIST_H_</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span>	<span class="comment">// RAND_MAX</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span>	<span class="comment">// ceil()</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;new&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line"><span class="keyword">struct</span> skipNode</div><div class="line">&#123;</div><div class="line">	<span class="keyword">typedef</span> pair&lt;<span class="keyword">const</span> K, E&gt; pairType;</div><div class="line"></div><div class="line">	pairType element;</div><div class="line">	skipNode&lt;K, E&gt;** next;</div><div class="line"></div><div class="line">	skipNode() &#123;&#125;</div><div class="line"></div><div class="line">	skipNode(<span class="keyword">const</span> pairType&amp; thePair, <span class="keyword">int</span> size) : element(thePair)</div><div class="line">	&#123;</div><div class="line">		next = <span class="keyword">new</span> skipNode&lt;K, E&gt;* [size];</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line"><span class="keyword">class</span> SkipList</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	SkipList() &#123;&#125;</div><div class="line">	SkipList(K largeKey, <span class="keyword">int</span> maxPairs, <span class="keyword">float</span> prob);</div><div class="line">	~SkipList();</div><div class="line"></div><div class="line">	<span class="comment">// find, 如果找到返回指针，没有返回NULL</span></div><div class="line">	pair&lt;<span class="keyword">const</span> K, E&gt;* find(<span class="keyword">const</span> K&amp; theKey) <span class="keyword">const</span>;</div><div class="line">	<span class="comment">// level，级的分配</span></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">level</span><span class="params">()</span> <span class="keyword">const</span></span>;</div><div class="line">	<span class="comment">// search，搜索</span></div><div class="line">	skipNode&lt;K,E&gt;* search(<span class="keyword">const</span> K&amp; theKey) <span class="keyword">const</span>;</div><div class="line">	<span class="comment">// insert， 插入操作</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">const</span> pair&lt;<span class="keyword">const</span> K, E&gt;&amp; thePair)</span></span>;</div><div class="line">	<span class="comment">// erase，删除操作</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">erase</span><span class="params">(<span class="keyword">const</span> K&amp; theKey)</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">float</span> cutOff;				<span class="comment">// 用来确定层数</span></div><div class="line">	<span class="keyword">int</span> levels;					<span class="comment">// 当前最大的非空链对</span></div><div class="line">	<span class="keyword">int</span> dSize;					<span class="comment">// 字典的数对个数</span></div><div class="line">	<span class="keyword">int</span> maxLevel;				<span class="comment">// 允许的最大链表层数</span></div><div class="line">	K tailKey;					<span class="comment">// 最大关键字</span></div><div class="line">	skipNode&lt;K, E&gt;* headerNode;	<span class="comment">// 头结点指针</span></div><div class="line">	skipNode&lt;K, E&gt;* tailNode;	<span class="comment">// 尾节点指针</span></div><div class="line">	skipNode&lt;K, E&gt;** last;		<span class="comment">// last[i] 表示i层的最后节点</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line">SkipList&lt;K, E&gt;::SkipList(K largeKey, <span class="keyword">int</span> maxPairs, <span class="keyword">float</span> prob)</div><div class="line">&#123;</div><div class="line">	<span class="comment">// 构造函数，关键字小于largeKey且数对个数size最多为maxPairs, 0 &lt; prob &lt; 1;</span></div><div class="line">	cutOff = prob * RAND_MAX;</div><div class="line">	maxLevel = (<span class="keyword">int</span>)<span class="built_in">ceil</span>(logf((<span class="keyword">float</span>)maxPairs) / logf(<span class="number">1</span> / prob)) - <span class="number">1</span>;	<span class="comment">// 向上取整</span></div><div class="line">	levels = <span class="number">0</span>;</div><div class="line">	dSize = <span class="number">0</span>;</div><div class="line">	tailKey = largeKey;</div><div class="line"></div><div class="line">	<span class="comment">// 生产头结点，尾节点和数组last</span></div><div class="line">	pair&lt;K,E&gt; tailPair;</div><div class="line">	tailPair.first = tailKey;</div><div class="line">	headerNode = <span class="keyword">new</span> skipNode&lt;K, E&gt; (tailPair, maxLevel + <span class="number">1</span>);</div><div class="line">	tailNode = <span class="keyword">new</span> skipNode&lt;K, E&gt; (tailPair, <span class="number">0</span>);</div><div class="line">	last = <span class="keyword">new</span> skipNode&lt;K, E&gt;*[maxLevel + <span class="number">1</span>];</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= maxLevel; i++)</div><div class="line">		headerNode-&gt;next[i] = tailNode;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line">SkipList&lt;K,E&gt;::~SkipList()</div><div class="line">&#123;</div><div class="line">	<span class="comment">// Empty</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line">pair&lt;<span class="keyword">const</span> K, E&gt;* SkipList&lt;K,E&gt;::find(<span class="keyword">const</span> K&amp; theKey) <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// 返回匹配的数对的指针</span></div><div class="line">	<span class="comment">// 如果关键字大于最大关键字，返回NULL</span></div><div class="line">	<span class="keyword">if</span>(theKey &gt;= tailKey)</div><div class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line"></div><div class="line">	<span class="comment">// 位置beforeNode是关键字为theKey的节点之最右边的位置</span></div><div class="line">	skipNode&lt;K,E&gt;* beforeNode = headerNode;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = levels; i &gt;= <span class="number">0</span>; i--)</div><div class="line">		<span class="keyword">while</span>(beforeNode-&gt;next[i]-&gt;element.first &lt; theKey)</div><div class="line">			beforeNode = beforeNode-&gt;next[i];</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(beforeNode-&gt;next[<span class="number">0</span>]-&gt;element.first == theKey)</div><div class="line">		<span class="keyword">return</span> &amp;beforeNode-&gt;next[<span class="number">0</span>]-&gt;element;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line"><span class="keyword">int</span> SkipList&lt;K,E&gt;::level() <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// 返回一个表示链表级的随机数，这个数不大于maxLevel</span></div><div class="line">	<span class="keyword">int</span> lev = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(rand() &lt;= cutOff)</div><div class="line">		lev++;</div><div class="line">	<span class="keyword">return</span> (lev &lt;= maxLevel) ? lev : maxLevel;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line">skipNode&lt;K, E&gt;* SkipList&lt;K, E&gt;::search(<span class="keyword">const</span> K&amp; theKey) <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// 返回beforeNode时关键字</span></div><div class="line">	skipNode&lt;K, E&gt;* beforeNode = headerNode;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = levels; i &gt;= <span class="number">0</span>; i--)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">while</span>(beforeNode-&gt;next[i]-&gt;element.first &lt; theKey)</div><div class="line">			beforeNode = beforeNode-&gt;next[i];</div><div class="line">		last[i] = beforeNode;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> beforeNode-&gt;next[<span class="number">0</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line"><span class="keyword">void</span> SkipList&lt;K,E&gt;::insert(<span class="keyword">const</span> pair&lt;<span class="keyword">const</span> K, E&gt;&amp; thePair)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(thePair.first &gt;= tailKey)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Key = "</span> &lt;&lt; thePair.first &lt;&lt; <span class="string">" must be &lt; "</span> &lt;&lt; tailKey;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 查看关键字是否已经存在</span></div><div class="line">	skipNode&lt;K, E&gt;* theNode = search(thePair.first);</div><div class="line">	<span class="keyword">if</span>(theNode-&gt;element.first == thePair.first)</div><div class="line">	&#123;</div><div class="line">		theNode-&gt;element.second = thePair.second;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 若不存在, 确定所在链级数</span></div><div class="line">	<span class="keyword">int</span> theLevel = level();</div><div class="line">	<span class="keyword">if</span>(theLevel &gt; levels)</div><div class="line">	&#123;</div><div class="line">		theLevel = ++levels;</div><div class="line">		last[theLevel] = headerNode;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 再借点theNode 之后插入新节点</span></div><div class="line">	skipNode&lt;K, E&gt;* newNode = <span class="keyword">new</span> skipNode&lt;K, E&gt;(thePair, theLevel + <span class="number">1</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; theLevel; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="comment">// 插入i级链表</span></div><div class="line">		newNode-&gt;next[i] = last[i]-&gt;next[i];</div><div class="line">		last[i]-&gt;next[i] = newNode;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	dSize++;	</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> E&gt;</div><div class="line"><span class="keyword">void</span> SkipList&lt;K,E&gt;::erase(<span class="keyword">const</span> K&amp; theKey)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(theKey &gt;= tailKey)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line"></div><div class="line">	<span class="comment">//查看是否有匹配的数对</span></div><div class="line">	skipNode&lt;K,E&gt;* theNode = search(theKey);</div><div class="line">	<span class="keyword">if</span>(theNode-&gt;element.first != theKey)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= levels &amp;&amp; last[i]-&gt;next[i] == theNode; i++)</div><div class="line">		last[i]-&gt;next[i] = theNode-&gt;next[i];</div><div class="line"></div><div class="line">	<span class="keyword">while</span>(levels &gt; <span class="number">0</span> &amp;&amp; headerNode-&gt;next[levels] == tailNode)</div><div class="line">		levels--;</div><div class="line"></div><div class="line">	<span class="keyword">delete</span> theNode;</div><div class="line">	dSize--;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !_SKIPLIST_H_</span></span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ccode/" rel="tag">#C/C++</a>
+          
+            <a href="/tags/数据结构/" rel="tag">#数据结构</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/12/C-typedef-and-typename/" rel="next" title="C++ typedef和typename关键字">
+                <i class="fa fa-chevron-left"></i> C++ typedef和typename关键字
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/16/C-structure-skiplist/"
+           data-title="数据结构之跳表" data-url="http://yoursite.com/2016/10/16/C-structure-skiplist/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Xefvan" />
+          <p class="site-author-name" itemprop="name">Xefvan</p>
+          <p class="site-description motion-element" itemprop="description">Do what you want, do what you wish</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jiafanxue" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5675853550" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/tutuxs" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构之跳表"><span class="nav-number">1.</span> <span class="nav-text">数据结构之跳表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字典"><span class="nav-number">1.1.</span> <span class="nav-text">字典</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字典类"><span class="nav-number">1.1.1.</span> <span class="nav-text">字典类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字典的节点"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">字典的节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字典类-1"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">字典类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字典类的实现"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">字典类的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#find"><span class="nav-number">1.1.1.3.1.</span> <span class="nav-text">find()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#insert"><span class="nav-number">1.1.1.3.2.</span> <span class="nav-text">insert()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#erase"><span class="nav-number">1.1.1.3.3.</span> <span class="nav-text">erase()</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跳表"><span class="nav-number">1.2.</span> <span class="nav-text">跳表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构建思路"><span class="nav-number">1.2.1.</span> <span class="nav-text">构建思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.2.2.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳表类"><span class="nav-number">1.2.3.</span> <span class="nav-text">跳表类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#节点"><span class="nav-number">1.2.3.0.1.</span> <span class="nav-text">节点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查找"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完整代码"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">完整代码</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xefvan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"Tutuxs"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
