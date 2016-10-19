@@ -1,0 +1,853 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C/C++,算法," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="九大排序算法
+
+冒泡排序
+插入排序
+选择排序
+快速排序
+归并排序
+堆排序
+计数排序
+基数排序
+桶排序
+
+注:
+
+以下遍历中用到了swap()函数，进行两个数的交换
+其中的伪代码参考自《算法导论第三版》
+
+
+冒泡排序冒泡排序是一种简单的排序算法。它重复地“走访”要排序的数列，一次比较两个元素，如果他们的顺序错误就进行交换。
+时间复杂度：O(n^2)最优时间复杂度：O(n)平均时间复杂度：O(n^2)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="九大排序算法">
+<meta property="og:url" content="http://yoursite.com/2016/10/20/C-algorithms-ninesort/index.html">
+<meta property="og:site_name" content="Xefvan's blog">
+<meta property="og:description" content="九大排序算法
+
+冒泡排序
+插入排序
+选择排序
+快速排序
+归并排序
+堆排序
+计数排序
+基数排序
+桶排序
+
+注:
+
+以下遍历中用到了swap()函数，进行两个数的交换
+其中的伪代码参考自《算法导论第三版》
+
+
+冒泡排序冒泡排序是一种简单的排序算法。它重复地“走访”要排序的数列，一次比较两个元素，如果他们的顺序错误就进行交换。
+时间复杂度：O(n^2)最优时间复杂度：O(n)平均时间复杂度：O(n^2)">
+<meta property="og:image" content="http://img.blog.csdn.net/20161018225736724">
+<meta property="og:image" content="http://img.blog.csdn.net/20161019235734139">
+<meta property="og:image" content="http://img.blog.csdn.net/20161020010544434">
+<meta property="og:image" content="http://img.blog.csdn.net/20161020213324808">
+<meta property="og:image" content="http://img.blog.csdn.net/20161020214521596">
+<meta property="og:image" content="http://img.blog.csdn.net/20161020231105742">
+<meta property="og:updated_time" content="2016-10-19T15:30:54.271Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="九大排序算法">
+<meta name="twitter:description" content="九大排序算法
+
+冒泡排序
+插入排序
+选择排序
+快速排序
+归并排序
+堆排序
+计数排序
+基数排序
+桶排序
+
+注:
+
+以下遍历中用到了swap()函数，进行两个数的交换
+其中的伪代码参考自《算法导论第三版》
+
+
+冒泡排序冒泡排序是一种简单的排序算法。它重复地“走访”要排序的数列，一次比较两个元素，如果他们的顺序错误就进行交换。
+时间复杂度：O(n^2)最优时间复杂度：O(n)平均时间复杂度：O(n^2)">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161018225736724">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Tutuxs'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/20/C-algorithms-ninesort/"/>
+
+  <title> 九大排序算法 | Xefvan's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-[UA-85210305-1]-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Xefvan's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                九大排序算法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-20T07:00:51+08:00" content="2016-10-19">
+              2016-10-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/20/C-algorithms-ninesort/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/20/C-algorithms-ninesort/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>九大排序算法</p>
+<ul>
+<li>冒泡排序</li>
+<li>插入排序</li>
+<li>选择排序</li>
+<li>快速排序</li>
+<li>归并排序</li>
+<li>堆排序</li>
+<li>计数排序</li>
+<li>基数排序</li>
+<li>桶排序</li>
+</ul>
+<p><font color="#ff0000">注:</font></p>
+<ol>
+<li>以下遍历中用到了swap()函数，进行两个数的交换</li>
+<li>其中的伪代码参考自《算法导论第三版》</li>
+</ol>
+<hr>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>冒泡排序是一种简单的排序算法。它重复地“走访”要排序的数列，一次比较两个元素，如果他们的顺序错误就进行交换。</p>
+<p>时间复杂度：O(n^2)<br>最优时间复杂度：O(n)<br>平均时间复杂度：O(n^2)<br>空间复杂度：O(n)，<br>需要辅助空间：O(1)</p>
+<h4 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h4><ol>
+<li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
+<li>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</li>
+<li>针对所有的元素重复以上的步骤，除了最后一个。</li>
+<li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</li>
+</ol>
+<h4 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(T a[], <span class="keyword">int</span> n)</span>	<span class="comment">// n为数组的大小</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt;= <span class="number">0</span>; i--)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(a[j] &gt; a[j+<span class="number">1</span>])</div><div class="line">				swap(a[j], a[j+<span class="number">1</span>]);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当然这种也可以<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(T a[], <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n - <span class="number">1</span>; j++)</div><div class="line">			<span class="keyword">if</span>(a[j] &gt; a[j+<span class="number">1</span>])</div><div class="line">				swap(a[j], a[j+<span class="number">1</span>]);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>当我们对少量元素进行排序的时候，插入排序不失为一种有效而又方便的排序算法</p>
+<h4 id="插入排序的伪代码"><a href="#插入排序的伪代码" class="headerlink" title="插入排序的伪代码"></a>插入排序的伪代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">INSERTSORT(A)</div><div class="line"><span class="keyword">for</span> j = <span class="number">2</span> to A.length</div><div class="line">	key = A[j];</div><div class="line">	i = j - <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> i &gt; <span class="number">0</span> and A[i] &gt; key</div><div class="line">		A[i + <span class="number">1</span>] = A[i]</div><div class="line">		i = i <span class="number">-1</span></div><div class="line">	A[i + <span class="number">1</span>] = key</div></pre></td></tr></table></figure>
+<h4 id="实现思路-1"><a href="#实现思路-1" class="headerlink" title="实现思路"></a>实现思路</h4><ol>
+<li>从第一个元素开始，该元素可以认为已经被排序</li>
+<li>取出下一个元素，在已经排序的元素序列中从后向前扫描</li>
+<li>如果该元素（已排序）大于新元素，将该元素移到下一位置</li>
+<li>重复步骤3，直到找到已排序的元素小于或者等于新元素的位置</li>
+<li>将新元素插入到该位置后</li>
+<li>重复步骤2~5</li>
+</ol>
+<p>或者更通俗的讲，你可以将数组分类两部分，一部分为有序的即数组的第一个元素， 另一部分为除有序部分之外的元素。例如：a[0], a[1, n]。每次循环与有序的部分进行比较，插入有序的部分。</p>
+<h4 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h4><p><img src="http://img.blog.csdn.net/20161018225736724" alt="插入排序"></p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(T a[], <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)</div><div class="line">	&#123;</div><div class="line">		T t = a[i];</div><div class="line">		<span class="keyword">int</span> j;</div><div class="line">		<span class="keyword">for</span>(j = i <span class="number">-1</span> ; j &gt;= <span class="number">0</span> &amp;&amp; t &lt; a[j]; j--) <span class="comment">// 这里循环遍历有序数组，把t插入有序数组</span></div><div class="line">			a[j+<span class="number">1</span>] = a[j];</div><div class="line">		a[j+<span class="number">1</span>] = t;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>选择排序是一种简单直观的排序算法。</p>
+<h4 id="实现思路-2"><a href="#实现思路-2" class="headerlink" title="实现思路"></a>实现思路</h4><p>它的工作原理如下。首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
+<h4 id="图解-1"><a href="#图解-1" class="headerlink" title="图解"></a>图解</h4><p>任然拿上面的数组进行演示，这里以每次查找最大值为例</p>
+<p><img src="http://img.blog.csdn.net/20161019235734139" alt="选择排序"></p>
+<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">findindex</span><span class="params">(T a[], <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> maxindex = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(a[maxindex] &lt; a[i])</div><div class="line">			maxindex = i;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> maxindex;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">selectSort</span><span class="params">(T a[], <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt; <span class="number">1</span>; i--)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> maxindex = findindex(a, i);</div><div class="line">		swap(a[maxindex], a[i - <span class="number">1</span>]);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当然如果你每次查找最小值的话，代码如下<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">selectionSort</span><span class="params">(T a[], <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> min = i;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(a[j] &lt; a[min])</div><div class="line">				min = j;</div><div class="line">		&#125;</div><div class="line">		swap(a[i], a[min]);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="快速排序（快排）"><a href="#快速排序（快排）" class="headerlink" title="快速排序（快排）"></a>快速排序（快排）</h3><p>快速排序通常是实际排序引用中最好的选择，因为它平均性能非常好</p>
+<h4 id="实现思路-3"><a href="#实现思路-3" class="headerlink" title="实现思路"></a>实现思路</h4><ol>
+<li>将数组A[p…r]划分为两个子数组A[p…q-1]和A[q+1 … r],使得A[p…q-1]的每一个元素都小于A[q]，而A[q+1 … r]的每一个元素都大于A[q]</li>
+<li>通过递归调用快速排序，对子数组A[p…q-1]和A[q+1 … r]进行排序</li>
+</ol>
+<h4 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h4><p>分为两段，一段递归调用，一段进行数组划分<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">QUICKSORT(A, p, r)</div><div class="line">	<span class="keyword">if</span> p &lt; r</div><div class="line">		q = PARTITION(A, p, r)</div><div class="line">		QUICKSORT(A, p, q<span class="number">-1</span>)</div><div class="line">		QUICKSORT(A, q+<span class="number">1</span>, r)</div></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">PARTITION(A, p, r)</div><div class="line">	x = A[r]</div><div class="line">	i = p - <span class="number">1</span></div><div class="line">	<span class="keyword">for</span> j = p to r - <span class="number">1</span></div><div class="line">		<span class="keyword">if</span> A[j] &lt;= x</div><div class="line">			i = i + <span class="number">1</span></div><div class="line">			exchange A[i] with A[j]</div><div class="line">	exchange A[i + <span class="number">1</span>] with A[r]</div><div class="line">	<span class="keyword">return</span> i + <span class="number">1</span></div></pre></td></tr></table></figure>
+<h4 id="图解-2"><a href="#图解-2" class="headerlink" title="图解"></a>图解</h4><p><img src="http://img.blog.csdn.net/20161020010544434" alt="快速排序"></p>
+<p>再分别对灰色和黑色数组进行快速排序，形成递归</p>
+<h4 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> p, <span class="keyword">int</span> r)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> x = a[r];</div><div class="line">	<span class="keyword">int</span> i = p - <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = p; j &lt; r; j++)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(a[j] &lt;= x)</div><div class="line">		&#123;</div><div class="line">			i += <span class="number">1</span>;</div><div class="line">			swap(a[i], a[j]);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	swap(a[i+<span class="number">1</span>], a[r]);</div><div class="line">	<span class="keyword">return</span> i + <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> p, <span class="keyword">int</span> r)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(p &lt; r)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> q = partition(a, p, r);		<span class="comment">// 第一次找出图中黄颜色的下标</span></div><div class="line">		quickSort(a, p, q - <span class="number">1</span>);			<span class="comment">// 递归灰色数组</span></div><div class="line">		quickSort(a, q + <span class="number">1</span>, r);			<span class="comment">// 递归黑色数组</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>归并排序算法完全遵循分治模式。而分治模式的三个步骤分别为“分解”，“解决”，“合并”。其中归并算法的关键操作是“合并”。</p>
+<h4 id="实现思路-4"><a href="#实现思路-4" class="headerlink" title="实现思路"></a>实现思路</h4><p>假设我们有一副牌分为A，B两幅，并且每一副牌都已经排序好</p>
+<ol>
+<li>我们逐个比较两幅牌，如果A的第一张牌小于B的第一张牌，则A的第一张牌入队</li>
+<li>继续比较，A的第二张牌和B的第一张牌，较小的一张牌入队，如此重复直到遍历完所有牌</li>
+</ol>
+<h4 id="图解-3"><a href="#图解-3" class="headerlink" title="图解"></a>图解</h4><p><img src="http://img.blog.csdn.net/20161020213324808" alt="归并排序"></p>
+<p>然而我们大多数情况下， 一个数组分为两个小数组不可能两个数组都排序好的，那么我们就应该一步一步的往上推</p>
+<p>思路和原来一样，只是现在的对象变为A（B），然后将A（B）再分为两副牌，对A（B）进行排序，一直往下递归，直至排序好。</p>
+<p><img src="http://img.blog.csdn.net/20161020214521596" alt="归并排序2"></p>
+<h4 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">MERGE(A, p, q, r)</div><div class="line">	n1 = q - p + <span class="number">1</span></div><div class="line">	n2 = r - <span class="number">1</span></div><div class="line">	let L[<span class="number">1.</span>..n1 + <span class="number">1</span>] and R[<span class="number">1.</span>..n2 + <span class="number">1</span>] be <span class="keyword">new</span> arrays</div><div class="line">	<span class="keyword">for</span> i = <span class="number">1</span> to n1</div><div class="line">		L[i] = A[p + i - <span class="number">1</span>]</div><div class="line">	<span class="keyword">for</span> j = <span class="number">1</span> to n2</div><div class="line">		R[j] = A[q + j]</div><div class="line">	L[n1 + <span class="number">1</span>] = -∞</div><div class="line">	R[n2 + <span class="number">1</span>] = -∞</div><div class="line">	<span class="keyword">for</span> k = p to r</div><div class="line">		<span class="keyword">if</span> L[i] &lt;= R[j]</div><div class="line">			A[k] = L[i]</div><div class="line">			i = i + <span class="number">1</span></div><div class="line">		<span class="keyword">else</span></div><div class="line">			A[k] = R[j]</div><div class="line">			j = j+<span class="number">1</span></div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MERGE-SORT(A, p, r)</div><div class="line">	<span class="keyword">if</span> p &lt; r</div><div class="line">		q = [(p + r) / <span class="number">2</span>]</div><div class="line">		MERGE-SORT(A, p, q)</div><div class="line">		MERGE-SORT(A, q + <span class="number">1</span>, r)</div><div class="line">		MERGE(A, p, q, r)</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="代码实现-3"><a href="#代码实现-3" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_array</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> p, <span class="keyword">int</span> q, <span class="keyword">int</span> r)</span> <span class="comment">// A[p, r] -- &gt; A[p, q] + A[q + 1, r]</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> n1 = q - p + <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> n2 = r - q;</div><div class="line">	<span class="keyword">int</span> L[n1 + <span class="number">1</span>];</div><div class="line">	<span class="keyword">int</span> R[n2 + <span class="number">1</span>];</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n1; i++)</div><div class="line">		L[i] = A[p + i <span class="number">-1</span>];</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n2; j++)</div><div class="line">		R[j] = A[q + j];</div><div class="line">	</div><div class="line">	<span class="comment">// INT_MAX 在&lt;climits&gt;里，表示整形数的最大值</span></div><div class="line">	<span class="comment">// 将最后一个元素设置为哨兵，可以简化代码，如遇到它，不可能为最小值</span></div><div class="line">	L[n1 + <span class="number">1</span>] = INT_MAX;</div><div class="line">	R[n2 + <span class="number">1</span>] = INT_MAX;</div><div class="line"></div><div class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> j = <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = p; k &lt; r; k++)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(L[i] &lt;= R[j])</div><div class="line">		&#123;</div><div class="line">			A[k] = L[i];</div><div class="line">			i++;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span></div><div class="line">		&#123;</div><div class="line">			A[k] = R[j];</div><div class="line">			j++;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> p,<span class="keyword">int</span> r)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(p &lt; r)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> q=(p + r) / <span class="number">2</span>;</div><div class="line">        <span class="comment">//利用递归，对两段子数组分别求序，再合并</span></div><div class="line">        merge_sort(a, p, q);</div><div class="line">        merge_sort(a, q+<span class="number">1</span>, r);</div><div class="line">        merge_array(a, p, q, r);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>要想理解堆排序首先需要知道什么是堆，这里我们利用二叉（最大）堆进行排序。二叉堆可以近似看成一个完全二叉树。其中又分为最大堆和最小堆。在最大堆中，最大堆性质是指除了根以外的所有节点i都要满足: A[parent(i)] &gt;= A[i]。也就是说堆中的最大元素存放在根节点中。而最小堆真好相反。</p>
+<h4 id="实现思路-5"><a href="#实现思路-5" class="headerlink" title="实现思路"></a>实现思路</h4><ol>
+<li><p>首先根据推导我们很容易知道它的父节点，左孩子和右孩子下标的计算方式.用于维护最大堆</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 父节点</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">parent</span><span class="params">(<span class="keyword">int</span> i)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> i / <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 左子树</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">left</span><span class="params">(<span class="keyword">int</span> i)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> <span class="number">2</span> * i;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 右子树</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">right</span><span class="params">(<span class="keyword">int</span> i)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> <span class="number">2</span> * i + <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>建立一个最大二叉堆，并且在建立最大堆的同时要维护最大堆的性质</p>
+</li>
+<li>由于最大堆的性质，他的堆中最大元素肯定处于顶层根节点中，因此每次只需要把最大元素取出来，在对剩下的元素重新维护，形成新的最大堆，再接着取最顶层的最大值，依次类推，直到最后一个</li>
+</ol>
+<h5 id="实现代码-1"><a href="#实现代码-1" class="headerlink" title="实现代码"></a>实现代码</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">parent</span><span class="params">(<span class="keyword">int</span> i)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> i / <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">left</span><span class="params">(<span class="keyword">int</span> i)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> <span class="number">2</span>*i;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">right</span><span class="params">(<span class="keyword">int</span> i)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> <span class="number">2</span>*i + <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 维护堆 */</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Max_HeapIfy</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> i, <span class="keyword">int</span> heap_size)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> l = left(i);</div><div class="line">	<span class="keyword">int</span> r = right(i);</div><div class="line"></div><div class="line">	<span class="keyword">int</span> largest;</div><div class="line">	<span class="keyword">if</span>(l &lt;= heap_size &amp;&amp; a[l] &gt; a[i])</div><div class="line">		largest = l;</div><div class="line">	<span class="keyword">else</span></div><div class="line">		largest = i;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(r &lt;= heap_size &amp;&amp; a[r] &gt; a[largest])</div><div class="line">		largest = r;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(largest != i)</div><div class="line">	&#123;</div><div class="line">		swap(a[i], a[largest]);</div><div class="line">		Max_HeapIfy(a, largest, heap_size);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 建立最大堆 */</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Build_Max_Heap</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> heap_size)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = heap_size / <span class="number">2</span>; i &gt; <span class="number">0</span>; i--)</div><div class="line">		Max_HeapIfy(a, i, heap_size);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 堆排序 */</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> heap_size)</span></span></div><div class="line">&#123;</div><div class="line">	Build_Max_Heap(a, heap_size);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = heap_size; i &gt;= <span class="number">0</span>; i--)</div><div class="line">	&#123;</div><div class="line">		swap(a[<span class="number">0</span>], a[i]);</div><div class="line">		heap_size -= <span class="number">1</span>;</div><div class="line">		Max_HeapIfy(a, <span class="number">0</span>, heap_size);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> a[<span class="number">11</span>] = &#123;INT_MIN , <span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">19</span>, <span class="number">10</span>, <span class="number">14</span>, <span class="number">8</span>, <span class="number">7</span>&#125;;</div><div class="line">	HeapSort(a, <span class="number">10</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)			<span class="comment">// for(int i = 0; i &lt; 11; i++) 如果改成这样子会怎么样？</span></div><div class="line">		<span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">" "</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h3><p>在前面介绍的6中排序都有一个共同的特点：在排序的最终结果中，各元素的次序依赖于它们之间的比较。所以我们又把这类排序叫做比较排序。而计数排序和基数排序，以及接下来的桶排序则不是运用比较来确定排序顺序的。</p>
+<h4 id="实现思路-6"><a href="#实现思路-6" class="headerlink" title="实现思路"></a>实现思路</h4><p>计数排序假设n个输入元素中的每一个都是在0到k区间的一个整数，其中k为某个整数。</p>
+<p>对每一个输入元素x，确定小于x的元素个数。利用这一信息，就可以直接把x放到它在输出数组的位置上了。例如，如果有17个元素小于x，则x就应该放在第18个输出位置上。</p>
+<h4 id="伪代码-2"><a href="#伪代码-2" class="headerlink" title="伪代码"></a>伪代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">COUNT-SORT(A, B, k)</div><div class="line">let C[<span class="number">0.</span>..k] be a <span class="keyword">new</span> <span class="built_in">array</span></div><div class="line"><span class="keyword">for</span> i = <span class="number">0</span> to k</div><div class="line">	C[i] = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> j = <span class="number">1</span> to A.length</div><div class="line">	C[A[j]] = C[A[j]] + <span class="number">1</span></div><div class="line"><span class="keyword">for</span> i = <span class="number">1</span> to k</div><div class="line">	C[i] = C[i] + C[i - <span class="number">1</span>]</div><div class="line"><span class="keyword">for</span> j = A.length downto <span class="number">1</span></div><div class="line">	B[C[A[j]]] = A[j]</div><div class="line">	C[A[j]] = C[A[j]] - <span class="number">1</span></div></pre></td></tr></table></figure>
+<p>由于代码中存在三个for循环，我个人喜欢叫它为三for排序</p>
+<h4 id="代码实现-4"><a href="#代码实现-4" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">CountingSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> b[], <span class="keyword">int</span> k, <span class="keyword">int</span> arr_size)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> *c  = <span class="keyword">new</span> <span class="keyword">int</span>[k + <span class="number">1</span>]&#123;<span class="number">0</span>&#125;;</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr_size; j++)</div><div class="line">		c[a[j]]	 = c[a[j]] + <span class="number">1</span>;</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++)</div><div class="line">		c[i] = c[i] + c[i<span class="number">-1</span>];</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = arr_size - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--)</div><div class="line">	&#123;</div><div class="line">		b[c[a[j]]] = a[j];</div><div class="line">		c[a[j]]	= c[a[j]]<span class="number">-1</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">delete</span>[] c;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h3><p>基数排序是先按最低有效位进行排序的排序算法</p>
+<h4 id="实现思路-7"><a href="#实现思路-7" class="headerlink" title="实现思路"></a>实现思路</h4><ol>
+<li>从最低有效位进行排序，如下图的个位开始排序</li>
+<li>个位排序完排十位，接下来是百位</li>
+</ol>
+<p>而每一个位的排序则用到了计数排序的思路</p>
+<h4 id="图解-4"><a href="#图解-4" class="headerlink" title="图解"></a>图解</h4><p><img src="http://img.blog.csdn.net/20161020231105742" alt="基数排序"></p>
+<h4 id="代码实现-5"><a href="#代码实现-5" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 假设n个d位的元素存放在数组A中，其中第一位是最低位，第d位是最高位</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">radixSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> b[], <span class="keyword">int</span> len, <span class="keyword">int</span> d)</span>	</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> *arrC = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>]; <span class="comment">//most 10 numbers;</span></div><div class="line">    </div><div class="line">    <span class="keyword">int</span> radix = <span class="number">1</span>; </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= d; k ++) &#123;</div><div class="line">        <span class="comment">//using CountingSort for every bit;</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i ++)</div><div class="line">            arrC[i] = <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i ++) &#123;</div><div class="line">            <span class="keyword">int</span> temp = (a[i]/radix) % <span class="number">10</span>; <span class="comment">//find every bit of a number</span></div><div class="line">            arrC[temp] = arrC[temp] + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i ++)</div><div class="line">            arrC[i] = arrC[i] + arrC[i<span class="number">-1</span>];</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = len<span class="number">-1</span>; j &gt;= <span class="number">0</span>; j --) &#123;</div><div class="line">            <span class="keyword">int</span> temp = (a[j]/radix) % <span class="number">10</span>;</div><div class="line">            b[arrC[temp] - <span class="number">1</span>] = a[j];</div><div class="line">            arrC[temp] = arrC[temp] - <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        radix *= <span class="number">10</span>; <span class="comment">//another bit;</span></div><div class="line">        <span class="built_in">memcpy</span>(a, b, len * <span class="keyword">sizeof</span>(<span class="keyword">int</span>)); <span class="comment">//note this line;</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h3><p>这里利用链表存储数组元素</p>
+<h4 id="实现思路-8"><a href="#实现思路-8" class="headerlink" title="实现思路"></a>实现思路</h4><ol>
+<li>设置一个定量的数组当作空桶子。</li>
+<li>寻访序列，并且把项目一个一个放到对应的桶子去。</li>
+<li>对每个不是空的桶子进行排序。</li>
+<li>从不是空的桶子里把项目再放回原来的序列中。</li>
+</ol>
+<h4 id="代码实现-6"><a href="#代码实现-6" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> BucketNode&#123;</div><div class="line">    <span class="keyword">double</span>        nValue;</div><div class="line">    BucketNode    *pNext;  </div><div class="line">&#125;Node;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">BucketSort_Link</span><span class="params">(<span class="keyword">double</span> arrA[], <span class="keyword">int</span> nLen)</span></span></div><div class="line">&#123;</div><div class="line">    Node *pBucket = <span class="keyword">new</span> Node[<span class="number">10</span>];</div><div class="line"></div><div class="line">    <span class="comment">//initial the bucket</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i ++) &#123;</div><div class="line">        pBucket[i].nValue = <span class="number">0.0</span>;</div><div class="line">        pBucket[i].pNext = <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nLen; i ++) &#123;</div><div class="line">        <span class="keyword">double</span> nTemp = arrA[i];</div><div class="line">        Node *pNode = <span class="keyword">new</span> Node();</div><div class="line">        pNode-&gt;nValue = nTemp;</div><div class="line">        pNode-&gt;pNext = <span class="literal">NULL</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> nKey = <span class="keyword">int</span>(arrA[i]*<span class="number">10</span>);</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (pBucket[nKey].pNext == <span class="literal">NULL</span>) &#123;</div><div class="line">            pBucket[nKey].pNext = pNode; <span class="comment">//每个桶的第一个位置不存数据</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            Node *p = &amp;pBucket[nKey]; <span class="comment">//p--&gt;q</span></div><div class="line">            Node *q = pBucket[nKey].pNext;</div><div class="line"></div><div class="line">            <span class="keyword">while</span> (q &amp;&amp; q-&gt;nValue &lt;= nTemp) &#123;</div><div class="line">                p = q;</div><div class="line">                q = q-&gt;pNext;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            pNode-&gt;pNext = q;</div><div class="line">            p-&gt;pNext = pNode;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i ++) &#123;</div><div class="line">        Node *pTemp = pBucket[i].pNext;</div><div class="line">        <span class="keyword">while</span> (pTemp) &#123;</div><div class="line">            arrA[k ++] = pTemp-&gt;nValue;</div><div class="line">            pTemp = pTemp-&gt;pNext;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ccode/" rel="tag">#C/C++</a>
+          
+            <a href="/tags/算法/" rel="tag">#算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/16/C-structure-skiplist/" rel="next" title="数据结构之跳表">
+                <i class="fa fa-chevron-left"></i> 数据结构之跳表
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/20/C-algorithms-ninesort/"
+           data-title="九大排序算法" data-url="http://yoursite.com/2016/10/20/C-algorithms-ninesort/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Xefvan" />
+          <p class="site-author-name" itemprop="name">Xefvan</p>
+          <p class="site-description motion-element" itemprop="description">Do what you want, do what you wish</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jiafanxue" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5675853550" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/tutuxs" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序"><span class="nav-number">1.</span> <span class="nav-text">冒泡排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现思路"><span class="nav-number">1.1.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现代码"><span class="nav-number">1.2.</span> <span class="nav-text">实现代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">2.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序的伪代码"><span class="nav-number">2.1.</span> <span class="nav-text">插入排序的伪代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现思路-1"><span class="nav-number">2.2.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图解"><span class="nav-number">2.3.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现"><span class="nav-number">2.4.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择排序"><span class="nav-number">3.</span> <span class="nav-text">选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现思路-2"><span class="nav-number">3.1.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图解-1"><span class="nav-number">3.2.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现-1"><span class="nav-number">3.3.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序（快排）"><span class="nav-number">4.</span> <span class="nav-text">快速排序（快排）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现思路-3"><span class="nav-number">4.1.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伪代码"><span class="nav-number">4.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图解-2"><span class="nav-number">4.3.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现-2"><span class="nav-number">4.4.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序"><span class="nav-number">5.</span> <span class="nav-text">归并排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现思路-4"><span class="nav-number">5.1.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图解-3"><span class="nav-number">5.2.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伪代码-1"><span class="nav-number">5.3.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现-3"><span class="nav-number">5.4.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序"><span class="nav-number">6.</span> <span class="nav-text">堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现思路-5"><span class="nav-number">6.1.</span> <span class="nav-text">实现思路</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实现代码-1"><span class="nav-number">6.1.1.</span> <span class="nav-text">实现代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计数排序"><span class="nav-number">7.</span> <span class="nav-text">计数排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现思路-6"><span class="nav-number">7.1.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伪代码-2"><span class="nav-number">7.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现-4"><span class="nav-number">7.3.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基数排序"><span class="nav-number">8.</span> <span class="nav-text">基数排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现思路-7"><span class="nav-number">8.1.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图解-4"><span class="nav-number">8.2.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现-5"><span class="nav-number">8.3.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桶排序"><span class="nav-number">9.</span> <span class="nav-text">桶排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现思路-8"><span class="nav-number">9.1.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现-6"><span class="nav-number">9.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xefvan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"Tutuxs"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
