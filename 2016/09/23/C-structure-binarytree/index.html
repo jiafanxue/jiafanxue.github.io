@@ -15,7 +15,7 @@
 
 
 
-<meta name="description" content="二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有
+<meta name="description" content="数据结构之二叉树(二)二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有
 
 确定树高
 确定元素数目
@@ -27,7 +27,7 @@
 <meta property="og:title" content="数据结构之二叉树(二)">
 <meta property="og:url" content="http://ixjfun.top/2016/09/23/C-structure-binarytree/index.html">
 <meta property="og:site_name" content="Xefvan's blog">
-<meta property="og:description" content="二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有
+<meta property="og:description" content="数据结构之二叉树(二)二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有
 
 确定树高
 确定元素数目
@@ -35,10 +35,10 @@
 显示或打印二叉树
 确定两颗二叉树是否一样
 删除整颗树">
-<meta property="og:updated_time" content="2016-11-18T15:38:39.207Z">
+<meta property="og:updated_time" content="2016-12-05T06:26:23.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构之二叉树(二)">
-<meta name="twitter:description" content="二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有
+<meta name="twitter:description" content="数据结构之二叉树(二)二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有
 
 确定树高
 确定元素数目
@@ -327,7 +327,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><excerpt in="" index="" |="" 首页摘要=""><br>二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有</excerpt></p>
+        <p><excerpt in="" index="" |="" 首页摘要=""></excerpt></p>
+<h2 id="数据结构之二叉树-二"><a href="#数据结构之二叉树-二" class="headerlink" title="数据结构之二叉树(二)"></a>数据结构之二叉树(二)</h2><p>二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有</p>
 <ol>
 <li>确定树高</li>
 <li>确定元素数目</li>
@@ -338,15 +339,6 @@
 </ol>
 <the rest="" of="" contents="" |="" 余下全文="">
 
-<h2 id="数据结构之二叉树-二"><a href="#数据结构之二叉树-二" class="headerlink" title="数据结构之二叉树(二)"></a>数据结构之二叉树(二)</h2><hr>
-<h4 id="二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有"><a href="#二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有" class="headerlink" title="二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有"></a>二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有</h4><ol>
-<li>确定树高</li>
-<li>确定元素数目</li>
-<li>复制</li>
-<li>显示或打印二叉树</li>
-<li>确定两颗二叉树是否一样</li>
-<li>删除整颗树</li>
-</ol>
 <h4 id="这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）"><a href="#这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）" class="headerlink" title="这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）"></a>这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：<a href="http://ixjfun.top/2016/09/22/C-algorithms-binarytree/" title="数据结构之二叉树（一）">数据结构之二叉树（一）</a></h4><h2 id="二叉树的完整构建（续）"><a href="#二叉树的完整构建（续）" class="headerlink" title="二叉树的完整构建（续）"></a>二叉树的完整构建（续）</h2><p>在构建二叉树，我们先要知道二叉树的数据成员和成员函数应该是什么。首先数据成员要有记录树节点的变量，以便我们返回树的节点个数，一个指向根节点的指针（可用于遍历操作等）。成员函数中，我们应该有上述提到的所有部分或全部操作（每个人的需求不一样，看自己的数据结构需要什么，自由组合等等）。因此代码实现为：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">template &lt;typename T&gt;</div><div class="line">class linkedBinaryTree : public binaryTree&lt;binaryTreeNode&lt;T&gt;&gt;</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	linkedBinaryTree();</div><div class="line">	~linkedBinaryTree(erase(););</div><div class="line">	bool emtpy() const &#123;return m_iTreeSize == 0; &#125;</div><div class="line">	void preOrder(void (*theVisit)(binaryTreeNode&lt;T&gt;*))</div><div class="line">	&#123;</div><div class="line">		visit = theVist;</div><div class="line">		preOrder(m_pRoot);</div><div class="line">	&#125;</div><div class="line">	void inOrder(void (*theVisit)(binaryTreeNode&lt;T&gt;*))</div><div class="line">	&#123;</div><div class="line">		visit = theVist;</div><div class="line">		inOrder(m_pRoot);</div><div class="line">	&#125;</div><div class="line">	void postOrder(void (*theVisit)(binaryTreeNode&lt;T&gt;*))</div><div class="line">	&#123;</div><div class="line">		visit = theVist;</div><div class="line">		postOrder(m_pRoot);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	void int size() const &#123;return m_iTreeSize; &#125;</div><div class="line">	void levelOrder(void (*)(binaryTreeNode&lt;T&gt;*));</div><div class="line">	void erase()</div><div class="line">	&#123;</div><div class="line">		postOrder(dispose);</div><div class="line">		m_pRoot = NULL;</div><div class="line">		treeSize = 0;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">private:</div><div class="line">	int m_iTreeSize;</div><div class="line">	binaryTreeNode&lt;T&gt; *m_pRoot;		// 指向根节点</div><div class="line">	static void (*visit))(binaryTreeNode&lt;T&gt; *);		// 访问函数</div><div class="line">	static void preOrder(binaryTreeNode&lt;T&gt; *);  		// 前序遍历</div><div class="line">	static void inOrder(binaryTreeNode&lt;T&gt; *);			  // 中序遍历</div><div class="line">	static void dispose(binaryTreeNode&lt;T&gt; *t) &#123;delete t;&#125;			// 后序遍历</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>注意事项：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> (*)(binaryTreeNode&lt;T&gt;*)</div><div class="line"></div><div class="line">是一种函数类型，这种函数的返回值为<span class="keyword">void</span>, 它的参数类型为binaryTreeNode&lt;T&gt; *， 即是一个指针</div></pre></td></tr></table></figure></p>
 <h5 id="如何获取树的高度"><a href="#如何获取树的高度" class="headerlink" title="如何获取树的高度"></a>如何获取树的高度</h5><p>思路：首先取它左子树的高度，然后取它右子树的高度，最后把左右子树高度的最大值加1，取得树的高度</p>
@@ -365,7 +357,7 @@
         <p><span>本文标题:</span><a href="/2016/09/23/C-structure-binarytree/">数据结构之二叉树(二)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Xefvan</a></p>
         <p><span>发布时间:</span>2016-09-23, 01:42:59</p>
-        <p><span>最后更新:</span>2016-11-18, 23:38:39</p>
+        <p><span>最后更新:</span>2016-12-05, 14:26:23</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/09/23/C-structure-binarytree/" title="数据结构之二叉树(二)">http://ixjfun.top/2016/09/23/C-structure-binarytree/</a>
             <span class="copy-path" data-clipboard-text="原文: http://ixjfun.top/2016/09/23/C-structure-binarytree/　　作者: Xefvan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -401,7 +393,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构之二叉树-二"><span class="toc-number">1.</span> <span class="toc-text">数据结构之二叉树(二)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有"><span class="toc-number">1.0.1.</span> <span class="toc-text">二叉树是一种特殊的树，在上一节中也介绍了树的其他形式，例如：霍夫曼树，B树等。其中，二叉树的常用操作有</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）"><span class="toc-number">1.0.2.</span> <span class="toc-text">这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的完整构建（续）"><span class="toc-number">2.</span> <span class="toc-text">二叉树的完整构建（续）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#如何获取树的高度"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">如何获取树的高度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#删除整颗树"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">删除整颗树</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#比较两颗树是否相等"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">比较两颗树是否相等</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类的部分实现"><span class="toc-number">2.1.</span> <span class="toc-text">类的部分实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#遍历"><span class="toc-number">2.1.1.</span> <span class="toc-text">遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#树的高度"><span class="toc-number">2.1.2.</span> <span class="toc-text">树的高度</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构之二叉树-二"><span class="toc-number">1.</span> <span class="toc-text">数据结构之二叉树(二)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）"><span class="toc-number">1.0.1.</span> <span class="toc-text">这些操作都可以通过有步骤的遍历二叉树来完成，如果不知道如何遍历二叉树的话请返回：数据结构之二叉树（一）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的完整构建（续）"><span class="toc-number">2.</span> <span class="toc-text">二叉树的完整构建（续）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#如何获取树的高度"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">如何获取树的高度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#删除整颗树"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">删除整颗树</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#比较两颗树是否相等"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">比较两颗树是否相等</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类的部分实现"><span class="toc-number">2.1.</span> <span class="toc-text">类的部分实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#遍历"><span class="toc-number">2.1.1.</span> <span class="toc-text">遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#树的高度"><span class="toc-number">2.1.2.</span> <span class="toc-text">树的高度</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -490,7 +482,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/11/19/C-structure-graph-array/">数据结构之图（C++）--邻接矩阵表示（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/C-algorithms-ninesort/">九大排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/16/C-structure-skiplist/">数据结构之跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/c-structure-stack-array-chain/">数据结构之栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/02/C-structure-linear-chain/">数据结构之线性表 -- 链式描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/01/C-structure-linear-array/">数据结构之线性表---数组描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/C-structure-binarytree/">数据结构之二叉树(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/C-algorithms-binarytree/">数据结构之二叉树(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/C-class-constructor-一/">C++类的初体验封装之构造函数（一）</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/C-algorithms-Beautyone/">《编程之美》-- 让CPU占用率听你指挥</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/19/C-structure-graph-array/">数据结构之图（C++）--邻接矩阵表示（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/C-algorithms-ninesort/">九大排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/16/C-structure-skiplist/">数据结构之跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/c-structure-stack-array-chain/">数据结构之栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/02/C-structure-linear-chain/">数据结构之线性表 -- 链式描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/01/C-structure-linear-array/">数据结构之线性表---数组描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/C-structure-binarytree/">数据结构之二叉树(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/C-algorithms-binarytree/">数据结构之二叉树(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/C-class-constructor-一/">C++类的初体验封装之构造函数（一）</a></li></ul>
 
 
 

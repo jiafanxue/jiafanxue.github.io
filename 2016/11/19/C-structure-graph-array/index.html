@@ -15,20 +15,20 @@
 
 
 
-<meta name="description" content="简单地说，图是一个用线或边链接爱一起的顶点或节点的集合。严格地说，图是有限集V和E的有序对，即G=（V，E），其中V的元素称为顶点（也称节点或点），E的元素称为边（也叫弧或线）。每一条边链接两个不同的顶点，而且用元组（i，j）来表示，其中i和j是边所连接的两个顶点。">
+<meta name="description" content="基本概念简单地说，图是一个用线或边链接爱一起的顶点或节点的集合。严格地说，图是有限集V和E的有序对，即G=（V，E），其中V的元素称为顶点（也称节点或点），E的元素称为边（也叫弧或线）。每一条边链接两个不同的顶点，而且用元组（i，j）来表示，其中i和j是边所连接的两个顶点。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构之图（C++）--邻接矩阵表示（一）">
 <meta property="og:url" content="http://ixjfun.top/2016/11/19/C-structure-graph-array/index.html">
 <meta property="og:site_name" content="Xefvan's blog">
-<meta property="og:description" content="简单地说，图是一个用线或边链接爱一起的顶点或节点的集合。严格地说，图是有限集V和E的有序对，即G=（V，E），其中V的元素称为顶点（也称节点或点），E的元素称为边（也叫弧或线）。每一条边链接两个不同的顶点，而且用元组（i，j）来表示，其中i和j是边所连接的两个顶点。">
+<meta property="og:description" content="基本概念简单地说，图是一个用线或边链接爱一起的顶点或节点的集合。严格地说，图是有限集V和E的有序对，即G=（V，E），其中V的元素称为顶点（也称节点或点），E的元素称为边（也叫弧或线）。每一条边链接两个不同的顶点，而且用元组（i，j）来表示，其中i和j是边所连接的两个顶点。">
 <meta property="og:image" content="http://img.blog.csdn.net/20161118211812975">
 <meta property="og:image" content="http://img.blog.csdn.net/20161118215737058">
 <meta property="og:image" content="http://img.blog.csdn.net/20161118222915416">
 <meta property="og:image" content="http://img.blog.csdn.net/20161118222915416">
-<meta property="og:updated_time" content="2016-11-18T15:38:34.359Z">
+<meta property="og:updated_time" content="2016-12-05T06:26:53.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构之图（C++）--邻接矩阵表示（一）">
-<meta name="twitter:description" content="简单地说，图是一个用线或边链接爱一起的顶点或节点的集合。严格地说，图是有限集V和E的有序对，即G=（V，E），其中V的元素称为顶点（也称节点或点），E的元素称为边（也叫弧或线）。每一条边链接两个不同的顶点，而且用元组（i，j）来表示，其中i和j是边所连接的两个顶点。">
+<meta name="twitter:description" content="基本概念简单地说，图是一个用线或边链接爱一起的顶点或节点的集合。严格地说，图是有限集V和E的有序对，即G=（V，E），其中V的元素称为顶点（也称节点或点），E的元素称为边（也叫弧或线）。每一条边链接两个不同的顶点，而且用元组（i，j）来表示，其中i和j是边所连接的两个顶点。">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20161118211812975">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -311,11 +311,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><excerpt in="" index="" |="" 首页摘要=""><br>简单地说，图是一个用线或边链接爱一起的顶点或节点的集合。严格地说，图是有限集V和E的有序对，即G=（V，E），其中V的元素称为顶点（也称节点或点），E的元素称为边（也叫弧或线）。每一条边链接两个不同的顶点，而且用元组（i，j）来表示，其中i和j是边所连接的两个顶点。<a id="more"></a></excerpt></p>
+        <p><excerpt in="" index="" |="" 首页摘要=""></excerpt></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>简单地说，图是一个用线或边链接爱一起的顶点或节点的集合。严格地说，图是有限集V和E的有序对，即G=（V，E），其中V的元素称为顶点（也称节点或点），E的元素称为边（也叫弧或线）。每一条边链接两个不同的顶点，而且用元组（i，j）来表示，其中i和j是边所连接的两个顶点。<a id="more"></a></p>
 <the rest="" of="" contents="" |="" 余下全文="">
 
-<h2 id="数据结构之图（C-）–邻接矩阵表示（一）"><a href="#数据结构之图（C-）–邻接矩阵表示（一）" class="headerlink" title="数据结构之图（C++）–邻接矩阵表示（一）"></a>数据结构之图（C++）–邻接矩阵表示（一）</h2><hr>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>简单地说，图是一个用线或边链接爱一起的顶点或节点的集合。严格地说，图是有限集V和E的有序对，即G=（V，E），其中V的元素称为顶点（也称节点或点），E的元素称为边（也叫弧或线）。每一条边链接两个不同的顶点，而且用元组（i，j）来表示，其中i和j是边所连接的两个顶点。</p>
 <ol>
 <li>图的术语：顶点，边，邻接，关联，度，回路，路径，连通构件，生成树</li>
 <li>图的类型：无向图，有向图和加权图</li>
@@ -371,7 +370,7 @@
         <p><span>本文标题:</span><a href="/2016/11/19/C-structure-graph-array/">数据结构之图（C++）--邻接矩阵表示（一）</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Xefvan</a></p>
         <p><span>发布时间:</span>2016-11-18, 23:15:41</p>
-        <p><span>最后更新:</span>2016-11-18, 23:38:34</p>
+        <p><span>最后更新:</span>2016-12-05, 14:26:53</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/11/19/C-structure-graph-array/" title="数据结构之图（C++）--邻接矩阵表示（一）">http://ixjfun.top/2016/11/19/C-structure-graph-array/</a>
             <span class="copy-path" data-clipboard-text="原文: http://ixjfun.top/2016/11/19/C-structure-graph-array/　　作者: Xefvan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -385,6 +384,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/12/05/C-algorithms-Beautyone/">
+                    《编程之美》-- 让CPU占用率听你指挥
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -401,7 +406,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构之图（C-）–邻接矩阵表示（一）"><span class="toc-number">1.</span> <span class="toc-text">数据结构之图（C++）–邻接矩阵表示（一）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-number">2.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#图的相关定义"><span class="toc-number">2.1.</span> <span class="toc-text">图的相关定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图的相关操作"><span class="toc-number">3.</span> <span class="toc-text">图的相关操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#邻接矩阵"><span class="toc-number">3.1.</span> <span class="toc-text">邻接矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#图的顶点类"><span class="toc-number">3.1.1.</span> <span class="toc-text">图的顶点类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#图的边类"><span class="toc-number">3.1.2.</span> <span class="toc-text">图的边类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#图的Graph类"><span class="toc-number">3.1.3.</span> <span class="toc-text">图的Graph类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#构造函数和析构函数"><span class="toc-number">3.1.3.1.</span> <span class="toc-text">构造函数和析构函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#深度优先搜索"><span class="toc-number">3.1.3.2.</span> <span class="toc-text">深度优先搜索</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#广度优先搜索"><span class="toc-number">3.1.3.3.</span> <span class="toc-text">广度优先搜索</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#其他代码"><span class="toc-number">3.1.3.4.</span> <span class="toc-text">其他代码</span></a></li></ol></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-number">1.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#图的相关定义"><span class="toc-number">1.1.</span> <span class="toc-text">图的相关定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图的相关操作"><span class="toc-number">2.</span> <span class="toc-text">图的相关操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#邻接矩阵"><span class="toc-number">2.1.</span> <span class="toc-text">邻接矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#图的顶点类"><span class="toc-number">2.1.1.</span> <span class="toc-text">图的顶点类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#图的边类"><span class="toc-number">2.1.2.</span> <span class="toc-text">图的边类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#图的Graph类"><span class="toc-number">2.1.3.</span> <span class="toc-text">图的Graph类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#构造函数和析构函数"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">构造函数和析构函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#深度优先搜索"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">深度优先搜索</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#广度优先搜索"><span class="toc-number">2.1.3.3.</span> <span class="toc-text">广度优先搜索</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#其他代码"><span class="toc-number">2.1.3.4.</span> <span class="toc-text">其他代码</span></a></li></ol></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -476,7 +481,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2016/12/05/C-algorithms-Beautyone/" title="上一篇: 《编程之美》-- 让CPU占用率听你指挥">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -488,7 +495,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/11/19/C-structure-graph-array/">数据结构之图（C++）--邻接矩阵表示（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/C-algorithms-ninesort/">九大排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/16/C-structure-skiplist/">数据结构之跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/c-structure-stack-array-chain/">数据结构之栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/02/C-structure-linear-chain/">数据结构之线性表 -- 链式描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/01/C-structure-linear-array/">数据结构之线性表---数组描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/C-structure-binarytree/">数据结构之二叉树(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/C-algorithms-binarytree/">数据结构之二叉树(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/C-class-constructor-一/">C++类的初体验封装之构造函数（一）</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/C-algorithms-Beautyone/">《编程之美》-- 让CPU占用率听你指挥</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/19/C-structure-graph-array/">数据结构之图（C++）--邻接矩阵表示（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/C-algorithms-ninesort/">九大排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/16/C-structure-skiplist/">数据结构之跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/c-structure-stack-array-chain/">数据结构之栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/02/C-structure-linear-chain/">数据结构之线性表 -- 链式描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/01/C-structure-linear-array/">数据结构之线性表---数组描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/C-structure-binarytree/">数据结构之二叉树(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/C-algorithms-binarytree/">数据结构之二叉树(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/C-class-constructor-一/">C++类的初体验封装之构造函数（一）</a></li></ul>
 
 
 

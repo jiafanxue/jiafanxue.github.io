@@ -15,16 +15,19 @@
 
 
 
-<meta name="description" content="C++里提供了强大的STL（标准模板库），而且很多大神和相关书籍多提倡我们使用STL，切勿盲目自己写，这样反而效率更低。但是在使用STL的同时，能够了解如何实现简单的STL是很爽的。">
+<meta name="description" content="前面我写了几节二叉树，现在想想还是回过头来吧线性表写了
+概述C++里提供了强大的STL（标准模板库），而且很多大神和相关书籍多提倡我们使用STL，切勿盲目自己写，这样反而效率更低。但是在使用STL的同时，能够了解如何实现简单的STL是很爽的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构之线性表---数组描述">
 <meta property="og:url" content="http://ixjfun.top/2016/10/01/C-structure-linear-array/index.html">
 <meta property="og:site_name" content="Xefvan's blog">
-<meta property="og:description" content="C++里提供了强大的STL（标准模板库），而且很多大神和相关书籍多提倡我们使用STL，切勿盲目自己写，这样反而效率更低。但是在使用STL的同时，能够了解如何实现简单的STL是很爽的。">
-<meta property="og:updated_time" content="2016-11-18T16:34:28.499Z">
+<meta property="og:description" content="前面我写了几节二叉树，现在想想还是回过头来吧线性表写了
+概述C++里提供了强大的STL（标准模板库），而且很多大神和相关书籍多提倡我们使用STL，切勿盲目自己写，这样反而效率更低。但是在使用STL的同时，能够了解如何实现简单的STL是很爽的。">
+<meta property="og:updated_time" content="2016-12-05T06:27:18.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构之线性表---数组描述">
-<meta name="twitter:description" content="C++里提供了强大的STL（标准模板库），而且很多大神和相关书籍多提倡我们使用STL，切勿盲目自己写，这样反而效率更低。但是在使用STL的同时，能够了解如何实现简单的STL是很爽的。">
+<meta name="twitter:description" content="前面我写了几节二叉树，现在想想还是回过头来吧线性表写了
+概述C++里提供了强大的STL（标准模板库），而且很多大神和相关书籍多提倡我们使用STL，切勿盲目自己写，这样反而效率更低。但是在使用STL的同时，能够了解如何实现简单的STL是很爽的。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -306,15 +309,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <excerpt in="" index="" |="" 首页摘要="">
-
-<p>C++里提供了强大的STL（标准模板库），而且很多大神和相关书籍多提倡我们使用STL，切勿盲目自己写，这样反而效率更低。但是在使用STL的同时，能够了解如何实现简单的STL是很爽的。<a id="more"></a></p>
+        <p><excerpt in="" index="" |="" 首页摘要=""><br>前面我写了几节二叉树，现在想想还是回过头来吧线性表写了</excerpt></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>C++里提供了强大的STL（标准模板库），而且很多大神和相关书籍多提倡我们使用STL，切勿盲目自己写，这样反而效率更低。但是在使用STL的同时，能够了解如何实现简单的STL是很爽的。<a id="more"></a></p>
 <the rest="" of="" contents="" |="" 余下全文="">
 
-
-<h2 id="数据结构之线性表—数组描述"><a href="#数据结构之线性表—数组描述" class="headerlink" title="数据结构之线性表—数组描述"></a>数据结构之线性表—数组描述</h2><hr>
-<p>前面我写了几节二叉树，现在想想还是回过头来吧线性表写了</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>C++里提供了强大的STL（标准模板库），而且很多大神和相关书籍多提倡我们使用STL，切勿盲目自己写，这样反而效率更低。但是在使用STL的同时，能够了解如何实现简单的STL是很爽的。</p>
 <p>C++程序常用的数据描述方式是数组描述和链式描述，而线性表可以用来说明这两种方法。STL容器大致相当于线性表的数组描述方式和链式描述方式，当然STL还有很多其他的方法，这里就不介绍了。</p>
 <h2 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h2><p>线性表也叫作有序表，它的每一个实例都是元素的一个有序集合</p>
 <h2 id="数组描述"><a href="#数组描述" class="headerlink" title="数组描述"></a>数组描述</h2><p>当我们在写数据结构的时候我们首先想到可能是如何创建，然后是它有什么操作。</p>
@@ -339,7 +337,7 @@
 <h2 id="Vector简单描述"><a href="#Vector简单描述" class="headerlink" title="Vector简单描述"></a>Vector简单描述</h2><p><a href="http://en.cppreference.com/w/cpp/container/vector" title="vector" target="_blank" rel="external">vector</a>是STL提供的一个基于数组的类，他不仅包含了上述介绍的全部方法，还增加了很多其它的方法，有兴趣的可以自己去看文档。例如：它没有get，而与之相应的是operator[]（当然还有其他的）, 。</p>
 <h2 id="数组描述的优缺点"><a href="#数组描述的优缺点" class="headerlink" title="数组描述的优缺点"></a>数组描述的优缺点</h2><p>数组描述的优点在于令人满意的时间性能</p>
 <p>数组描述的缺点是空间利用率低，如果造成内存不足，可能是动态数组空间分配失败或者数组长度倍增失败所致。</p>
-</the></excerpt>
+</the>
       
     </div>
     
@@ -350,7 +348,7 @@
         <p><span>本文标题:</span><a href="/2016/10/01/C-structure-linear-array/">数据结构之线性表---数组描述</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Xefvan</a></p>
         <p><span>发布时间:</span>2016-09-30, 21:50:57</p>
-        <p><span>最后更新:</span>2016-11-19, 00:34:28</p>
+        <p><span>最后更新:</span>2016-12-05, 14:27:18</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/10/01/C-structure-linear-array/" title="数据结构之线性表---数组描述">http://ixjfun.top/2016/10/01/C-structure-linear-array/</a>
             <span class="copy-path" data-clipboard-text="原文: http://ixjfun.top/2016/10/01/C-structure-linear-array/　　作者: Xefvan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -386,7 +384,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构之线性表—数组描述"><span class="toc-number">1.</span> <span class="toc-text">数据结构之线性表—数组描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-number">3.</span> <span class="toc-text">线性表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组描述"><span class="toc-number">4.</span> <span class="toc-text">数组描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类arrayList的创建"><span class="toc-number">5.</span> <span class="toc-text">类arrayList的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类的具体实现"><span class="toc-number">6.</span> <span class="toc-text">类的具体实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vector简单描述"><span class="toc-number">7.</span> <span class="toc-text">Vector简单描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组描述的优缺点"><span class="toc-number">8.</span> <span class="toc-text">数组描述的优缺点</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-number">2.</span> <span class="toc-text">线性表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组描述"><span class="toc-number">3.</span> <span class="toc-text">数组描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类arrayList的创建"><span class="toc-number">4.</span> <span class="toc-text">类arrayList的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类的具体实现"><span class="toc-number">5.</span> <span class="toc-text">类的具体实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vector简单描述"><span class="toc-number">6.</span> <span class="toc-text">Vector简单描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组描述的优缺点"><span class="toc-number">7.</span> <span class="toc-text">数组描述的优缺点</span></a></li></ol>
         
     </div>
     <style>
@@ -475,7 +473,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/11/19/C-structure-graph-array/">数据结构之图（C++）--邻接矩阵表示（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/C-algorithms-ninesort/">九大排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/16/C-structure-skiplist/">数据结构之跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/c-structure-stack-array-chain/">数据结构之栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/02/C-structure-linear-chain/">数据结构之线性表 -- 链式描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/01/C-structure-linear-array/">数据结构之线性表---数组描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/C-structure-binarytree/">数据结构之二叉树(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/C-algorithms-binarytree/">数据结构之二叉树(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/C-class-constructor-一/">C++类的初体验封装之构造函数（一）</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/C-algorithms-Beautyone/">《编程之美》-- 让CPU占用率听你指挥</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/19/C-structure-graph-array/">数据结构之图（C++）--邻接矩阵表示（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/C-algorithms-ninesort/">九大排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/16/C-structure-skiplist/">数据结构之跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/c-structure-stack-array-chain/">数据结构之栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/02/C-structure-linear-chain/">数据结构之线性表 -- 链式描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/01/C-structure-linear-array/">数据结构之线性表---数组描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/C-structure-binarytree/">数据结构之二叉树(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/C-algorithms-binarytree/">数据结构之二叉树(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/C-class-constructor-一/">C++类的初体验封装之构造函数（一）</a></li></ul>
 
 
 

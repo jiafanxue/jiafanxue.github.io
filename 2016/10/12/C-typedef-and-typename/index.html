@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://ixjfun.top/2016/10/12/C-typedef-and-typename/index.html">
 <meta property="og:site_name" content="Xefvan's blog">
 <meta property="og:description" content="简述typedef和typename的具体用法，分析了typename和typename结合使用的用法">
-<meta property="og:updated_time" content="2016-11-18T15:37:47.003Z">
+<meta property="og:updated_time" content="2016-12-05T06:30:25.459Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ typedef和typename关键字">
 <meta name="twitter:description" content="简述typedef和typename的具体用法，分析了typename和typename结合使用的用法">
@@ -309,7 +309,7 @@
         <p><excerpt in="" index="" |="" 首页摘要=""><br>简述typedef和typename的具体用法，分析了typename和typename结合使用的用法<a id="more"></a></excerpt></p>
 <the rest="" of="" contents="" |="" 余下全文="">
 
-<h1 id="C-typedef和typename关键字"><a href="#C-typedef和typename关键字" class="headerlink" title="C++ typedef和typename关键字"></a>C++ typedef和typename关键字</h1><hr>
+<hr>
 <h2 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h2><p>在《STL源码解析》一书中看到了这样一段代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ForwardIterator, <span class="keyword">class</span> Size, <span class="keyword">class</span> T, <span class="keyword">class</span> T1&gt;</div><div class="line"><span class="keyword">inline</span> ForwardIterator <span class="number">__u</span>ninitialized_fill_n(ForwardIterator first, Size n, <span class="keyword">const</span> T&amp; x, T1*)&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="number">__</span>type_traits&lt;T1&gt;::is_POD_type is_POD;</div><div class="line">	<span class="keyword">return</span> <span class="number">__u</span>ninitialized_fill_n_aux(first, n, x, is_POD());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>在代码的第三行中出现的</p>
 <pre><code>typedef typename __type_traits&lt;T1&gt;::is_POD_type is_POD;
@@ -349,7 +349,7 @@
         <p><span>本文标题:</span><a href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Xefvan</a></p>
         <p><span>发布时间:</span>2016-10-12, 12:41:52</p>
-        <p><span>最后更新:</span>2016-11-18, 23:37:47</p>
+        <p><span>最后更新:</span>2016-12-05, 14:30:25</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/10/12/C-typedef-and-typename/" title="C++ typedef和typename关键字">http://ixjfun.top/2016/10/12/C-typedef-and-typename/</a>
             <span class="copy-path" data-clipboard-text="原文: http://ixjfun.top/2016/10/12/C-typedef-and-typename/　　作者: Xefvan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -385,7 +385,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-typedef和typename关键字"><span class="toc-number">1.</span> <span class="toc-text">C++ typedef和typename关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前序"><span class="toc-number">1.1.</span> <span class="toc-text">前序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型别名typedef"><span class="toc-number">1.2.</span> <span class="toc-text">类型别名typedef</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型解释typename"><span class="toc-number">1.3.</span> <span class="toc-text">类型解释typename</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用类的类型成员"><span class="toc-number">1.3.2.</span> <span class="toc-text">使用类的类型成员</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#typedef和typename共用"><span class="toc-number">1.4.</span> <span class="toc-text">typedef和typename共用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#traits（特性萃取机）"><span class="toc-number">1.4.1.</span> <span class="toc-text">traits（特性萃取机）</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前序"><span class="toc-number">1.</span> <span class="toc-text">前序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型别名typedef"><span class="toc-number">2.</span> <span class="toc-text">类型别名typedef</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型解释typename"><span class="toc-number">3.</span> <span class="toc-text">类型解释typename</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用类的类型成员"><span class="toc-number">3.2.</span> <span class="toc-text">使用类的类型成员</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#typedef和typename共用"><span class="toc-number">4.</span> <span class="toc-text">typedef和typename共用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#traits（特性萃取机）"><span class="toc-number">4.1.</span> <span class="toc-text">traits（特性萃取机）</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -474,7 +474,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/11/19/C-structure-graph-array/">数据结构之图（C++）--邻接矩阵表示（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/C-algorithms-ninesort/">九大排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/16/C-structure-skiplist/">数据结构之跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/c-structure-stack-array-chain/">数据结构之栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/02/C-structure-linear-chain/">数据结构之线性表 -- 链式描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/01/C-structure-linear-array/">数据结构之线性表---数组描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/C-structure-binarytree/">数据结构之二叉树(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/C-algorithms-binarytree/">数据结构之二叉树(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/C-class-constructor-一/">C++类的初体验封装之构造函数（一）</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/C-algorithms-Beautyone/">《编程之美》-- 让CPU占用率听你指挥</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/19/C-structure-graph-array/">数据结构之图（C++）--邻接矩阵表示（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/C-algorithms-ninesort/">九大排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/16/C-structure-skiplist/">数据结构之跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/c-structure-stack-array-chain/">数据结构之栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/02/C-structure-linear-chain/">数据结构之线性表 -- 链式描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/01/C-structure-linear-array/">数据结构之线性表---数组描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/C-structure-binarytree/">数据结构之二叉树(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/C-algorithms-binarytree/">数据结构之二叉树(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/C-class-constructor-一/">C++类的初体验封装之构造函数（一）</a></li></ul>
 
 
 
