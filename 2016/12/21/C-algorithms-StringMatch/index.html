@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Xefvan" />
+
+
+
+<meta name="description" content="算法与时间
+
+
+算法
+预处理时间
+匹配时间
+
+
+
+
+朴素算法
+0
+O((n-m+1)m)
+
+
+Rabin-Karp
+Θ(m)
+O((n-m+1)m)
+
+
+KMP算法
+Θ(m)
+Θ(n)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串匹配算法 -- 暴力破解法（朴素法），RK算法，KMP算法，Sunday算法">
+<meta property="og:url" content="http://ixjfun.top/2016/12/21/C-algorithms-StringMatch/index.html">
+<meta property="og:site_name" content="Xefvan's blog">
+<meta property="og:description" content="算法与时间
+
+
+算法
+预处理时间
+匹配时间
+
+
+
+
+朴素算法
+0
+O((n-m+1)m)
+
+
+Rabin-Karp
+Θ(m)
+O((n-m+1)m)
+
+
+KMP算法
+Θ(m)
+Θ(n)">
+<meta property="og:image" content="http://img.blog.csdn.net/20161218174449020?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161215194725480?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161219232320631?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161219232423167?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161219232525293?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161219232609432?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161219232655215?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161219232729262?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161219232928669?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2016-12-20T16:52:46.718Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="字符串匹配算法 -- 暴力破解法（朴素法），RK算法，KMP算法，Sunday算法">
+<meta name="twitter:description" content="算法与时间
+
+
+算法
+预处理时间
+匹配时间
+
+
+
+
+朴素算法
+0
+O((n-m+1)m)
+
+
+Rabin-Karp
+Θ(m)
+O((n-m+1)m)
+
+
+KMP算法
+Θ(m)
+Θ(n)">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161218174449020?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Xefvan&#39;s blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>字符串匹配算法 -- 暴力破解法（朴素法），RK算法，KMP算法，Sunday算法 | Xefvan&#39;s blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?6704785cfc948caca5017a5bddd63d28";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatarr.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Xefvan</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ccode/">C/C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编程之美/">编程之美</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://ienning.com/">ienning</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于C++</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Xefvan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatarr.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Xefvan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-C-algorithms-StringMatch" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/12/21/C-algorithms-StringMatch/" class="article-date">
+      <time datetime="2016-12-21T00:48:00.000Z" itemprop="datePublished">2016-12-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      字符串匹配算法 -- 暴力破解法（朴素法），RK算法，KMP算法，Sunday算法
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/programming/">programming</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编程之美/">编程之美</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<h2 id="算法与时间"><a href="#算法与时间" class="headerlink" title="算法与时间"></a>算法与时间</h2><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>预处理时间</th>
+<th>匹配时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>朴素算法</td>
+<td>0</td>
+<td>O((n-m+1)m)</td>
+</tr>
+<tr>
+<td>Rabin-Karp</td>
+<td>Θ(m)</td>
+<td>O((n-m+1)m)</td>
+</tr>
+<tr>
+<td>KMP算法</td>
+<td>Θ(m)</td>
+<td>Θ(n)</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><h3 id="前缀和后缀"><a href="#前缀和后缀" class="headerlink" title="前缀和后缀"></a>前缀和后缀</h3><p>如果对某个字符串y∈∑*有x = wy, 则称字符串w是字符串x的<font color="red">前缀</font>，记做 w ⊂ x。</p>
+<p>如果对某个字符串y∈∑*有x = yw, 则称字符串w是字符串x的<font color="red">后缀</font>，记做 w ⊃ x。</p>
+<h2 id="朴素字符串匹配算法"><a href="#朴素字符串匹配算法" class="headerlink" title="朴素字符串匹配算法"></a>朴素字符串匹配算法</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>朴素字符串匹配算法是通过<font color="red">一个循环</font>找到<font color="red">所有</font>有效偏移地址，该循环对<font color="red">n-m+1</font>个可能的s值进行检测，看是否满足条件P[1..m] = T[s+1..s+m]。</p>
+<h3 id="图说明"><a href="#图说明" class="headerlink" title="图说明"></a>图说明</h3><p>如下图所示，文本T = “acaabc”，P = “aab”，在对文本T进行循环的时候，隐藏着一个循环，该循环用于逐个检测对应位置上的字符，直到所有位置都能够成功匹配或者有一个位置不能匹配为止。</p>
+<p><img src="http://img.blog.csdn.net/20161218174449020?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="朴素字符串匹配"></p>
+<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NAVIE-STRING-MATCHER(T,P)</div><div class="line">n = T.length</div><div class="line">m = P.length</div><div class="line"><span class="keyword">for</span> s = <span class="number">0</span> to n - m</div><div class="line">	<span class="keyword">if</span> P[<span class="number">1.</span>.m] == T[s + <span class="number">1</span> .. s + m]</div><div class="line">		print <span class="string">"Pattern occurs with shift"</span></div></pre></td></tr></table></figure>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>由于实现相对简单，这里对代码不在做过多的说明，核心在于遍历文本的过程，如果成功匹配第一个元素，则遍历模板，进行内部匹配。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 朴素字符串匹配算法</span></div><div class="line"><span class="comment">// 匹配时间为O((N-M+1)M)</span></div><div class="line"><span class="comment">// 输出文本T中子串出现的次数</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Naivie_String_matcher</span><span class="params">(<span class="built_in">string</span> T, <span class="built_in">string</span> P)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> num = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> n = T.size();</div><div class="line">	<span class="keyword">int</span> m = P.size();</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> s = <span class="number">0</span>; s &lt;= n - m; ++s) &#123;</div><div class="line">		<span class="keyword">if</span>(T[s] == P[<span class="number">0</span>]) &#123;</div><div class="line">			<span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i) &#123;</div><div class="line">				<span class="keyword">if</span>(T[s + i] == P[i]) &#123;</div><div class="line">					++k;</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> &#123;</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(k == m) &#123;</div><div class="line">				++num;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> num;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Rabin-Karp算法"><a href="#Rabin-Karp算法" class="headerlink" title="Rabin-Karp算法"></a>Rabin-Karp算法</h2><h3 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h3><p>Rabin-Karp算法又叫做RK算法（下面都用这个简称），它的预处理时间为Θ(m)，并且在最坏情况下，它的运行时间为Θ((n-m+1)m)。在实际情况下，它相对于朴素算法来说，是比较好的。</p>
+<font color="red">RK算法主要是利用两个数相对于第三个数模等价的概念。 </font>
+
+<blockquote>
+<p>例如：假设<br>A % B = C<br>D % B = C<br>即便不能判断A一定等于D ， 但是如果取模不相等，那么A一定不等于D，所以可以用来提高效率</p>
+</blockquote>
+<h3 id="图说明-1"><a href="#图说明-1" class="headerlink" title="图说明"></a>图说明</h3><p>如下图， 我们选取的字符串T为“234590314121204”和模板字符串P为“3141”。我们将m个字符串转为d进制的数字（这里我们用十进制表示），转换后的整数取模进行匹配。当寻找到模相等的时候在进行内部匹配，检测是否为合法匹配。</p>
+<p><img src="http://img.blog.csdn.net/20161215194725480?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="RK算法图"></p>
+<h3 id="相应的数学公式"><a href="#相应的数学公式" class="headerlink" title="相应的数学公式"></a>相应的数学公式</h3><p>先思考一个问题，如何将字符串“31415”转换为十进制的31415？</p>
+<blockquote>
+<p>我们可以容易知道<br>31415 = 3 × 10000 + 1 × 1000 + 4 × 100 + 1 × 10 + 5<br>即<br>31415 = ((((3 × 10 + 1) × 10 + 4 ) × 10) + 1 ) × 10 + 5</p>
+</blockquote>
+<p>由上面的等式我们可以知道，给定一个模式P[1..m]，假设p表示其相应的十进制值。那么我们利用霍纳法则得</p>
+<p>$$p = P[m] + 10(P[m-1] + 10(P[m-2] + L + 10(P[2] + 10P[1])))$$</p>
+<p>利用循环的方式我们可以简化代码，其中i为0到m</p>
+<p>$$p_0 = 0$$</p>
+<p>$$p =10p + P[i]$$</p>
+<p>对应的C++代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i) &#123;</div><div class="line">		p = (d * p + P[i]) ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当文本移动的时候</p>
+<blockquote>
+<p>例如m = 5时，T = “31245678”，t_0 = 31245， t_1= 12456</p>
+</blockquote>
+<p>如何得到t_1的值？这是我们要思考的第二个问题。可以看得出 t_1的值为t_0去掉最高位“3”和加末尾加上“6”，因此</p>
+<p>$$t_1 = 10(t_0 - 10000 *T[0]) + T[m + 1]$$</p>
+<p>归纳后得</p>
+<p>$$t_{s+1}= d(t_s - d^{m - 1} T[s + 1]) + T[s + m + 1]$$</p>
+<p>相应的C++代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//h = static_cast&lt;int&gt;(pow(d, m - 1));</span></div><div class="line">t = d * (t - T[s] * h) + T[s + m];</div></pre></td></tr></table></figure></p>
+<h3 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">RABIN-KARP-MATCHER(T,P,d,q)</div><div class="line">n = T.length</div><div class="line">m = P.length</div><div class="line">h = d^(m - <span class="number">1</span>) mod q</div><div class="line">p = <span class="number">0</span></div><div class="line">t0 = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> i = <span class="number">1</span> to m</div><div class="line">	p = (dp + P[i]) mod q</div><div class="line">	t0 = (dt0 + T[i]) mod q</div><div class="line"></div><div class="line"><span class="keyword">for</span> s = <span class="number">0</span> to n - m</div><div class="line">	<span class="keyword">if</span> p == t(s)</div><div class="line">		<span class="keyword">if</span> P[<span class="number">1.</span>.m] == T[s + <span class="number">1</span> .. s + m]</div><div class="line">			print <span class="string">"Pattern occurs with shift"</span>s</div><div class="line">	<span class="keyword">if</span> s &lt; n - m</div><div class="line">		t(s+<span class="number">1</span>) = (d(t(s) - T[s + <span class="number">1</span>] * h) + T[s + m + <span class="number">1</span>]) mod q</div></pre></td></tr></table></figure>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>本人没有完全按照上面的伪代码实现，本代码在VS2013上可以成功运行，但在sublime3上有个bug，对于匹配纯数字字符串，它可以完美匹配，在字符字符串上，只能部分匹配。</p>
+<p>例如：文本为”abcdefghijdefgkldefg”，对于模板为“d”,”de”，”def”，”defgh”…….”defghij”中”def”和”defgh”无法匹配。至于原因可以与我探讨。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Rabin-Karp算法</span></div><div class="line"><span class="comment">// 预处理时间（M），匹配时间O((N-M+1)M),实际优于朴素算法</span></div><div class="line"><span class="comment">// d : 表示字符都是由d为基数表示的数字</span></div><div class="line"><span class="comment">// q : 素数，用于模计算</span></div><div class="line"><span class="comment">// 输出子串出现的次数</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Rabin_Karp_matcher</span><span class="params">(<span class="built_in">string</span> T, <span class="built_in">string</span> P, <span class="keyword">int</span> d, <span class="keyword">int</span> q)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> num = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> n = T.size();</div><div class="line">	<span class="keyword">int</span> m = P.size();</div><div class="line">	<span class="comment">// 计算h</span></div><div class="line">	<span class="keyword">int</span> h = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(<span class="built_in">pow</span>(d, m - <span class="number">1</span>));</div><div class="line">	<span class="comment">/*int pow_d = 1;</span></div><div class="line">	for(int i = 0; i &lt; m - 1; ++i) &#123;</div><div class="line">		pow_d *= d;</div><div class="line">	&#125;</div><div class="line">	int h = pow_d % d;*/</div><div class="line">	<span class="comment">// p和t0用于求出相应的子串对应的d进制整数</span></div><div class="line">	<span class="comment">/*</span></div><div class="line">	相应数学公式(霍纳法则)</div><div class="line">	p = P[m] + d(P[m - 1] + d(P[m - 2] + d(P[m - 3] + ... + d(P[2] + dP[1])...))</div><div class="line">	可以看出一共有(m-1)个d</div><div class="line">	通过数学归纳法我们可以知道</div><div class="line">	p = (d * p + P[i]))</div><div class="line">	又因为要取模</div><div class="line">	易知p(总) % q 和每次计算的出的p % q是一样的</div><div class="line">	*/</div><div class="line">	<span class="keyword">int</span> p = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> t = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i) &#123;</div><div class="line">		p = (d * p + P[i]) % q;</div><div class="line">		t = (d * t + T[i]);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> s = <span class="number">0</span>; s &lt;= n - m; ++s) &#123;</div><div class="line">		<span class="keyword">if</span>(p == (t % q)) &#123;</div><div class="line">			<span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i) &#123;</div><div class="line">				<span class="keyword">if</span>(T[s + i] == P[i]) &#123;</div><div class="line">					++k;</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> &#123;</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(k == m) &#123;</div><div class="line">				++num;</div><div class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"The position : "</span> &lt;&lt; s + <span class="number">1</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 前面我们之算出了T的前m个字符对应的d进制的值，如果不匹配，那么需要往下移动一个字符</span></div><div class="line">		<span class="comment">// 所以我们需要去除最前面的数，在尾部加入新的数，例如m = 5时，T = "31245678"，t(0) = 31245, t(1) = 12456</span></div><div class="line">		<span class="comment">// 根据公式</span></div><div class="line">		<span class="comment">// t(s+1) = d * (t(s) - d^(m - 1) * T[s + 1]) + T[s + m + 1]</span></div><div class="line">		<span class="comment">// 其中h % q = d^(m-1)</span></div><div class="line">		<span class="comment">// h 是一个具有m数位的文本窗口的高位数的数位上的数字“1”的值。</span></div><div class="line">		<span class="keyword">if</span>(s &lt; n - m) &#123;</div><div class="line">			t = (d * (t - T[s] * h) + T[s + m]);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> num;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Knuth-Morris-Pratt算法"><a href="#Knuth-Morris-Pratt算法" class="headerlink" title="Knuth-Morris-Pratt算法"></a>Knuth-Morris-Pratt算法</h2><p><font color="blue">建议看之前先看一篇国外的关于KMP算法的博客：<a href="http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/" title="The Knuth-Morris-Pratt Algorithm in my own words" target="_blank" rel="external">The Knuth-Morris-Pratt Algorithm in my own words</a></font></p>
+<h3 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h3><p>KMP算法是一种改进的字符串匹配算法，由D.E.Knuth，J.H.Morris和V.R.Pratt同时发现，因此人们称它为克努特—莫里斯—普拉特操作（简称KMP算法）。<font color="red">KMP算法的关键在于部分匹配表的信息</font>，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。</p>
+<p>当我们进行匹配的时候，假设文本T =“bacbababaabcbab”和模板 P = “ababaca”</p>
+<ol>
+<li><p>当我们进行字符串匹配的时候，如果匹配到成功的字符，那么它将进行内循环，如下图所示<br><img src="http://img.blog.csdn.net/20161219232320631?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="KMP图1"></p>
+</li>
+<li><p>逐一匹配<br><img src="http://img.blog.csdn.net/20161219232423167?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="KMP图2"></p>
+</li>
+<li><p>检索字符<br><img src="http://img.blog.csdn.net/20161219232525293?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="KMP图3"></p>
+</li>
+<li><p>检索字符<br><img src="http://img.blog.csdn.net/20161219232609432?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="KMP图4"></p>
+</li>
+<li><p>检索字符<br><img src="http://img.blog.csdn.net/20161219232655215?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="KMP图5"></p>
+</li>
+<li><p>当匹配到不相同的时候开始进行跳步<br><img src="http://img.blog.csdn.net/20161219232729262?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="KMP图6"></p>
+</li>
+<li><p>根据部分匹配表（Partial Match Table）<br><code>char :   | a | b | a | b | a | c | a  |</code><br><code>index: | 0 | 1 | 2 | 3 | 4  | 6 | 7 |</code><br><code>value: | 0 | 0 | 1 | 2 | 3  | 0 | 1 |</code></p>
+</li>
+</ol>
+<blockquote>
+<p>查表可知，最后一个匹配字符a对应的”部分匹配值”为3</p>
+</blockquote>
+<p>因此按照下面的公式算出向后移动的位数：移动位数 = 已匹配的字符数 - 对应的部分匹配值(value) </p>
+<blockquote>
+<p>因为 5 - 3 等于2，所以将搜索词向后移动2位。</p>
+</blockquote>
+<ol>
+<li>跳两步<br><img src="http://img.blog.csdn.net/20161219232928669?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="KMP图7"></li>
+</ol>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>上图简单介绍了下KMP进行匹配时候的运行原理，现在我们来进行分析KMP算法的正确性，然后再来搞清楚怎么获取到部分匹配表。</p>
+<p>假设模式字符P[1..q]与文本字符T[s + 1.. s + 1]匹配，s’是最小的偏移量,s’&gt;s，那么对某些k &lt; q ，满足</p>
+<blockquote>
+<p>P[1..k] = T[s’ + 1 .. s’ + k]</p>
+</blockquote>
+<p>的最小偏移s’&gt;s是多少，其中s’+ k = s + q。换句话说，已知P_q⊃P_k，我们希望P_q的最长真前缀P<em>k也就是$$T</em>(s+q)的后缀。</p>
+<p>即：已知一个模式P[1..m]，模式P的前缀函数是函数π：{1，2，….，m}-&gt;{0，1，…，m-1}，满足</p>
+<blockquote>
+<p>π[q] = max { k:k&lt;q 且 P_k⊃P_q }</p>
+</blockquote>
+<p>即π[q]是P_q的真后缀P的最长前缀长度。</p>
+<h3 id="什么是前缀和后缀"><a href="#什么是前缀和后缀" class="headerlink" title="什么是前缀和后缀"></a>什么是前缀和后缀</h3><p>要知道部分匹配表的由来，首先，要了解两个概念：”前缀”和”后缀”。<br>“前缀”指除了最后一个字符以外，一个字符串的全部头部组合。<br>“后缀”指除了第一个字符以外，一个字符串的全部尾部组合。</p>
+<p>例如：字符串“ABCDEF”，那么它的前缀和后缀分别为</p>
+<blockquote>
+<p>前缀：“A”，“AB”，“ABC”，“ABCD”，“ABCDE”<br>后缀：“BCDEF”，“CDEF”，“DEF”，“EF”，“F”</p>
+</blockquote>
+<h3 id="部分匹配表"><a href="#部分匹配表" class="headerlink" title="部分匹配表"></a>部分匹配表</h3><p>算法导论书上说的有点不是很清楚，我们可以换一种思路，来得到部分匹配表。</p>
+<p>对于模式P = “ababaca”，从左到右依次增加一个字符</p>
+<ol>
+<li><p>当下标为0的时候<br>“a” 的前缀和后缀都没有，故部分匹配表里的  value=0</p>
+</li>
+<li><p>当下表为1的时候<br>“ab”的前缀为：“a”，后缀为“b”，由于前缀和后缀不相同，故 value = 0</p>
+</li>
+<li><p>当下标为2的时候<br>“aba”的前缀为：“a”，“ab”，后缀为“ba”，“a”，由于前缀和后缀有一个相同，且最长度为1，故 value = 1</p>
+</li>
+<li><p>当下标为3的时候<br>“abab”的前缀为：“a”，“ab”，“aba”，后缀为：“bab”，“ab”，“b”，由于前缀和后缀有一个相同，且最长度为2，故 value = 2</p>
+</li>
+<li><p>当下标为4的时候<br>“ababa”的前缀为：“a”，“ab”，“aba”，“abab”，后缀为：“baba”，“aba”，“ba”，“a”，前缀和后缀有两个相同，但是最长长度为3，故 value = 3</p>
+</li>
+</ol>
+<p>以此类推，就能得出所有的部分匹配表</p>
+<p>代码实现<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span>* <span class="title">compute_prefix_function</span><span class="params">(<span class="built_in">string</span> P_string)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> P_length = P_string.size();</div><div class="line">	<span class="keyword">int</span>* PI = <span class="keyword">new</span> <span class="keyword">int</span>[P_length];</div><div class="line">	PI[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> q = <span class="number">1</span>; q &lt; P_length; ++q) &#123;</div><div class="line">		<span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; P_string[k] != P_string[q]) &#123;</div><div class="line">			k = PI[k];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(P_string[k] == P_string[q]) &#123;</div><div class="line">			k += <span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">		PI[q] = k;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> PI;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="整体代码"><a href="#整体代码" class="headerlink" title="整体代码"></a>整体代码</h3><p>得出部分匹配表后，剩下的就是根据部分匹配表里的值，进行跳步。<br>关键点就是下一个有效偏移<code>s&#39;= s + (q - π[q])</code>，这里s表示有效偏移，q表示匹配的字符长度，π[q]表示对应部分匹配表里的信息</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span>* <span class="title">compute_prefix_function</span><span class="params">(<span class="built_in">string</span> P_string)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> P_length = P_string.size();</div><div class="line">	<span class="keyword">int</span>* PI = <span class="keyword">new</span> <span class="keyword">int</span>[P_length];</div><div class="line">	PI[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> q = <span class="number">1</span>; q &lt; P_length; ++q) &#123;</div><div class="line">		<span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; P_string[k] != P_string[q]) &#123;</div><div class="line">			k = PI[k];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(P_string[k] == P_string[q]) &#123;</div><div class="line">			k += <span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">		PI[q] = k;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> PI;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Knuth-Morris-Pratt算法</span></div><div class="line"><span class="comment">// 预处理时间Θ(m)，匹配时间Θ(N)</span></div><div class="line"><span class="comment">// 输出子串出现的次数</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Knuth_Morris_Pratt_matcher</span><span class="params">(<span class="built_in">string</span> T, <span class="built_in">string</span> P)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> num = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> n = T.size();</div><div class="line">	<span class="keyword">int</span> m = P.size();</div><div class="line">	<span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span>* tb = compute_prefix_function(P);</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</div><div class="line">		<span class="keyword">if</span>(k &gt; <span class="number">0</span> &amp;&amp; T[i] != P[k]) &#123;		<span class="comment">// 进行跳步</span></div><div class="line">			i += k - tb[k];					<span class="comment">// s'= s + (q - π[q])</span></div><div class="line">			k = <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(T[i] == P[k]) &#123;</div><div class="line">			k = k + <span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(k == m) &#123;</div><div class="line">			++num;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"The position : "</span> &lt;&lt; i - k + <span class="number">2</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">			k = <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> num;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><p>字符串匹配算法还有很多，例如：<a href="http://www-igm.univ-mlv.fr/~lecroq/string/node14.html" title="Boyer-Moore algorithm" target="_blank" rel="external">Boyer-Moore algorithm</a>，神奇的<a href="http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/sundayen.htm" title="Sunday algorithm" target="_blank" rel="external">Sunday algorithm</a>等等。</p>
+<p>以后有机会，会把BM算法和Sunday算法加上。欢迎各位进行讨论。</p>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://en.wikipedia.org/wiki/Knuth-Morris-Pratt_algorithm" title="Knuth–Morris–Pratt algorithm" target="_blank" rel="external">Knuth–Morris–Pratt algorithm</a></li>
+<li><a href="http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/" title="The Knuth-Morris-Pratt Algorithm in my own words" target="_blank" rel="external">The Knuth-Morris-Pratt Algorithm in my own words</a></li>
+<li>《算法导论》第32章</li>
+<li><a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html" target="_blank" rel="external">字符串匹配的KMP算法</a></li>
+</ol>
+</the>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/12/21/C-algorithms-StringMatch/">字符串匹配算法 -- 暴力破解法（朴素法），RK算法，KMP算法，Sunday算法</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Xefvan</a></p>
+        <p><span>发布时间:</span>2016-12-21, 00:48:00</p>
+        <p><span>最后更新:</span>2016-12-21, 00:52:46</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/12/21/C-algorithms-StringMatch/" title="字符串匹配算法 -- 暴力破解法（朴素法），RK算法，KMP算法，Sunday算法">http://ixjfun.top/2016/12/21/C-algorithms-StringMatch/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://ixjfun.top/2016/12/21/C-algorithms-StringMatch/　　作者: Xefvan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/12/13/C-algorithms-Beautythree/">
+                    《编程之美》-- 快速找出故障机器
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法与时间"><span class="toc-number">1.</span> <span class="toc-text">算法与时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#术语"><span class="toc-number">2.</span> <span class="toc-text">术语</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前缀和后缀"><span class="toc-number">2.1.</span> <span class="toc-text">前缀和后缀</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#朴素字符串匹配算法"><span class="toc-number">3.</span> <span class="toc-text">朴素字符串匹配算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">3.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图说明"><span class="toc-number">3.2.</span> <span class="toc-text">图说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伪代码"><span class="toc-number">3.3.</span> <span class="toc-text">伪代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-number">3.4.</span> <span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rabin-Karp算法"><span class="toc-number">4.</span> <span class="toc-text">Rabin-Karp算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述-1"><span class="toc-number">4.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图说明-1"><span class="toc-number">4.2.</span> <span class="toc-text">图说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相应的数学公式"><span class="toc-number">4.3.</span> <span class="toc-text">相应的数学公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伪代码-1"><span class="toc-number">4.4.</span> <span class="toc-text">伪代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码"><span class="toc-number">4.5.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Knuth-Morris-Pratt算法"><span class="toc-number">5.</span> <span class="toc-text">Knuth-Morris-Pratt算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述-2"><span class="toc-number">5.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析"><span class="toc-number">5.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是前缀和后缀"><span class="toc-number">5.3.</span> <span class="toc-text">什么是前缀和后缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部分匹配表"><span class="toc-number">5.4.</span> <span class="toc-text">部分匹配表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#整体代码"><span class="toc-number">5.5.</span> <span class="toc-text">整体代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拓展"><span class="toc-number">6.</span> <span class="toc-text">拓展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">7.</span> <span class="toc-text">参考资料</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"字符串匹配算法 -- 暴力破解法（朴素法），RK算法，KMP算法，Sunday算法　| Xefvan's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/12/21/C-algorithms-StringMatch/" data-title="字符串匹配算法 -- 暴力破解法（朴素法），RK算法，KMP算法，Sunday算法" data-url="http://ixjfun.top/2016/12/21/C-algorithms-StringMatch/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"null"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/12/13/C-algorithms-Beautythree/" title="下一篇: 《编程之美》-- 快速找出故障机器">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/21/C-algorithms-StringMatch/">字符串匹配算法 -- 暴力破解法（朴素法），RK算法，KMP算法，Sunday算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/C-algorithms-Beautythree/">《编程之美》-- 快速找出故障机器</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/11/C-algorithms-Beautytwo/">《编程之美》 -- 中国象棋将帅问题和一摞烙饼的排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/C-algorithms-Beautyone/">《编程之美》-- 让CPU占用率听你指挥</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/19/C-structure-graph-array/">数据结构之图（C++）--邻接矩阵表示（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/C-algorithms-ninesort/">九大排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/16/C-structure-skiplist/">数据结构之跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/c-structure-stack-array-chain/">数据结构之栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/02/C-structure-linear-chain/">数据结构之线性表 -- 链式描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/01/C-structure-linear-array/">数据结构之线性表---数组描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/C-structure-binarytree/">数据结构之二叉树(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/C-algorithms-binarytree/">数据结构之二叉树(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/C-class-constructor-一/">C++类的初体验封装之构造函数（一）</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Xefvan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
