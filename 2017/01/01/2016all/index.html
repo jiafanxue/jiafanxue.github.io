@@ -15,16 +15,25 @@
 
 
 
-<meta name="description" content="简述typedef和typename的具体用法，分析了typename和typename结合使用的用法">
+<meta name="description" content="盛年不重来，一日难再晨。及时当勉励，岁月不待人。        —陶渊明 
+
+时间过得很快，再过几个小时就是2017年了，回望2016，让我感触很深。2016年是改变的一年，也是成长的一年。
+浑浑噩噩的半年年初，我参加了社团里的寒假比赛，说实话那时候的我对自己是一点信心都没有，回到家，为了不拖累小组的进度，只要吃完饭就待在电脑前，《Flask Web开发》那本书，看了一遍又一遍，也不知道是脑子通了">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++ typedef和typename关键字">
-<meta property="og:url" content="http://ixjfun.top/2016/10/12/C-typedef-and-typename/index.html">
+<meta property="og:title" content="2016年终总结">
+<meta property="og:url" content="http://ixjfun.top/2017/01/01/2016all/index.html">
 <meta property="og:site_name" content="Xefvan's blog">
-<meta property="og:description" content="简述typedef和typename的具体用法，分析了typename和typename结合使用的用法">
-<meta property="og:updated_time" content="2016-12-05T06:30:25.459Z">
+<meta property="og:description" content="盛年不重来，一日难再晨。及时当勉励，岁月不待人。        —陶渊明 
+
+时间过得很快，再过几个小时就是2017年了，回望2016，让我感触很深。2016年是改变的一年，也是成长的一年。
+浑浑噩噩的半年年初，我参加了社团里的寒假比赛，说实话那时候的我对自己是一点信心都没有，回到家，为了不拖累小组的进度，只要吃完饭就待在电脑前，《Flask Web开发》那本书，看了一遍又一遍，也不知道是脑子通了">
+<meta property="og:updated_time" content="2016-12-31T16:00:08.222Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++ typedef和typename关键字">
-<meta name="twitter:description" content="简述typedef和typename的具体用法，分析了typename和typename结合使用的用法">
+<meta name="twitter:title" content="2016年终总结">
+<meta name="twitter:description" content="盛年不重来，一日难再晨。及时当勉励，岁月不待人。        —陶渊明 
+
+时间过得很快，再过几个小时就是2017年了，回望2016，让我感触很深。2016年是改变的一年，也是成长的一年。
+浑浑噩噩的半年年初，我参加了社团里的寒假比赛，说实话那时候的我对自己是一点信心都没有，回到家，为了不拖累小组的进度，只要吃完饭就待在电脑前，《Flask Web开发》那本书，看了一遍又一遍，也不知道是脑子通了">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +65,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>C++ typedef和typename关键字 | Xefvan&#39;s blog</title>
+<title>2016年终总结 | Xefvan&#39;s blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -262,11 +271,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-C-typedef-and-typename" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-2016all" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/10/12/C-typedef-and-typename/" class="article-date">
-      <time datetime="2016-10-12T12:41:52.000Z" itemprop="datePublished">2016-10-12</time>
+      <a href="/2017/01/01/2016all/" class="article-date">
+      <time datetime="2016-12-31T23:59:42.000Z" itemprop="datePublished">2016-12-31</time>
 </a>
 
 
@@ -281,7 +290,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      C++ typedef和typename关键字
+      2016年终总结
     </h1>
   
 
@@ -289,16 +298,8 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/programming/">programming</a>
-    </div>
-
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ccode/">C/C++</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -306,39 +307,61 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><excerpt in="" index="" |="" 首页摘要=""><br>简述typedef和typename的具体用法，分析了typename和typename结合使用的用法<a id="more"></a></excerpt></p>
-<the rest="" of="" contents="" |="" 余下全文="">
-
+        <p>盛年不重来，一日难再晨。及时当勉励，岁月不待人。        —陶渊明 </p>
 <hr>
-<h2 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h2><p>在《STL源码解析》一书中看到了这样一段代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ForwardIterator, <span class="keyword">class</span> Size, <span class="keyword">class</span> T, <span class="keyword">class</span> T1&gt;</div><div class="line"><span class="keyword">inline</span> ForwardIterator <span class="number">__u</span>ninitialized_fill_n(ForwardIterator first, Size n, <span class="keyword">const</span> T&amp; x, T1*)&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="number">__</span>type_traits&lt;T1&gt;::is_POD_type is_POD;</div><div class="line">	<span class="keyword">return</span> <span class="number">__u</span>ninitialized_fill_n_aux(first, n, x, is_POD());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在代码的第三行中出现的</p>
-<pre><code>typedef typename __type_traits&lt;T1&gt;::is_POD_type is_POD;
-</code></pre><p>可能会让初学者感到无法理解，难以接受。这里的typedef 还好理解，但是typename又是啥鬼?:tw-1f62c:<br>在《C++Primer 5th》P593页和《Effective C++》第42条都讲解了这部分内容，我也总结了下给大家，方便大家解惑。</p>
-<h2 id="类型别名typedef"><a href="#类型别名typedef" class="headerlink" title="类型别名typedef"></a>类型别名typedef</h2><p>类型说明的格式为:</p>
-<font color="#FF0000">typedef  类型 定义名;</font>
-
-<p>它用来对一个数据类型取一个新名字。其中定义名表示这个类型的新名字。</p>
-<p>例如:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> type_int;	</div><div class="line"><span class="comment">// 这里的type_int就是整形int的另一个名字，接下来可以用type_int代替int</span></div></pre></td></tr></table></figure></p>
-<h2 id="类型解释typename"><a href="#类型解释typename" class="headerlink" title="类型解释typename"></a>类型解释typename</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>在维基百科中这样解释：<br>当用于泛型编程时是另一术语”class”的同义词。这个关键字用于指出模板声明（或定义）中的非独立名称（dependent names）是类型名，而非变量名。</p>
-<p>例如声明一个人的模板类<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> Person</div><div class="line">&#123;</div><div class="line">	<span class="comment">// .... </span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 或者</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> Person</div><div class="line">&#123;</div><div class="line">	</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h3 id="使用类的类型成员"><a href="#使用类的类型成员" class="headerlink" title="使用类的类型成员"></a>使用类的类型成员</h3><p>通常我们使用作用域运算符(::)来访问static成员和类型成员。在普通（非模板）代码中，编译器掌握类的定义。因此，他知道通过作用域运算符访问的名字是类型还是static成员。例如：string::size_type,编译器有string的定义，从而知道size_type是一个类型。</p>
-<p>但是如果是模板类就变得很困难了。</p>
-<p>例如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print2nd</span><span class="params">(<span class="keyword">const</span> C&amp; contrainer)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// ...</span></div><div class="line">	C::const_iterator* x;			<span class="comment">// 申明x为一个指针，指向C::const_iterator</span></div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>这段代码看起来好像是对，但是它确实是错的，回到之前我们之所以认为它对，是因为我们“知道”C::const_iterator是一个类型，但是如果C::const_iterator不是一个类型呢，如果它是一个static成员变量呢？又或者是一个全局变量呢？那么上述的用法就变为相乘了。</p>
-<p>因此有必要说明C::const_iterator是一个类型。只要在紧邻它之前放置关键字typename即可<br>例如<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print2nd</span><span class="params">(<span class="keyword">const</span> C&amp; contrainer)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// ...</span></div><div class="line">	<span class="keyword">typename</span> C::const_iterator* x;			<span class="comment">// 申明x为一个指针，指向C::const_iterator</span></div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<font color="#ff0000"> 这个规则很简单：在任何时候当你想在template中涉及一个嵌套从属类型名称，就必须在紧临它的前一个位置放置上关键字typename（也有例外）</font>
-
-
+<p>时间过得很快，再过几个小时就是2017年了，回望2016，让我感触很深。2016年是改变的一年，也是成长的一年。</p>
+<h2 id="浑浑噩噩的半年"><a href="#浑浑噩噩的半年" class="headerlink" title="浑浑噩噩的半年"></a>浑浑噩噩的半年</h2><p>年初，我参加了社团里的寒假比赛，说实话那时候的我对自己是一点信心都没有，回到家，为了不拖累小组的进度，只要吃完饭就待在电脑前，《Flask Web开发》那本书，看了一遍又一遍，也不知道是脑子通了？还是什么，后面学的很快，也把放假前的不懂给解决了，寒假结束后带着写好的寒假比赛作品回到了学校，也许是自己很自信的原因，我知道我们小组会获得比赛的第一名，事实也是如此，我们拿到了第一名。</p>
+<p>紧接而来的是迷茫，虽然陆陆续续的做了几个小的项目，但是我对自己的未来还是不太明确。究竟是继续学习Python还是其它（当然有人会说Python这么好，继续学啊，前景很好啊），当然我也不是说学Python不好，只是一种感觉吧，无法言语。大一下学期我学习了C语言，了解了数据结构，知道了很多其它的东西。</p>
 <hr>
-<p><font color="#0099ff" size="4">“typename作为嵌套从属类型名称的前缀词”的例外</font><br>template 不可以出现在base classes list内的嵌套从属类型名称之前，也不可以出现在memeber initialization list(成员初始列表)中作为base class 修饰词, 例如：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">template &lt;typename T&gt;</div><div class="line">class Derived : public Base&lt;T&gt;::Nested	//  Base classes list，不允许出现"typename"</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	explicit Derived(int x) : </div><div class="line">	Base&lt;T&gt;::Nested(x)				// 成员初始化列表，不允许出现"typename"</div><div class="line">	&#123;		</div><div class="line">		typename Base&lt;T&gt;::Nested temp;				// 嵌套从属类型名称</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h2 id="typedef和typename共用"><a href="#typedef和typename共用" class="headerlink" title="typedef和typename共用"></a>typedef和typename共用</h2><p>回到最初的问题，这里我们用另外一个例子代替</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> IterT&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">workWithIterator</span><span class="params">(IterT iter)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">typename</span> <span class="built_in">std</span>::iterator_traits&lt;IterT&gt;::<span class="function">value_type <span class="title">temp</span><span class="params">(*iter)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>看起来任然可能有点蒙, 所以先讲下traits</p>
-<h3 id="traits（特性萃取机）"><a href="#traits（特性萃取机）" class="headerlink" title="traits（特性萃取机）"></a>traits（特性萃取机）</h3><p>在我们日常中，常用到的迭代器相应型别有5中：value_type, difference_type, pointer, reference, iterator catagoly。而“特性萃取机”traits会忠实的原汁原味的榨取出来:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> I&gt;</div><div class="line"><span class="keyword">struct</span> iterator_traits&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::iterator_category 	  iterator_category;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::value_type 				value_type;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::difference_type 		difference_type;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::pointer 					 pointer;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::reference 				  reference;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>而<code>std::iterator_traits&lt;IterT&gt;::value_type</code>说的就是”类型为IterT之对象所指之物的类型”<br>如果你的IterT为<code>vector&lt;int&gt;::iterator</code>，temp的类型就是int，<br>如果你的IterT为<code>list&lt;sting&gt;::iterator</code>，temp的类型就是string</p>
-<p>说完上面哪行代码就解释的通了<br><code>std::iterator_traits&lt;IterT&gt;::value_type</code>是一个嵌套从属类型名（value_type被嵌套与<code>iterator_traits&lt;IterT&gt;</code>之内而IterT是一个template参数），所以必须在它之前放置typename</p>
-<p>而为了简化书写，加上typedef，完美:tw-1f604:<br>最终代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> IterT&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">workWithIterator</span><span class="params">(IterT iter)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="built_in">std</span>::iterator_traits&lt;IterT&gt;::value_type;</div><div class="line">	<span class="function">value_type <span class="title">temp</span><span class="params">(*iter)</span></span>;</div><div class="line">	<span class="comment">// .....</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-</the>
+<h2 id="初识C"><a href="#初识C" class="headerlink" title="初识C++"></a>初识C++</h2><p>暑假的留校可能是我人生的第一个转折点，由于工作室的传统，暑假这边会有留校做项目，特别的是开发部要求成员全体留校。不过这对于我们来说是不错的机会，在锻炼自己的同时也可以学到新的东西。</p>
+<p>带着《C++ Primer》和《Linux菜鸟教程》，我迎来了为期1个多月的留校锻炼。</p>
+<p>这是我们那时的工作时间</p>
+<p>早上：8：00 - 12：00<br>下午：14：00 - 17：00<br>晚上：19：00 - 21：00</p>
+<p>刚开始的几天，还在适应。我和一个小伙伴分在了‘云家园’的小组里，当时组长是“佛爷”，一个准大四的<strong>单身</strong>学长，经过几天Restful框架的学习，和项目的熟悉，项目是我所接触的最大的一个（光是MySQL数据库里表就有50多个，在暑假结束的时候已经到了70多了），我们正式的开始了两点一线的生活。</p>
+<p>由于项目构想相当的大，做一个学校教学服务（服务包括教职工，学生和家长）的网络平台。在最开始的时候日子过得相当的充实，少则几个commit，多则十几个commit，随着子项目的越做越多，代码的重复度也很多，虽然中间有不少困难。例如：教职工考勤哪里，因为数据库是在windows那台机上的，而我们用的mysql数据库有个中转表，要跨越两个数据库进行数据交互，在取数据的时候和计算缺勤情况的时候给了我恨大的麻烦。</p>
+<p>由于白天的工作，C++的学习只能推迟到晚上10点以后，与学Python不同，C++语言有点“不太好理解”。而且C++是公认的难学，有人会说，学什么不好，学C++这种鸡肋的语言，不上不下的。在当时我学C++的冲动是想去做游戏，可能这也是一直驱动我学习的一个动力吧。（做网站后台我觉得不太好玩，现在觉得有点幼稚了~）</p>
+<hr>
+<h2 id="工作室成立"><a href="#工作室成立" class="headerlink" title="工作室成立"></a>工作室成立</h2><p>结束了暑假的留校，我和一个学java的小伙伴有了想出去看看的“想法”，我们不想局限在这里。（直到现在我还不知道这到底是对还是错，只能交给时间来说明了）。找了几个“志同道合”的人，我们向学院申请了组建自己的工作室的想法。申请工作室，要么你的项目的点子很好（能够成为创业的项目）或者你有省级或者国家级的奖项，而这两点我们都不太符合。怀着忐忑的心情等了近一周的时间，我们接到了当时负责创新创业的老师的电话，说我们的申请成功了。听到这个消息，我相当的高兴。</p>
+<h2 id="读书与学习"><a href="#读书与学习" class="headerlink" title="读书与学习"></a>读书与学习</h2><p>工作室成立之后的几周，经过诸多考虑，我退出了之前的家园工作室。开始正式学习C++。学C++很苦，这是真话，不过我想我会坚持下去的，即是很多人不看好我能够将它学好，但是我依然会走下去。</p>
+<p>这是我这半年看的书</p>
+<p>关于C++方面的书籍：</p>
+<ul>
+<li>《C++ Primer》第五版</li>
+<li>《Effective C++》</li>
+<li>《More Effective C++》</li>
+<li>《深度探索C++对象模型》</li>
+<li>《C++并发编程实战》</li>
+<li>《C++Templates》</li>
+<li>《STL源码解析》</li>
+<li>《C++编程规范 101条规则、准则与最佳实践》</li>
+</ul>
+<p>关于游戏方面的书籍：</p>
+<ul>
+<li>《DirectX9.0 3D游戏开发编程基础》</li>
+<li>《游戏编程入门》第四版</li>
+</ul>
+<p>关于数据结构和算法方面的书籍：</p>
+<ul>
+<li>《数据结构，算法与应用C++语言描述》</li>
+<li>《算法导论》第三版</li>
+<li>《编程之美》</li>
+</ul>
+<p>关于底层方面的书籍：</p>
+<ul>
+<li>《深入理解计算机系统》</li>
+<li>《现代操作系统》（还没看完）</li>
+<li>《编译原理》（还没看完）</li>
+</ul>
+<p>关于计算机网络的：</p>
+<ul>
+<li>《图解TCP/IP》</li>
+<li>《计算机网络》（还没看完）</li>
+</ul>
+<p>看了大概15-17本书，项目没做什么，陆陆续续的刷了几十道Leetcode算法题，硬盘里存有将近1个多G的各种代码。时间很短，看你怎么去利用它。当然，看了并不一定能够全部理解，而我也不指望一遍能够理解透。</p>
+<p>##展望2017<br>琐碎的事情太多，无法一一赘叙，2016年（或者说这半年来）真的过得很充实，这里的每一个人，每一件事情都教会了我不断成长，不断的从大局考虑，让我用开阔的视野看待这个时间。现在，我任然在努力的道路上，不会因为任何事情停下脚步，因为我明白我需要什么。</p>
+<p>在2017年，我会用更高的要求对待自己，每天一个完成一个小目标，每个月进行一次总结，希望2017年是个让人难忘的一年。</p>
+<p>最后希望你们新的一年里都 所思不谬 所爱有据 万事胜意 事事顺心。新年快乐</p>
+
       
     </div>
     
@@ -346,13 +369,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></p>
+        <p><span>本文标题:</span><a href="/2017/01/01/2016all/">2016年终总结</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Xefvan</a></p>
-        <p><span>发布时间:</span>2016-10-12, 12:41:52</p>
-        <p><span>最后更新:</span>2016-12-05, 14:30:25</p>
+        <p><span>发布时间:</span>2016-12-31, 23:59:42</p>
+        <p><span>最后更新:</span>2017-01-01, 00:00:08</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/10/12/C-typedef-and-typename/" title="C++ typedef和typename关键字">http://ixjfun.top/2016/10/12/C-typedef-and-typename/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://ixjfun.top/2016/10/12/C-typedef-and-typename/　　作者: Xefvan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/01/01/2016all/" title="2016年终总结">http://ixjfun.top/2017/01/01/2016all/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://ixjfun.top/2017/01/01/2016all/　　作者: Xefvan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -364,16 +387,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/10/16/C-structure-skiplist/">
-                    数据结构之跳表
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/10/10/c-structure-stack-array-chain/">
-                    数据结构之栈
+                <a href="/2016/12/21/C-algorithms-StringMatch/">
+                    字符串匹配算法 -- 暴力破解法（朴素法），RK算法，KMP算法，Sunday算法
                 </a>
             </div>
         
@@ -385,7 +402,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前序"><span class="toc-number">1.</span> <span class="toc-text">前序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型别名typedef"><span class="toc-number">2.</span> <span class="toc-text">类型别名typedef</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型解释typename"><span class="toc-number">3.</span> <span class="toc-text">类型解释typename</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用类的类型成员"><span class="toc-number">3.2.</span> <span class="toc-text">使用类的类型成员</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#typedef和typename共用"><span class="toc-number">4.</span> <span class="toc-text">typedef和typename共用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#traits（特性萃取机）"><span class="toc-number">4.1.</span> <span class="toc-text">traits（特性萃取机）</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#浑浑噩噩的半年"><span class="toc-number">1.</span> <span class="toc-text">浑浑噩噩的半年</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初识C"><span class="toc-number">2.</span> <span class="toc-text">初识C++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工作室成立"><span class="toc-number">3.</span> <span class="toc-text">工作室成立</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读书与学习"><span class="toc-number">4.</span> <span class="toc-text">读书与学习</span></a></li></ol>
         
     </div>
     <style>
@@ -421,7 +438,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"C++ typedef和typename关键字　| Xefvan's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"2016年终总结　| Xefvan's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -437,7 +454,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/12/C-typedef-and-typename/" data-title="C++ typedef和typename关键字" data-url="http://ixjfun.top/2016/10/12/C-typedef-and-typename/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/01/01/2016all/" data-title="2016年终总结" data-url="http://ixjfun.top/2017/01/01/2016all/"></div>
     <script>
         var duoshuoQuery = {short_name:"null"};
         var loadComment = function(){
@@ -460,15 +477,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/10/16/C-structure-skiplist/" title="上一篇: 数据结构之跳表">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/10/10/c-structure-stack-array-chain/" title="下一篇: 数据结构之栈">
+            <a href="/2016/12/21/C-algorithms-StringMatch/" title="下一篇: 字符串匹配算法 -- 暴力破解法（朴素法），RK算法，KMP算法，Sunday算法">
                 <i class="fa fa-angle-right"></i>
             </a>
         
