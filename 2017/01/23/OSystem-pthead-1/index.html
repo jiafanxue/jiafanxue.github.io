@@ -15,16 +15,19 @@
 
 
 
-<meta name="description" content="简述typedef和typename的具体用法，分析了typename和typename结合使用的用法">
+<meta name="description" content="进程进程是操作系统中最核心的概念，是对正在运行程序的一个抽象。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++ typedef和typename关键字">
-<meta property="og:url" content="http://ixjfun.top/2016/10/12/C-typedef-and-typename/index.html">
+<meta property="og:title" content="操作系统之进程和线程（一）">
+<meta property="og:url" content="http://ixjfun.top/2017/01/23/OSystem-pthead-1/index.html">
 <meta property="og:site_name" content="Xefvan's blog">
-<meta property="og:description" content="简述typedef和typename的具体用法，分析了typename和typename结合使用的用法">
-<meta property="og:updated_time" content="2016-12-05T06:30:25.459Z">
+<meta property="og:description" content="进程进程是操作系统中最核心的概念，是对正在运行程序的一个抽象。">
+<meta property="og:image" content="http://img.blog.csdn.net/20170123150434923?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170120183450130?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-01-23T07:09:15.442Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++ typedef和typename关键字">
-<meta name="twitter:description" content="简述typedef和typename的具体用法，分析了typename和typename结合使用的用法">
+<meta name="twitter:title" content="操作系统之进程和线程（一）">
+<meta name="twitter:description" content="进程进程是操作系统中最核心的概念，是对正在运行程序的一个抽象。">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170123150434923?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +59,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>C++ typedef和typename关键字 | Xefvan&#39;s blog</title>
+<title>操作系统之进程和线程（一） | Xefvan&#39;s blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -262,11 +265,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-C-typedef-and-typename" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-OSystem-pthead-1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/10/12/C-typedef-and-typename/" class="article-date">
-      <time datetime="2016-10-12T12:41:52.000Z" itemprop="datePublished">2016-10-12</time>
+      <a href="/2017/01/23/OSystem-pthead-1/" class="article-date">
+      <time datetime="2017-01-23T15:07:21.000Z" itemprop="datePublished">2017-01-23</time>
 </a>
 
 
@@ -281,7 +284,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      C++ typedef和typename关键字
+      操作系统之进程和线程（一）
     </h1>
   
 
@@ -290,13 +293,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/programming/">programming</a>
+    <a class="article-category-link" href="/categories/Operating-System/">Operating System</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ccode/">C/C++</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -306,38 +309,38 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><excerpt in="" index="" |="" 首页摘要=""><br>简述typedef和typename的具体用法，分析了typename和typename结合使用的用法<a id="more"></a></excerpt></p>
+        <p><excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>进程是操作系统中最核心的概念，是对正在运行程序的一个抽象。<a id="more"></a></p>
 <the rest="" of="" contents="" |="" 余下全文="">
 
+<p>在进程模型中，计算机上所有可运行的软件，通常也包括操纵系统，被组织成若干顺序进程，简称<font color="red">进程</font>。而为了实现这进程模型，操作系统维护着一张表格（一个数据结构），即<font color="red">进程表</font>。每个进程占用一个表项，该表项包含了进程的状态的重要信息，比如程序计数器，堆栈指针，内存分配状态，所打开文件的状态，账号和调度信息，以及其他进程运行态转换或阻塞态时必须保存的信息，从而保证该进程随后能再次启动，就像从未中断过一样</p>
+<h3 id="进程与程序的区别"><a href="#进程与程序的区别" class="headerlink" title="进程与程序的区别"></a>进程与程序的区别</h3><p>例如：当你去做饭时，你拿着食谱，原料。此时，你根据手中的食谱做菜，每当执行下一步时，你都可能用到原料。</p>
+<p>在这个例子中，你本人相当于计算机里的CPU，而食谱相当于程序，原料相当于数据，而完成这一切所组成的总和叫做程序。</p>
+<h3 id="进程中的层次结构"><a href="#进程中的层次结构" class="headerlink" title="进程中的层次结构"></a>进程中的层次结构</h3><ul>
+<li><p>UNIX（及其他类似的系统）<br>存在父子进程，子进程只有一个父进程，它们共同组成一个进程的层次结构</p>
+</li>
+<li><p>Windows<br>没有进程层次的概念，所有进程都是地位相同的。唯一类似于进程的按时是在创建进程的时候，父进程会得到一个句柄，该句柄口语控制子进程。</p>
+</li>
+</ul>
+<h3 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h3><p>每个进程都是一个独立的个体，存在三种状态：运行，就绪和阻塞。并且这三种状态都能够进行转换。</p>
+<ul>
+<li>运行态 – 该时刻进程时间占用CPU</li>
+<li>就绪态 – 可运行，单位其他进程正在运行而暂时停止</li>
+<li>阻塞态 – 除非某种外部事件发生，否则进程不能运行</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20170123150434923?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="进程中的状态转换"></p>
 <hr>
-<h2 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h2><p>在《STL源码解析》一书中看到了这样一段代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ForwardIterator, <span class="keyword">class</span> Size, <span class="keyword">class</span> T, <span class="keyword">class</span> T1&gt;</div><div class="line"><span class="keyword">inline</span> ForwardIterator <span class="number">__u</span>ninitialized_fill_n(ForwardIterator first, Size n, <span class="keyword">const</span> T&amp; x, T1*)&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="number">__</span>type_traits&lt;T1&gt;::is_POD_type is_POD;</div><div class="line">	<span class="keyword">return</span> <span class="number">__u</span>ninitialized_fill_n_aux(first, n, x, is_POD());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在代码的第三行中出现的</p>
-<pre><code>typedef typename __type_traits&lt;T1&gt;::is_POD_type is_POD;
-</code></pre><p>可能会让初学者感到无法理解，难以接受。这里的typedef 还好理解，但是typename又是啥鬼?:tw-1f62c:<br>在《C++Primer 5th》P593页和《Effective C++》第42条都讲解了这部分内容，我也总结了下给大家，方便大家解惑。</p>
-<h2 id="类型别名typedef"><a href="#类型别名typedef" class="headerlink" title="类型别名typedef"></a>类型别名typedef</h2><p>类型说明的格式为:</p>
-<font color="#FF0000">typedef  类型 定义名;</font>
-
-<p>它用来对一个数据类型取一个新名字。其中定义名表示这个类型的新名字。</p>
-<p>例如:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> type_int;	</div><div class="line"><span class="comment">// 这里的type_int就是整形int的另一个名字，接下来可以用type_int代替int</span></div></pre></td></tr></table></figure></p>
-<h2 id="类型解释typename"><a href="#类型解释typename" class="headerlink" title="类型解释typename"></a>类型解释typename</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>在维基百科中这样解释：<br>当用于泛型编程时是另一术语”class”的同义词。这个关键字用于指出模板声明（或定义）中的非独立名称（dependent names）是类型名，而非变量名。</p>
-<p>例如声明一个人的模板类<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> Person</div><div class="line">&#123;</div><div class="line">	<span class="comment">// .... </span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 或者</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> Person</div><div class="line">&#123;</div><div class="line">	</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h3 id="使用类的类型成员"><a href="#使用类的类型成员" class="headerlink" title="使用类的类型成员"></a>使用类的类型成员</h3><p>通常我们使用作用域运算符(::)来访问static成员和类型成员。在普通（非模板）代码中，编译器掌握类的定义。因此，他知道通过作用域运算符访问的名字是类型还是static成员。例如：string::size_type,编译器有string的定义，从而知道size_type是一个类型。</p>
-<p>但是如果是模板类就变得很困难了。</p>
-<p>例如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print2nd</span><span class="params">(<span class="keyword">const</span> C&amp; contrainer)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// ...</span></div><div class="line">	C::const_iterator* x;			<span class="comment">// 申明x为一个指针，指向C::const_iterator</span></div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>这段代码看起来好像是对，但是它确实是错的，回到之前我们之所以认为它对，是因为我们“知道”C::const_iterator是一个类型，但是如果C::const_iterator不是一个类型呢，如果它是一个static成员变量呢？又或者是一个全局变量呢？那么上述的用法就变为相乘了。</p>
-<p>因此有必要说明C::const_iterator是一个类型。只要在紧邻它之前放置关键字typename即可<br>例如<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print2nd</span><span class="params">(<span class="keyword">const</span> C&amp; contrainer)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// ...</span></div><div class="line">	<span class="keyword">typename</span> C::const_iterator* x;			<span class="comment">// 申明x为一个指针，指向C::const_iterator</span></div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<font color="#ff0000"> 这个规则很简单：在任何时候当你想在template中涉及一个嵌套从属类型名称，就必须在紧临它的前一个位置放置上关键字typename（也有例外）</font>
-
-
-<hr>
-<p><font color="#0099ff" size="4">“typename作为嵌套从属类型名称的前缀词”的例外</font><br>template 不可以出现在base classes list内的嵌套从属类型名称之前，也不可以出现在memeber initialization list(成员初始列表)中作为base class 修饰词, 例如：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">template &lt;typename T&gt;</div><div class="line">class Derived : public Base&lt;T&gt;::Nested	//  Base classes list，不允许出现"typename"</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	explicit Derived(int x) : </div><div class="line">	Base&lt;T&gt;::Nested(x)				// 成员初始化列表，不允许出现"typename"</div><div class="line">	&#123;		</div><div class="line">		typename Base&lt;T&gt;::Nested temp;				// 嵌套从属类型名称</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h2 id="typedef和typename共用"><a href="#typedef和typename共用" class="headerlink" title="typedef和typename共用"></a>typedef和typename共用</h2><p>回到最初的问题，这里我们用另外一个例子代替</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> IterT&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">workWithIterator</span><span class="params">(IterT iter)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">typename</span> <span class="built_in">std</span>::iterator_traits&lt;IterT&gt;::<span class="function">value_type <span class="title">temp</span><span class="params">(*iter)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>看起来任然可能有点蒙, 所以先讲下traits</p>
-<h3 id="traits（特性萃取机）"><a href="#traits（特性萃取机）" class="headerlink" title="traits（特性萃取机）"></a>traits（特性萃取机）</h3><p>在我们日常中，常用到的迭代器相应型别有5中：value_type, difference_type, pointer, reference, iterator catagoly。而“特性萃取机”traits会忠实的原汁原味的榨取出来:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> I&gt;</div><div class="line"><span class="keyword">struct</span> iterator_traits&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::iterator_category 	  iterator_category;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::value_type 				value_type;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::difference_type 		difference_type;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::pointer 					 pointer;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::reference 				  reference;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>而<code>std::iterator_traits&lt;IterT&gt;::value_type</code>说的就是”类型为IterT之对象所指之物的类型”<br>如果你的IterT为<code>vector&lt;int&gt;::iterator</code>，temp的类型就是int，<br>如果你的IterT为<code>list&lt;sting&gt;::iterator</code>，temp的类型就是string</p>
-<p>说完上面哪行代码就解释的通了<br><code>std::iterator_traits&lt;IterT&gt;::value_type</code>是一个嵌套从属类型名（value_type被嵌套与<code>iterator_traits&lt;IterT&gt;</code>之内而IterT是一个template参数），所以必须在它之前放置typename</p>
-<p>而为了简化书写，加上typedef，完美:tw-1f604:<br>最终代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> IterT&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">workWithIterator</span><span class="params">(IterT iter)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="built_in">std</span>::iterator_traits&lt;IterT&gt;::value_type;</div><div class="line">	<span class="function">value_type <span class="title">temp</span><span class="params">(*iter)</span></span>;</div><div class="line">	<span class="comment">// .....</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>线程也叫作“迷你进程”。</p>
+<p>线程是程序中一个单一的顺序控制流程。在传统操作系统中，每个进程有一个地址空间和一个控制线程。不过，经常存在同一个地址空间中准并行运行多个控制线程的情况。</p>
+<p>线程概念试图实现的是：<font color="blue">共享一组资源的多个线程的执行能力，以便这些线程可以为完成某一任务而共同工作。</font></p>
+<p>由于线程比进程更轻量级，所以它的创建比进程更容易，也更容易撤销。这也是需要多线程的理由之一。</p>
+<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h3><p>进程模型基于两种独立的概念：<font color="red">资源分组处理和执行</font></p>
+<p>进程拥有一个执行的线程，通常简写为线程。在线程中有一个程序计数器，用来记录接着要执行哪一条指令。线程拥有寄存器，用来保存线程当前的工作变量。线程还拥有一个堆栈，用来记录执行历史，其中每一帧保存了一个已调用的但是还没有从中返回的过程。</p>
+<h3 id="多线程的伪并行"><a href="#多线程的伪并行" class="headerlink" title="多线程的伪并行"></a>多线程的伪并行</h3><p>通过在多个进程之间来回切换，系统制造了不同的顺序进程并行运行的假象。多线程的工作方式也是类似的。CPU在线程之间的快速切换，制造了线程并行运行的假象。</p>
+<p>进程中的不同线程不像不同进程之间那样存在很大的独立性。所有的线程都有完全一样的地址空间（进程间都有各自的地址空间），这意味着它们也共享同样的全局变量。并且线程之间是没有保护的。</p>
+<h3 id="线程实现"><a href="#线程实现" class="headerlink" title="线程实现"></a>线程实现</h3><p>多数计算机有两种运行模式：内核态和用户态</p>
+<p><img src="http://img.blog.csdn.net/20170120183450130?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHV0dXhz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="内核态和用户态"></p>
+<p>因此实现线程包的两种主要方法：在用户空间中和在内核中。</p>
 </the>
       
     </div>
@@ -346,13 +349,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></p>
+        <p><span>本文标题:</span><a href="/2017/01/23/OSystem-pthead-1/">操作系统之进程和线程（一）</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Xefvan</a></p>
-        <p><span>发布时间:</span>2016-10-12, 12:41:52</p>
-        <p><span>最后更新:</span>2016-12-05, 14:30:25</p>
+        <p><span>发布时间:</span>2017-01-23, 15:07:21</p>
+        <p><span>最后更新:</span>2017-01-23, 15:09:15</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/10/12/C-typedef-and-typename/" title="C++ typedef和typename关键字">http://ixjfun.top/2016/10/12/C-typedef-and-typename/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://ixjfun.top/2016/10/12/C-typedef-and-typename/　　作者: Xefvan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/01/23/OSystem-pthead-1/" title="操作系统之进程和线程（一）">http://ixjfun.top/2017/01/23/OSystem-pthead-1/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://ixjfun.top/2017/01/23/OSystem-pthead-1/　　作者: Xefvan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -364,16 +367,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/10/16/C-structure-skiplist/">
-                    数据结构之跳表
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/10/10/c-structure-stack-array-chain/">
-                    数据结构之栈
+                <a href="/2017/01/01/2016all/">
+                    2016年终总结
                 </a>
             </div>
         
@@ -385,7 +382,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前序"><span class="toc-number">1.</span> <span class="toc-text">前序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型别名typedef"><span class="toc-number">2.</span> <span class="toc-text">类型别名typedef</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型解释typename"><span class="toc-number">3.</span> <span class="toc-text">类型解释typename</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用类的类型成员"><span class="toc-number">3.2.</span> <span class="toc-text">使用类的类型成员</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#typedef和typename共用"><span class="toc-number">4.</span> <span class="toc-text">typedef和typename共用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#traits（特性萃取机）"><span class="toc-number">4.1.</span> <span class="toc-text">traits（特性萃取机）</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程"><span class="toc-number">1.</span> <span class="toc-text">进程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程与程序的区别"><span class="toc-number">1.1.</span> <span class="toc-text">进程与程序的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程中的层次结构"><span class="toc-number">1.2.</span> <span class="toc-text">进程中的层次结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的状态"><span class="toc-number">1.3.</span> <span class="toc-text">进程的状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程"><span class="toc-number">2.</span> <span class="toc-text">线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程模型"><span class="toc-number">2.1.</span> <span class="toc-text">线程模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程的伪并行"><span class="toc-number">2.2.</span> <span class="toc-text">多线程的伪并行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程实现"><span class="toc-number">2.3.</span> <span class="toc-text">线程实现</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -421,7 +418,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"C++ typedef和typename关键字　| Xefvan's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"操作系统之进程和线程（一）　| Xefvan's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -437,7 +434,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/12/C-typedef-and-typename/" data-title="C++ typedef和typename关键字" data-url="http://ixjfun.top/2016/10/12/C-typedef-and-typename/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/01/23/OSystem-pthead-1/" data-title="操作系统之进程和线程（一）" data-url="http://ixjfun.top/2017/01/23/OSystem-pthead-1/"></div>
     <script>
         var duoshuoQuery = {short_name:"null"};
         var loadComment = function(){
@@ -460,15 +457,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/10/16/C-structure-skiplist/" title="上一篇: 数据结构之跳表">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/10/10/c-structure-stack-array-chain/" title="下一篇: 数据结构之栈">
+            <a href="/2017/01/01/2016all/" title="下一篇: 2016年终总结">
                 <i class="fa fa-angle-right"></i>
             </a>
         
