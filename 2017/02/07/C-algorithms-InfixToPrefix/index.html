@@ -15,16 +15,16 @@
 
 
 
-<meta name="description" content="简述typedef和typename的具体用法，分析了typename和typename结合使用的用法">
+<meta name="description" content="前面既然写了中缀转后缀的，那么现在说下中缀转前缀的，至于后缀（前缀）转中缀，可以根据相关的转换规则自行转换。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++ typedef和typename关键字">
-<meta property="og:url" content="http://ixjfun.top/2016/10/12/C-typedef-and-typename/index.html">
+<meta property="og:title" content="利用栈实现中缀表达式转前缀表达式">
+<meta property="og:url" content="http://ixjfun.top/2017/02/07/C-algorithms-InfixToPrefix/index.html">
 <meta property="og:site_name" content="Xefvan's blog">
-<meta property="og:description" content="简述typedef和typename的具体用法，分析了typename和typename结合使用的用法">
-<meta property="og:updated_time" content="2016-12-05T06:30:25.459Z">
+<meta property="og:description" content="前面既然写了中缀转后缀的，那么现在说下中缀转前缀的，至于后缀（前缀）转中缀，可以根据相关的转换规则自行转换。">
+<meta property="og:updated_time" content="2017-02-06T11:35:43.644Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++ typedef和typename关键字">
-<meta name="twitter:description" content="简述typedef和typename的具体用法，分析了typename和typename结合使用的用法">
+<meta name="twitter:title" content="利用栈实现中缀表达式转前缀表达式">
+<meta name="twitter:description" content="前面既然写了中缀转后缀的，那么现在说下中缀转前缀的，至于后缀（前缀）转中缀，可以根据相关的转换规则自行转换。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>C++ typedef和typename关键字 | Xefvan&#39;s blog</title>
+<title>利用栈实现中缀表达式转前缀表达式 | Xefvan&#39;s blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -262,11 +262,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-C-typedef-and-typename" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-C-algorithms-InfixToPrefix" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/10/12/C-typedef-and-typename/" class="article-date">
-      <time datetime="2016-10-12T12:41:52.000Z" itemprop="datePublished">2016-10-12</time>
+      <a href="/2017/02/07/C-algorithms-InfixToPrefix/" class="article-date">
+      <time datetime="2017-02-06T19:34:37.000Z" itemprop="datePublished">2017-02-06</time>
 </a>
 
 
@@ -281,7 +281,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      C++ typedef和typename关键字
+      利用栈实现中缀表达式转前缀表达式
     </h1>
   
 
@@ -296,7 +296,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ccode/">C/C++</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -306,38 +306,38 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><excerpt in="" index="" |="" 首页摘要=""><br>简述typedef和typename的具体用法，分析了typename和typename结合使用的用法<a id="more"></a></excerpt></p>
+        <p><excerpt in="" index="" |="" 首页摘要=""><br>前面既然写了中缀转后缀的，那么现在说下中缀转前缀的，至于后缀（前缀）转中缀，可以根据相关的转换规则自行转换。<br><a id="more"></a></excerpt></p>
 <the rest="" of="" contents="" |="" 余下全文="">
 
-<hr>
-<h2 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h2><p>在《STL源码解析》一书中看到了这样一段代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ForwardIterator, <span class="keyword">class</span> Size, <span class="keyword">class</span> T, <span class="keyword">class</span> T1&gt;</div><div class="line"><span class="keyword">inline</span> ForwardIterator <span class="number">__u</span>ninitialized_fill_n(ForwardIterator first, Size n, <span class="keyword">const</span> T&amp; x, T1*)&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="number">__</span>type_traits&lt;T1&gt;::is_POD_type is_POD;</div><div class="line">	<span class="keyword">return</span> <span class="number">__u</span>ninitialized_fill_n_aux(first, n, x, is_POD());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在代码的第三行中出现的</p>
-<pre><code>typedef typename __type_traits&lt;T1&gt;::is_POD_type is_POD;
-</code></pre><p>可能会让初学者感到无法理解，难以接受。这里的typedef 还好理解，但是typename又是啥鬼?:tw-1f62c:<br>在《C++Primer 5th》P593页和《Effective C++》第42条都讲解了这部分内容，我也总结了下给大家，方便大家解惑。</p>
-<h2 id="类型别名typedef"><a href="#类型别名typedef" class="headerlink" title="类型别名typedef"></a>类型别名typedef</h2><p>类型说明的格式为:</p>
-<font color="#FF0000">typedef  类型 定义名;</font>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a><font color="red">目的</font></h2><p>将中缀表达式（即标准的表达式）转换为前缀表达式</p>
+<p>例如：1+2<em>3+(4</em>5+6)<em>7 转换成 ++1</em>23<em>+</em>4567</p>
+<h2 id="转换原则："><a href="#转换原则：" class="headerlink" title=" 转换原则："></a><font color="red"> 转换原则：</font></h2><p>与中缀转后缀不同，前者是顺序从左到右读取每一个字符，后者是从右到左顺序读取每一个字符，然后进行反转字符串。</p>
+<ol>
+<li>如果遇到操作数，直接将操作数放入到<em>prefix</em> 中</li>
+<li>如果遇到操作符，如果符号栈为空，直接放入符号栈中，如果符号栈不为空，则判断当前栈顶元素<ul>
+<li>如果当前栈顶元素为右括号‘）’，直接将操作符放入符号栈中</li>
+<li>如果当前栈顶元素的优先级大于操作数的优先级，则将栈顶元素移除，再次和判断移除后栈的栈顶元素比较优先级大小，直到当前栈顶元素<font color="red">小于或等于</font>操作数优先级，将操作符放入符号栈中</li>
+</ul>
+</li>
+<li>如果遇到右括号，直接将右括号放入符号栈中</li>
+<li>如果遇到左括号，将右括号到左括号之间的全部符号移出到<em>prefix</em> 中（记得左括号不要入栈，并且在最后将右括号从栈中删除）</li>
+<li>重复1-4，直到最后一个字符被读入。</li>
+<li>判断当前栈是否为空，如果不为空，将栈中的元素依次移出到<em>prefix</em> 中</li>
+<li>翻转字符串</li>
+</ol>
+<font color="blue">和中缀转后缀不同，进行优先级比较的时候，需要注意等号的问题</font>
 
-<p>它用来对一个数据类型取一个新名字。其中定义名表示这个类型的新名字。</p>
-<p>例如:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> type_int;	</div><div class="line"><span class="comment">// 这里的type_int就是整形int的另一个名字，接下来可以用type_int代替int</span></div></pre></td></tr></table></figure></p>
-<h2 id="类型解释typename"><a href="#类型解释typename" class="headerlink" title="类型解释typename"></a>类型解释typename</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>在维基百科中这样解释：<br>当用于泛型编程时是另一术语”class”的同义词。这个关键字用于指出模板声明（或定义）中的非独立名称（dependent names）是类型名，而非变量名。</p>
-<p>例如声明一个人的模板类<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> Person</div><div class="line">&#123;</div><div class="line">	<span class="comment">// .... </span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 或者</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">class</span> Person</div><div class="line">&#123;</div><div class="line">	</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h3 id="使用类的类型成员"><a href="#使用类的类型成员" class="headerlink" title="使用类的类型成员"></a>使用类的类型成员</h3><p>通常我们使用作用域运算符(::)来访问static成员和类型成员。在普通（非模板）代码中，编译器掌握类的定义。因此，他知道通过作用域运算符访问的名字是类型还是static成员。例如：string::size_type,编译器有string的定义，从而知道size_type是一个类型。</p>
-<p>但是如果是模板类就变得很困难了。</p>
-<p>例如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print2nd</span><span class="params">(<span class="keyword">const</span> C&amp; contrainer)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// ...</span></div><div class="line">	C::const_iterator* x;			<span class="comment">// 申明x为一个指针，指向C::const_iterator</span></div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>这段代码看起来好像是对，但是它确实是错的，回到之前我们之所以认为它对，是因为我们“知道”C::const_iterator是一个类型，但是如果C::const_iterator不是一个类型呢，如果它是一个static成员变量呢？又或者是一个全局变量呢？那么上述的用法就变为相乘了。</p>
-<p>因此有必要说明C::const_iterator是一个类型。只要在紧邻它之前放置关键字typename即可<br>例如<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print2nd</span><span class="params">(<span class="keyword">const</span> C&amp; contrainer)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// ...</span></div><div class="line">	<span class="keyword">typename</span> C::const_iterator* x;			<span class="comment">// 申明x为一个指针，指向C::const_iterator</span></div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<font color="#ff0000"> 这个规则很简单：在任何时候当你想在template中涉及一个嵌套从属类型名称，就必须在紧临它的前一个位置放置上关键字typename（也有例外）</font>
-
-
-<hr>
-<p><font color="#0099ff" size="4">“typename作为嵌套从属类型名称的前缀词”的例外</font><br>template 不可以出现在base classes list内的嵌套从属类型名称之前，也不可以出现在memeber initialization list(成员初始列表)中作为base class 修饰词, 例如：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">template &lt;typename T&gt;</div><div class="line">class Derived : public Base&lt;T&gt;::Nested	//  Base classes list，不允许出现"typename"</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	explicit Derived(int x) : </div><div class="line">	Base&lt;T&gt;::Nested(x)				// 成员初始化列表，不允许出现"typename"</div><div class="line">	&#123;		</div><div class="line">		typename Base&lt;T&gt;::Nested temp;				// 嵌套从属类型名称</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h2 id="typedef和typename共用"><a href="#typedef和typename共用" class="headerlink" title="typedef和typename共用"></a>typedef和typename共用</h2><p>回到最初的问题，这里我们用另外一个例子代替</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> IterT&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">workWithIterator</span><span class="params">(IterT iter)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">typename</span> <span class="built_in">std</span>::iterator_traits&lt;IterT&gt;::<span class="function">value_type <span class="title">temp</span><span class="params">(*iter)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>看起来任然可能有点蒙, 所以先讲下traits</p>
-<h3 id="traits（特性萃取机）"><a href="#traits（特性萃取机）" class="headerlink" title="traits（特性萃取机）"></a>traits（特性萃取机）</h3><p>在我们日常中，常用到的迭代器相应型别有5中：value_type, difference_type, pointer, reference, iterator catagoly。而“特性萃取机”traits会忠实的原汁原味的榨取出来:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> I&gt;</div><div class="line"><span class="keyword">struct</span> iterator_traits&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::iterator_category 	  iterator_category;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::value_type 				value_type;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::difference_type 		difference_type;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::pointer 					 pointer;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> I::reference 				  reference;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>而<code>std::iterator_traits&lt;IterT&gt;::value_type</code>说的就是”类型为IterT之对象所指之物的类型”<br>如果你的IterT为<code>vector&lt;int&gt;::iterator</code>，temp的类型就是int，<br>如果你的IterT为<code>list&lt;sting&gt;::iterator</code>，temp的类型就是string</p>
-<p>说完上面哪行代码就解释的通了<br><code>std::iterator_traits&lt;IterT&gt;::value_type</code>是一个嵌套从属类型名（value_type被嵌套与<code>iterator_traits&lt;IterT&gt;</code>之内而IterT是一个template参数），所以必须在它之前放置typename</p>
-<p>而为了简化书写，加上typedef，完美:tw-1f604:<br>最终代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> IterT&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">workWithIterator</span><span class="params">(IterT iter)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="built_in">std</span>::iterator_traits&lt;IterT&gt;::value_type;</div><div class="line">	<span class="function">value_type <span class="title">temp</span><span class="params">(*iter)</span></span>;</div><div class="line">	<span class="comment">// .....</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a><font color="red">实例</font></h2><p>首先，读入‘7’，并送到输出，然后‘*’被读入并压入栈中。接下来‘）’读入并送到栈中，此时状态如下：<br>栈：*）<br>输出：7</p>
+<p>接下来读入‘6’，并送到输出，然后读入‘+’此时状态如下：<br>栈：* ) +<br>输出：7 6</p>
+<p>然后读入‘5’，并送到输出，然后继续读入‘*’，由于‘*’的优先级比‘+’高，所以直接加入栈中，再将‘4’送到输出，因此状态如下：<br>栈：* ) + *<br>输出：7 6 5 4</p>
+<p>下一个读入的符号‘（’，由于规则4，因此将符号栈中的操作符依次出栈，然后读入‘4’，并在最后将右括号弹出：<br>栈：*<br>输出： 7 6 5 4 * +</p>
+<p>继续读入，此时读入‘+’，由优先级小于栈中‘*’的优先级，因此依照规则2，依次出栈，最后将‘+’入栈，接下来读入‘3’：<br>栈：+<br>输出：7 6 5 4 * + * 3</p>
+<p>往后读入的符号是‘*’，将‘*’入栈。然后将‘2’放入输出：<br>栈：+ *<br>输出：7 6 5 4 * + * 3 2</p>
+<p>现在读入‘+’，由于符号栈中存在‘+’且它们的优先级相同，根据规则，除非，优先级大于栈顶元素，否则不出栈，依次栈中状态如下：<br>栈：+ +<br>输出：7 6 5 4 * + * 3 2 *</p>
+<p>下一个读入‘1’：<br>栈：+ +<br>输出：7 6 5 4 * + * 3 2 * 1</p>
+<p>现在输入为空，弹出所有栈中元素<br>栈：空<br>输出：7 6 5 4 * + * 3 2 * 1 + +</p>
+<p>最后翻转<br>输出：+ + 1 * 2 3 * + * 4 5 6 7</p>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a><font color="red">实现代码</font></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">	利用栈将（中缀表达式）转换成（前缀表达式）</div><div class="line">	e.g.</div><div class="line">		1+2*3+(4*5+6)*7 转换成 ++1*23*+*4567</div><div class="line"></div><div class="line">	infix（中缀表达式） : 1+2*3+(4*5+6)*7</div><div class="line">	prefix（前缀表达式） : ++1*23*+*4567</div><div class="line">*/</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">InfixToPrefix</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> infix, <span class="built_in">string</span>&amp; prefix)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">stack</span>&lt;<span class="keyword">char</span>&gt; mark;							<span class="comment">// 符号栈</span></div><div class="line">	</div><div class="line">	<span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; priority;					<span class="comment">// 符号优先级</span></div><div class="line">	priority[<span class="string">'+'</span>] = <span class="number">0</span>;</div><div class="line">	priority[<span class="string">'-'</span>] = <span class="number">0</span>;</div><div class="line">	priority[<span class="string">'*'</span>] = <span class="number">1</span>;</div><div class="line">	priority[<span class="string">'/'</span>] = <span class="number">1</span>;</div><div class="line"></div><div class="line">	<span class="keyword">int</span> infix_length = infix.size();			<span class="comment">// 中缀表达式的字符长度</span></div><div class="line">	prefix.reserve(infix_length);				<span class="comment">// 提高效率</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = infix_length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</div><div class="line">		<span class="keyword">switch</span>(infix[i]) &#123;</div><div class="line">			<span class="keyword">case</span> <span class="string">'0'</span>:</div><div class="line">			<span class="keyword">case</span> <span class="string">'1'</span>:</div><div class="line">			<span class="keyword">case</span> <span class="string">'2'</span>:</div><div class="line">			<span class="keyword">case</span> <span class="string">'3'</span>:</div><div class="line">			<span class="keyword">case</span> <span class="string">'4'</span>:</div><div class="line">			<span class="keyword">case</span> <span class="string">'5'</span>:</div><div class="line">			<span class="keyword">case</span> <span class="string">'6'</span>:</div><div class="line">			<span class="keyword">case</span> <span class="string">'7'</span>:</div><div class="line">			<span class="keyword">case</span> <span class="string">'8'</span>:</div><div class="line">			<span class="keyword">case</span> <span class="string">'9'</span>:</div><div class="line">				prefix.push_back(infix[i]);</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			<span class="keyword">case</span> <span class="string">'+'</span>:</div><div class="line">			<span class="keyword">case</span> <span class="string">'-'</span>:</div><div class="line">			<span class="keyword">case</span> <span class="string">'*'</span>:</div><div class="line">			<span class="keyword">case</span> <span class="string">'/'</span>:</div><div class="line">				<span class="keyword">if</span>(!mark.empty()) &#123;</div><div class="line">					<span class="keyword">char</span> markTop = mark.top();</div><div class="line">					<span class="comment">// 注意此处，与中缀转后缀有所不同</span></div><div class="line">					<span class="keyword">while</span>(markTop != <span class="string">')'</span> &amp;&amp; priority[infix[i]] &lt; priority[markTop]) &#123;</div><div class="line">						prefix.push_back(markTop);</div><div class="line">						mark.pop();</div><div class="line">						<span class="keyword">if</span>(mark.empty()) &#123;</div><div class="line">							<span class="keyword">break</span>;</div><div class="line">						&#125;</div><div class="line">						markTop = mark.top();</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">				mark.push(infix[i]);</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			<span class="keyword">case</span> <span class="string">')'</span>:</div><div class="line">				mark.push(infix[i]);</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			<span class="keyword">case</span> <span class="string">'('</span>:</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">char</span> markTop = mark.top();</div><div class="line">				<span class="keyword">while</span>(markTop != <span class="string">')'</span>) &#123;</div><div class="line">					prefix.push_back(markTop);</div><div class="line">					mark.pop();</div><div class="line">					markTop = mark.top();</div><div class="line">				&#125;</div><div class="line">				mark.pop();</div><div class="line">			&#125;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 剩余的全部出栈</span></div><div class="line">	<span class="keyword">while</span>(!mark.empty()) &#123;</div><div class="line">		prefix.push_back(mark.top());</div><div class="line">		mark.pop();</div><div class="line">	&#125;</div><div class="line">	reverse(prefix.begin(), prefix.end());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> infix = <span class="string">"1+2*3+(4*5+6)*7"</span>;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> prefix;</div><div class="line"></div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"infix : "</span> &lt;&lt; infix &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	InfixToPrefix(infix, prefix);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"prefix : "</span> &lt;&lt; prefix &lt;&lt; <span class="built_in">endl</span>; </div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </the>
       
     </div>
@@ -346,13 +346,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></p>
+        <p><span>本文标题:</span><a href="/2017/02/07/C-algorithms-InfixToPrefix/">利用栈实现中缀表达式转前缀表达式</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Xefvan</a></p>
-        <p><span>发布时间:</span>2016-10-12, 12:41:52</p>
-        <p><span>最后更新:</span>2016-12-05, 14:30:25</p>
+        <p><span>发布时间:</span>2017-02-06, 19:34:37</p>
+        <p><span>最后更新:</span>2017-02-06, 19:35:43</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/10/12/C-typedef-and-typename/" title="C++ typedef和typename关键字">http://ixjfun.top/2016/10/12/C-typedef-and-typename/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://ixjfun.top/2016/10/12/C-typedef-and-typename/　　作者: Xefvan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/07/C-algorithms-InfixToPrefix/" title="利用栈实现中缀表达式转前缀表达式">http://ixjfun.top/2017/02/07/C-algorithms-InfixToPrefix/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://ixjfun.top/2017/02/07/C-algorithms-InfixToPrefix/　　作者: Xefvan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -364,16 +364,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/10/16/C-structure-skiplist/">
-                    数据结构之跳表
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/10/10/c-structure-stack-array-chain/">
-                    数据结构之栈
+                <a href="/2017/01/24/C-algorithms-InfixToPostfix/">
+                    利用栈实现中缀表达式转后缀表达式
                 </a>
             </div>
         
@@ -385,7 +379,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前序"><span class="toc-number">1.</span> <span class="toc-text">前序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型别名typedef"><span class="toc-number">2.</span> <span class="toc-text">类型别名typedef</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型解释typename"><span class="toc-number">3.</span> <span class="toc-text">类型解释typename</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用类的类型成员"><span class="toc-number">3.2.</span> <span class="toc-text">使用类的类型成员</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#typedef和typename共用"><span class="toc-number">4.</span> <span class="toc-text">typedef和typename共用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#traits（特性萃取机）"><span class="toc-number">4.1.</span> <span class="toc-text">traits（特性萃取机）</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目的"><span class="toc-number">1.</span> <span class="toc-text">目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换原则："><span class="toc-number">2.</span> <span class="toc-text"> 转换原则：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现代码"><span class="toc-number">4.</span> <span class="toc-text">实现代码</span></a></li></ol>
         
     </div>
     <style>
@@ -421,7 +415,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"C++ typedef和typename关键字　| Xefvan's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"利用栈实现中缀表达式转前缀表达式　| Xefvan's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -437,7 +431,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/12/C-typedef-and-typename/" data-title="C++ typedef和typename关键字" data-url="http://ixjfun.top/2016/10/12/C-typedef-and-typename/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/07/C-algorithms-InfixToPrefix/" data-title="利用栈实现中缀表达式转前缀表达式" data-url="http://ixjfun.top/2017/02/07/C-algorithms-InfixToPrefix/"></div>
     <script>
         var duoshuoQuery = {short_name:"null"};
         var loadComment = function(){
@@ -460,15 +454,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/10/16/C-structure-skiplist/" title="上一篇: 数据结构之跳表">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/10/10/c-structure-stack-array-chain/" title="下一篇: 数据结构之栈">
+            <a href="/2017/01/24/C-algorithms-InfixToPostfix/" title="下一篇: 利用栈实现中缀表达式转后缀表达式">
                 <i class="fa fa-angle-right"></i>
             </a>
         
