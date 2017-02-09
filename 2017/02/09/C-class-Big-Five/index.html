@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Xefvan" />
+
+
+
+<meta name="description" content="简介在C++11里，类有五个已经为你写好的特殊函数。它们是析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作函数。这些就是Big-Five。在许多情况下，你可以接受编译器为五大操作提供的默认函数。但是，有时你不能这样做。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Big-Five： 析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作">
+<meta property="og:url" content="http://ixjfun.top/2017/02/09/C-class-Big-Five/index.html">
+<meta property="og:site_name" content="Xefvan's blog">
+<meta property="og:description" content="简介在C++11里，类有五个已经为你写好的特殊函数。它们是析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作函数。这些就是Big-Five。在许多情况下，你可以接受编译器为五大操作提供的默认函数。但是，有时你不能这样做。">
+<meta property="og:updated_time" content="2017-02-09T07:02:34.096Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Big-Five： 析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作">
+<meta name="twitter:description" content="简介在C++11里，类有五个已经为你写好的特殊函数。它们是析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作函数。这些就是Big-Five。在许多情况下，你可以接受编译器为五大操作提供的默认函数。但是，有时你不能这样做。">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Xefvan&#39;s blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Big-Five： 析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作 | Xefvan&#39;s blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?6704785cfc948caca5017a5bddd63d28";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatarr.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Xefvan</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ccode/">C/C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/">OS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编程之美/">编程之美</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自我总结/">自我总结</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://ienning.com/">ienning</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于C++</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Xefvan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatarr.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Xefvan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-C-class-Big-Five" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/09/C-class-Big-Five/" class="article-date">
+      <time datetime="2017-02-09T15:00:37.000Z" itemprop="datePublished">2017-02-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Big-Five： 析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/programming/">programming</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ccode/">C/C++</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在C++11里，类有五个已经为你写好的特殊函数。它们是析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作函数。这些就是<font color="blue">Big-Five</font>。在许多情况下，你可以接受编译器为五大操作提供的默认函数。但是，有时你不能这样做。<br><a id="more"></a></p>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<h2 id="析构函数（Destructor）"><a href="#析构函数（Destructor）" class="headerlink" title="析构函数（Destructor）"></a>析构函数（Destructor）</h2><p>当一个对象离开作用域或者遭到删除时，析构函数被调用。通常，析构函数的唯一职责就是释放在使用对象期间获取的任何资源。这包括通过调用<em>delete</em> 来释放任何与之相应的通过<em>new</em> 操作申请的内存，关闭任何打开的文件等等。默认情况下简单地对每个数据成员调用析构函数。</p>
+<h2 id="拷贝构造函数和移动构造函数（Copy-Constructor-and-Move-Constructor）"><a href="#拷贝构造函数和移动构造函数（Copy-Constructor-and-Move-Constructor）" class="headerlink" title="拷贝构造函数和移动构造函数（Copy Constructor and Move Constructor）"></a>拷贝构造函数和移动构造函数（Copy Constructor and Move Constructor）</h2><p>有两个特殊构造函数需要构造一个新对象，该对象初始化为同一类型的另一个对象的同一状态。一个很好的办法来判断到底是拷贝构造函数还是移动构造函数就是通过判断对象是左值还是右值。<font color="red">如果现有的对象是左值（lvalue），那么是拷贝构造函数，如果现有的对象是右值（rvalue）（例如，即将被摧毁的临时对象），那么是移动构造函数。</font></p>
+<p>对于任何对象，例如<em>IntCell</em> 类，一个拷贝构造函数和移动构造函数可以被这样调用：</p>
+<ul>
+<li>一个初始化声明，例如<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">IntCell B = C;			<span class="comment">// 如果C是左值，那么是拷贝构造函数；如果C是右值，那么是移动构造函数</span></div><div class="line">IntCell B &#123; C &#125;;		<span class="comment">//  如果C是左值，那么是拷贝构造函数；如果C是右值，那么是移动构造函数</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>需要注意的是<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">B = C;					<span class="comment">// 赋值操作，稍后讲解</span></div></pre></td></tr></table></figure></p>
+<ul>
+<li>一个使用按值传递（而不是通过<em>&amp;</em> 或者<em>const &amp;</em> ）的对象，如前所述，很少这样做。</li>
+<li>一个通过值返回的对象（而不是通过<em>&amp;</em> 或者<em>const &amp;</em> ）。同样，如果被返回的对象是一个左值，则调用拷贝构造函数，如果正在返回的对象是一个右值，则调用一个移动构造函数。</li>
+</ul>
+<p>默认情况下，拷贝构造函数的实现，通过依次对其中每个数据成员调用其自身的拷贝构造函数来实现。对于初级的数据成员（例如，整形（int）, 浮点型（double）或者指针（pointer）），简单的赋值就可以完成。在<em>IntCell</em> 类中，我们将看到简单的实现。对于本身就是类对象的数据成员，数据成员适当的调用自身的构造函数来实现。</p>
+<h2 id="拷贝赋值操作和移动赋值操作（operator-）"><a href="#拷贝赋值操作和移动赋值操作（operator-）" class="headerlink" title="拷贝赋值操作和移动赋值操作（operator =）"></a>拷贝赋值操作和移动赋值操作（operator =）</h2><p>当 “=”应用在两个<font color="blue">先前已被构造好的</font>对象时，将调用赋值运算符（=）。<em>lhs</em> = <em>rhs</em> 旨在将<em>rhs</em> 的状态赋值到<em>lhs</em> 中。如果<em>rhs</em> 是一个左值，这将通过拷贝赋值操作完成，如果”rhs” 是一个右值，这将通过移动赋值操作完成。默认情况下，通过依次向每个数据成员应用拷贝赋值操作符来实现拷贝赋值操作符</p>
+<h2 id="默认操作"><a href="#默认操作" class="headerlink" title="默认操作"></a>默认操作</h2><p>如果我们检查IntCell类，我们看到默认值是完全可以接受的，所以我们不必做任何事情。 这通常是这样的。 如果一个类完全由初始数据成员组成，默认值通常是有意义的。 因此，其数据成员为<code>int</code>，<code>vector&lt;int&gt;</code>，<code>string</code>和<code>vector&lt;string&gt;</code>的类都可以接受默认值。</p>
+<p>主要的问题发生在包含指针作为数据成员的类中。假设类中包含一个指针的数据成员，这个指针指向一个动态分配的对象。此时，默认的析构函数不会对这个指针做任何事情（我们必须统购调用delete来删除指针）。此外，<font color="blue">拷贝构造函数和拷贝赋值运算符都复制指针的值，而不是指向的对象。</font>因此，我们将有两个类实例包含指向同一个对象的指针。 这是所谓的<font color="red">浅拷贝</font>。通常，我们期待的是一个<font color="red">深拷贝（克隆整个对象）</font>。因此，当一个类中包含指针作为数据成员，深层的语义是重要的，我们必须重构析构函数，拷贝构造函数和拷贝赋值操作来取消默认由编译器自带的默认操作。通常来说，要么接受默认的五个操作，要么重新定义五个操作。</p>
+<p>对于<em>IntCell</em> ，这些默认的操作为：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">~IntCell();													<span class="comment">// 析构函数 </span></div><div class="line">IntCell(<span class="keyword">const</span> IntCell&amp; rhs);						 <span class="comment">// 拷贝构造函数</span></div><div class="line">IntCell(IntCell&amp;&amp; rhs);								<span class="comment">// 移动构造函数</span></div><div class="line">IntCell&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> IntCell&amp; rhs);	 <span class="comment">// 拷贝赋值操作</span></div><div class="line">IntCell&amp; <span class="keyword">operator</span>=(IntCell&amp;&amp; rhs);			<span class="comment">// 移动赋值操作</span></div></pre></td></tr></table></figure></p>
+<p><font color="red"><em>operator=</em>返回类型为引用的原因是为了允许链式赋值，例如a=b=c。</font>虽然看起来返回值类型应该为const引用，以防止(a=b)=c这种操作。但是在C++中，这种表达式实际上是允许的。 因此，通常使用引用返回类型（而不是const引用返回类型），但是从语法上说是不严谨的。</p>
+<p>当我们定义这些函数时，如果还想使用编译器自带的默认函数，我们可以使用<code>= default</code>，例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">~IntCell() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Invoking destructor"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;	<span class="comment">// 析构函数 </span></div><div class="line">IntCell(<span class="keyword">const</span> IntCell&amp; rhs) = <span class="keyword">default</span>;							 <span class="comment">// 拷贝构造函数</span></div><div class="line">IntCell(IntCell&amp;&amp; rhs) = <span class="keyword">default</span>;									<span class="comment">// 移动构造函数</span></div><div class="line">IntCell&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> IntCell&amp; rhs) = <span class="keyword">default</span>;		<span class="comment">// 拷贝赋值操作</span></div><div class="line">IntCell&amp; <span class="keyword">operator</span>=(IntCell&amp;&amp; rhs) = <span class="keyword">default</span>;			   <span class="comment">// 移动赋值操作</span></div></pre></td></tr></table></figure>
+<p>或者，我们可以通过<code>= delete</code>来禁止默认操纵，例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">~IntCell() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Invoking destructor"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;	<span class="comment">// 析构函数 </span></div><div class="line">IntCell(<span class="keyword">const</span> IntCell&amp; rhs) = <span class="keyword">delete</span>;							 <span class="comment">// 拷贝构造函数</span></div><div class="line">IntCell(IntCell&amp;&amp; rhs) = <span class="keyword">delete</span>;									<span class="comment">// 移动构造函数</span></div><div class="line">IntCell&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> IntCell&amp; rhs) = <span class="keyword">delete</span>;		<span class="comment">// 拷贝赋值操作</span></div><div class="line">IntCell&amp; <span class="keyword">operator</span>=(IntCell&amp;&amp; rhs) = <span class="keyword">delete</span>;			   <span class="comment">// 移动赋值操作</span></div></pre></td></tr></table></figure>
+<p>如果默认操作是有意义的，那么我们可以使用默认的，如果是没有意义的，我们需要重写这些操作。</p>
+<h2 id="重写Big-Five"><a href="#重写Big-Five" class="headerlink" title="重写Big-Five"></a>重写Big-Five</h2><p>在大多是时候，这些默认操作都不足以满足我们的需求，这时候我们需要重写这些操作。默认函数不工作的最常见情况发生在数据成员是指针类型，并且指针由某个对象成员函数（例如构造函数）分配时。例如我们通过动态分配一个<em>int</em> 类型的时候，如下，我们定义一个<strong>IntCell类</strong>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> IntCell</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">explicit</span> <span class="title">IntCell</span><span class="params">(<span class="keyword">int</span> initialValue = <span class="number">0</span>)</span></span></div><div class="line">	&#123;</div><div class="line">		storedValue = <span class="keyword">new</span> <span class="keyword">int</span>&#123;initialValue&#125;;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> <span class="keyword">const</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> *storedValue;	</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> x)</span></span></div><div class="line">	&#123;</div><div class="line">		*storedValue = x;	</div><div class="line">	&#125;</div><div class="line">	</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span>* storedValue;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>当我们定义如上的<strong>IntCell类</strong>时，使用了默认的操作，其中会有很多问题发生。例如我们如下使用：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	IntCell a&#123;<span class="number">2</span>&#125;;</div><div class="line">	IntCell b = a;</div><div class="line">	IntCell c;</div><div class="line">	</div><div class="line">	c = a;</div><div class="line">	a.write(<span class="number">4</span>);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; a.read() &lt;&lt; <span class="built_in">endl</span>;			<span class="comment">// 4</span></div><div class="line">	<span class="built_in">cout</span> &lt;&lt; b.read() &lt;&lt; <span class="built_in">endl</span>;			<span class="comment">// 4</span></div><div class="line">	<span class="built_in">cout</span> &lt;&lt; c.read() &lt;&lt; <span class="built_in">endl</span>;			<span class="comment">// 4</span></div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>此段代码输出为3个4，而我们的本意是只将a改为4，这个问题就是使用了默认的拷贝构造函数（Copy Constructor）和拷贝赋值操作（Copy assignment operator=）来拷贝这个<code>storedValue</code>指针。因此，<code>a.storedValue</code>，<code>b.storedValue</code>和<code>c.storedValue</code>都是指向相同的<em>int</em> 值。这种拷贝就是我们所说的<font color="red">浅拷贝</font>，指针而不是指针被复制。</p>
+<p><font color="green">第二，很容易忽略的是内存泄漏</font>。当我们使用完这个指针变量，离开 <strong>f()</strong> 函数的作用域，我们不再使用指针了，由于默认析构函数不会自动调用<code>delete</code>来删除<code>storedValue</code>指针，所以存在内存泄露的隐患。</p>
+<p>综合这些问题，我们重新定义这5个函数。代码如下所示。正如我们所见，一旦析构函数被实现，浅复制将导致一个编译错误：两个对象的<code>storedValue</code>指针指向相同的<em>int</em> 对象，一旦第一个IntCell对象被析构，<code>storedValue</code>指针将回收，此时，如果第二个IntCell对象析构，<code>storedValue</code>指针被删除两次，这是将导致严重的错误。</p>
+<p>这就是为什么C++11弃用了先前的默认拷贝操作行为，即是析构函数被重写了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> IntCell</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">IntCell</span><span class="params">(<span class="keyword">int</span> initialValue = <span class="number">0</span>)</span> </span></div><div class="line">    &#123;</div><div class="line">        storedValue = <span class="keyword">new</span> <span class="keyword">int</span>&#123;initialValue&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    ~IntCell()</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">delete</span> storedValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    IntCell(<span class="keyword">const</span> IntCell&amp; rhs)</div><div class="line">    &#123;</div><div class="line">        storedValue = <span class="keyword">new</span> <span class="keyword">int</span>&#123;*rhs.storedValue&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    IntCell(IntCell&amp;&amp; rhs) : storedValue(rhs.storedValue)</div><div class="line">    &#123;</div><div class="line">        rhs.storedValue = <span class="literal">nullptr</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    IntCell&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> IntCell&amp; rhs)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(<span class="keyword">this</span> != &amp;rhs) &#123;</div><div class="line">            *storedValue = *rhs.storedValue;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    IntCell&amp; <span class="keyword">operator</span>=(IntCell&amp;&amp; rhs)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::swap(storedValue, rhs.storedValue);</div><div class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> <span class="keyword">const</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> *storedValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> x)</span></span></div><div class="line">    &#123;</div><div class="line">        *storedValue = x;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span>* storedValue;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>在C++11中，在拷贝赋值操作通常使用copy-and-swap惯用法实现。</p>
+<p>在第19行和第22行的移动构造函数将数据表示形式从rhs移动到*this; 那么它将rhs的原始数据（包括指针）设置为有效但易于销毁的状态。注意，如果存在非原始数据，则该数据必须在初始化列表中移动。 例如，如果有<code>vector&lt;string&gt;</code>项，那么构造函数将是:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">IntCell(IntCell&amp;&amp; rhs)</div><div class="line">	: storedValue(rhs.storedValue), </div><div class="line">	  items(<span class="built_in">std</span>::move(rhs.items))		<span class="comment">// 通过std::move将rhs的vector&lt;string&gt;项移动到items中</span></div><div class="line">&#123;</div><div class="line">	rhs.storedValue = <span class="literal">nullptr</span>;	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在最后，移动赋值操作通过成员与成员之间的swap操作进行交换。注意，有时它被实现为与复制赋值运算符相同的单一交换对象，但是只有当交换自身实现为逐个成员交换时才起作用。如果交换被实现为三个移动，那么我们将有相互的非终止递归。</p>
+<p>此时再次调用<strong>f()</strong>，将会输出</p>
+<blockquote>
+<p>4<br>2<br>2</p>
+</blockquote>
+</the>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/02/09/C-class-Big-Five/">Big-Five： 析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Xefvan</a></p>
+        <p><span>发布时间:</span>2017-02-09, 15:00:37</p>
+        <p><span>最后更新:</span>2017-02-09, 15:02:34</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/09/C-class-Big-Five/" title="Big-Five： 析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作">http://ixjfun.top/2017/02/09/C-class-Big-Five/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://ixjfun.top/2017/02/09/C-class-Big-Five/　　作者: Xefvan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/02/07/C-algorithms-InfixToPrefix/">
+                    利用栈实现中缀表达式转前缀表达式
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#析构函数（Destructor）"><span class="toc-number">2.</span> <span class="toc-text">析构函数（Destructor）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拷贝构造函数和移动构造函数（Copy-Constructor-and-Move-Constructor）"><span class="toc-number">3.</span> <span class="toc-text">拷贝构造函数和移动构造函数（Copy Constructor and Move Constructor）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拷贝赋值操作和移动赋值操作（operator-）"><span class="toc-number">4.</span> <span class="toc-text">拷贝赋值操作和移动赋值操作（operator =）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#默认操作"><span class="toc-number">5.</span> <span class="toc-text">默认操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重写Big-Five"><span class="toc-number">6.</span> <span class="toc-text">重写Big-Five</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Big-Five： 析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作　| Xefvan's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/09/C-class-Big-Five/" data-title="Big-Five： 析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作" data-url="http://ixjfun.top/2017/02/09/C-class-Big-Five/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"null"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/02/07/C-algorithms-InfixToPrefix/" title="下一篇: 利用栈实现中缀表达式转前缀表达式">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/09/C-class-Big-Five/">Big-Five： 析构函数，拷贝构造函数，移动构造函数，拷贝赋值操作和移动赋值操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/07/C-algorithms-InfixToPrefix/">利用栈实现中缀表达式转前缀表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/24/C-algorithms-InfixToPostfix/">利用栈实现中缀表达式转后缀表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/23/OSystem-pthead-1/">操作系统之进程和线程（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/01/2016all/">2016年终总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/21/C-algorithms-StringMatch/">字符串匹配算法 -- 暴力破解法（朴素法），RK算法，KMP算法，Sunday算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/13/C-algorithms-Beautythree/">《编程之美》-- 快速找出故障机器</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/11/C-algorithms-Beautytwo/">《编程之美》 -- 中国象棋将帅问题和一摞烙饼的排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/C-algorithms-Beautyone/">《编程之美》-- 让CPU占用率听你指挥</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/19/C-structure-graph-array/">数据结构之图（C++）--邻接矩阵表示（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/C-algorithms-ninesort/">九大排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/16/C-structure-skiplist/">数据结构之跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C-typedef-and-typename/">C++ typedef和typename关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/c-structure-stack-array-chain/">数据结构之栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/02/C-structure-linear-chain/">数据结构之线性表 -- 链式描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/01/C-structure-linear-array/">数据结构之线性表---数组描述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/C-structure-binarytree/">数据结构之二叉树(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/C-algorithms-binarytree/">数据结构之二叉树(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/C-class-constructor-一/">C++类的初体验封装之构造函数（一）</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 Xefvan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
